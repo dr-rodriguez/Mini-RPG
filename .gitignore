@@ -1,0 +1,10 @@
+# Godot 4+ specific ignores
+.godot/
+/android/
+
+# Agents
+.claude
+CLAUDE.md
+
+# Assets (might not be safe to distribute)
+assets/
