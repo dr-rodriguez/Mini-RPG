@@ -2,6 +2,9 @@
 
 [ext_resource type="Script" uid="uid://cj2d25c4g5na8" path="res://src/gameplay/player/player.gd" id="1_64h4j"]
 [ext_resource type="Texture2D" uid="uid://dui8c46yaph6u" path="res://assets/art/characters/player/player.png" id="1_kh5p4"]
+[ext_resource type="Script" uid="uid://xetjb7xjcdvu" path="res://src/gameplay/player/state_machine.gd" id="3_sjr3t"]
+[ext_resource type="Script" uid="uid://btra1nrkavrx4" path="res://src/gameplay/player/move.gd" id="4_d3trc"]
+[ext_resource type="Script" uid="uid://cdi8lolcum36q" path="res://src/gameplay/player/idle.gd" id="5_d3trc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_64h4j"]
 atlas = ExtResource("1_kh5p4")
@@ -553,3 +556,16 @@ shape = SubResource("RectangleShape2D_ammmm")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1244859738]
 zoom = Vector2(2, 2)
+
+[node name="States" type="Node" parent="." unique_id=1796915915]
+script = ExtResource("3_sjr3t")
+
+[node name="Move" type="Node" parent="States" unique_id=1773219313]
+script = ExtResource("4_d3trc")
+
+[node name="Idle" type="Node" parent="States" unique_id=2019446983]
+script = ExtResource("5_d3trc")
+
+[node name="Die" type="Node" parent="States" unique_id=357605725]
+
+[node name="Attack" type="Node" parent="States" unique_id=159009206]
