@@ -551,14 +551,16 @@ collision_mask = 13
 script = ExtResource("1_64h4j")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1092946920]
+position = Vector2(0, -17)
 sprite_frames = SubResource("SpriteFrames_reblb")
 animation = &"idle_front"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1582406360]
-position = Vector2(0.5, 13)
+position = Vector2(0.5, -6)
 shape = SubResource("RectangleShape2D_ammmm")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1244859738]
+position = Vector2(0, -7)
 zoom = Vector2(2, 2)
 
 [node name="States" type="Node" parent="." unique_id=1796915915]
