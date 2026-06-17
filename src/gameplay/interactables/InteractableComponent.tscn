@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dsabgn5w06svj"]
+
+[ext_resource type="Script" uid="uid://crb58dk4vvha4" path="res://src/gameplay/interactables/interactable_component.gd" id="1_plkkg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hq33g"]
+radius = 26.019224
+
+[node name="InteractableComponent" type="Area2D" unique_id=1662481959]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_plkkg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1409286154]
+shape = SubResource("CircleShape2D_hq33g")
+debug_color = Color(0.27790022, 0.6162691, 0.4060959, 0.41960785)

@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://cxwq8xvugqmrb"]
+
+[ext_resource type="Texture2D" uid="uid://c6bymdvjtq7yx" path="res://assets/art/characters/enemies/slime.png" id="1_vn1wn"]
+[ext_resource type="PackedScene" uid="uid://dsabgn5w06svj" path="res://src/gameplay/interactables/InteractableComponent.tscn" id="2_reb0q"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nca5n"]
+atlas = ExtResource("1_vn1wn")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jnybn"]
+atlas = ExtResource("1_vn1wn")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8vvfn"]
+atlas = ExtResource("1_vn1wn")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkhyc"]
+atlas = ExtResource("1_vn1wn")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hkq6v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nca5n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jnybn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8vvfn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fkhyc")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 4.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pp22n"]
+radius = 8.0
+
+[node name="QuestNpc" type="CharacterBody2D" unique_id=1048711515]
+collision_layer = 4
+collision_mask = 15
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=688045759]
+position = Vector2(0, -8)
+sprite_frames = SubResource("SpriteFrames_hkq6v")
+animation = &"idle"
+frame_progress = 0.91216415
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=916767064]
+position = Vector2(0, -5)
+shape = SubResource("CircleShape2D_pp22n")
+
+[node name="InteractableComponent" parent="." unique_id=1662481959 instance=ExtResource("2_reb0q")]
+position = Vector2(0, -5)
+interact_name = "Press E to Chat"

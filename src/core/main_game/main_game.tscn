@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b327hlihadnw" path="res://src/gameplay/player/player.tscn" id="1_3fed5"]
 [ext_resource type="PackedScene" uid="uid://cdotfbw41payy" path="res://src/levels/Level1.tscn" id="1_6yl8a"]
+[ext_resource type="PackedScene" uid="uid://cxwq8xvugqmrb" path="res://src/gameplay/interactables/QuestNPC.tscn" id="3_6n4xl"]
 
 [node name="MainGame" type="Node" unique_id=1872517867]
 process_mode = 3
@@ -22,6 +23,9 @@ y_sort_enabled = true
 
 [node name="Player" parent="World/EntityRoot" unique_id=255443496 instance=ExtResource("1_3fed5")]
 position = Vector2(303, 152)
+
+[node name="QuestNpc" parent="World/EntityRoot" unique_id=1048711515 instance=ExtResource("3_6n4xl")]
+position = Vector2(457, 157)
 
 [node name="EffectRoot" type="Node2D" parent="World" unique_id=1141262815]
 
