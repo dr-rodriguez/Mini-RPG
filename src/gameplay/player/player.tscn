@@ -561,6 +561,10 @@ shape = SubResource("RectangleShape2D_ammmm")
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1244859738]
 position = Vector2(0, -7)
 zoom = Vector2(2, 2)
+limit_left = 0
+limit_top = 0
+limit_right = 640
+limit_bottom = 320
 
 [node name="States" type="Node" parent="." unique_id=1796915915]
 script = ExtResource("3_sjr3t")
