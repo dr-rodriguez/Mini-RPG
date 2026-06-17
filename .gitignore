@@ -6,5 +6,9 @@
 .claude
 CLAUDE.md
 
+# Addons (see README and install them from Godot)
+addons/
+
 # Assets (if not be safe to distribute)
+assets/art/
 assets/audio/
