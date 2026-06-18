@@ -18,22 +18,34 @@ func _on_area_exited(area: Area2D) -> void:
 	if area is Interactable:
 		current_interactions.erase(area)
 
+
 func _process(_delta: float) -> void:
 	if current_interactions.is_empty():
 		interact_label.hide()
 		return
+	
 	# Sort so the nearest interactable is index 0
 	current_interactions.sort_custom(sort_nearest)
 	var nearest: Interactable = current_interactions[0]
+	
 	# Activate the text for the interactible
 	interact_label.text = nearest.interact_name
+	
+	# Move the label to be for the area, instead of the player
+	interact_label.global_position = nearest.global_position
+	interact_label.global_position.y -= 36
+	interact_label.global_position.x -= interact_label.size.x / 2
+	
+	# Actually show the label
 	interact_label.show()
+
 
 func sort_nearest(a: Interactable, b: Interactable) -> bool:
 	# Helper function to return closest of 2
 	var da := global_position.distance_to(a.global_position)
 	var db := global_position.distance_to(b.global_position)
 	return da < db
+
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact") and not current_interactions.is_empty():

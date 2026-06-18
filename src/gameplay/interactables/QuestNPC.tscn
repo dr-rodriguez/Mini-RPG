@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cxwq8xvugqmrb"]
 
+[ext_resource type="Script" uid="uid://jtg26w2r1t7h" path="res://src/gameplay/interactables/quest_npc.gd" id="1_reb0q"]
 [ext_resource type="Texture2D" uid="uid://c6bymdvjtq7yx" path="res://assets/art/characters/enemies/slime.png" id="1_vn1wn"]
 [ext_resource type="PackedScene" uid="uid://dsabgn5w06svj" path="res://src/resources/interactable_component.tscn" id="2_vn1wn"]
 
@@ -46,8 +47,10 @@ radius = 8.0
 radius = 24.020824
 
 [node name="QuestNpc" type="CharacterBody2D" unique_id=1048711515]
+y_sort_enabled = true
 collision_layer = 4
 collision_mask = 15
+script = ExtResource("1_reb0q")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=688045759]
 position = Vector2(0, -8)
@@ -56,11 +59,12 @@ animation = &"idle"
 frame_progress = 0.91216415
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=916767064]
+y_sort_enabled = true
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_pp22n")
 
 [node name="InteractableComponent" parent="." unique_id=1662481959 instance=ExtResource("2_vn1wn")]
-interact_name = "Press E"
+interact_name = "Chat"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent" unique_id=319998954]
 position = Vector2(0, -5)

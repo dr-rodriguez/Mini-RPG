@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://ckx7vyjcqgcu6"]
+
+[ext_resource type="Texture2D" uid="uid://b866w4fpwtpf0" path="res://assets/art/world/tilesets/objects.png" id="1_mgtct"]
+[ext_resource type="PackedScene" uid="uid://dsabgn5w06svj" path="res://src/resources/interactable_component.tscn" id="2_klwkb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_klwkb"]
+atlas = ExtResource("1_mgtct")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_njkul"]
+size = Vector2(14, 13.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_njkul"]
+radius = 22.0
+
+[node name="Sign" type="StaticBody2D" unique_id=1260255883]
+y_sort_enabled = true
+collision_mask = 14
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2042806]
+position = Vector2(0, -6)
+texture = SubResource("AtlasTexture_klwkb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=90325556]
+y_sort_enabled = true
+position = Vector2(0, -6.25)
+shape = SubResource("RectangleShape2D_njkul")
+
+[node name="InteractableComponent" parent="." unique_id=1662481959 instance=ExtResource("2_klwkb")]
+interact_name = "Read"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent" unique_id=411164239]
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_njkul")
+debug_color = Color(0.28516385, 0.61284316, 0.43264073, 0.41960785)

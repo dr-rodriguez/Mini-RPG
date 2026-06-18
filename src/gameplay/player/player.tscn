@@ -543,7 +543,7 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_d3trc"]
 radius = 5.5
-height = 16.0
+height = 14.0
 
 [node name="Player" type="CharacterBody2D" unique_id=255443496]
 y_sort_enabled = true
@@ -557,7 +557,7 @@ sprite_frames = SubResource("SpriteFrames_reblb")
 animation = &"idle_front"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1582406360]
-position = Vector2(0, -7)
+position = Vector2(0, -6)
 shape = SubResource("CapsuleShape2D_d3trc")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1244859738]
@@ -582,3 +582,4 @@ script = ExtResource("5_d3trc")
 [node name="Attack" type="Node" parent="States" unique_id=159009206]
 
 [node name="InteractingComponent" parent="." unique_id=338100428 instance=ExtResource("6_dxsvo")]
+position = Vector2(0, -6)
