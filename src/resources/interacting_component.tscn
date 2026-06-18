@@ -1,0 +1,38 @@
+[gd_scene format=3 uid="uid://d0legpol8mhgk"]
+
+[ext_resource type="Script" uid="uid://blhs8ilb5ben1" path="res://src/resources/interacting_component.gd" id="1_ku258"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_alyki"]
+radius = 18.027756
+
+[sub_resource type="LabelSettings" id="LabelSettings_ku258"]
+outline_size = 2
+outline_color = Color(0.06053035, 0.06053035, 0.060530342, 1)
+
+[node name="InteractingComponent" type="Node2D" unique_id=338100428]
+script = ExtResource("1_ku258")
+
+[node name="InteractingRange" type="Area2D" parent="." unique_id=1893121536]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractingRange" unique_id=459050442]
+shape = SubResource("CircleShape2D_alyki")
+debug_color = Color(0.2852009, 0.62362725, 0.28114116, 0.41960785)
+
+[node name="InteractLabel" type="Label" parent="." unique_id=1481444738]
+z_index = 10
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -28.0
+offset_top = -41.0
+offset_right = 27.0
+offset_bottom = -18.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Sample"
+label_settings = SubResource("LabelSettings_ku258")
+horizontal_alignment = 1
