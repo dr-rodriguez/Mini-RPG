@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://divj11vcsefnl"]
+
+[node name="PlayerMenu" type="Control" unique_id=1523442858]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="." unique_id=2098670896]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -140.0
+offset_right = 100.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=774499032]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -105.0
+offset_top = -135.0
+offset_right = 105.0
+offset_bottom = 135.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=1618371614]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=1305394263]
+layout_mode = 2
+
+[node name="LabelStats" type="Label" parent="Panel/MarginContainer/VBoxContainer/VBoxContainer" unique_id=1323079417]
+layout_mode = 2
+text = "Stats"
+
+[node name="LabelHealth" type="Label" parent="Panel/MarginContainer/VBoxContainer/VBoxContainer" unique_id=447993645]
+layout_mode = 2
+text = "Health:"
+
+[node name="LabelStrength" type="Label" parent="Panel/MarginContainer/VBoxContainer/VBoxContainer" unique_id=838699461]
+layout_mode = 2
+text = "Strength:"
+
+[node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBoxContainer" unique_id=1123517134]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=1750244415]
+layout_mode = 2
+
+[node name="LabelInventory" type="Label" parent="Panel/MarginContainer/VBoxContainer/VBoxContainer2" unique_id=1696468367]
+layout_mode = 2
+text = "Inventory"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/VBoxContainer/VBoxContainer2" unique_id=1516293543]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer" unique_id=1568621782]
+layout_mode = 2
+text = "Item1"
+
+[node name="Label2" type="Label" parent="Panel/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer" unique_id=1860476839]
+layout_mode = 2
+text = "Item2"
+
+[node name="Label3" type="Label" parent="Panel/MarginContainer/VBoxContainer/VBoxContainer2/HBoxContainer" unique_id=818518721]
+layout_mode = 2
+text = "Item3"

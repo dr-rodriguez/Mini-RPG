@@ -30,7 +30,6 @@ position = Vector2(303, 152)
 position = Vector2(457, 157)
 
 [node name="RemovableFence" parent="World/EntityRoot" unique_id=1569724308 instance=ExtResource("4_ibp4d")]
-unique_name_in_owner = true
 position = Vector2(632, 134)
 
 [node name="Sign" parent="World/EntityRoot" unique_id=1260255883 instance=ExtResource("5_tk58t")]
