@@ -103,6 +103,7 @@ _data = {
 layer = 100
 script = ExtResource("1_36de5")
 next_action = &"interact"
+skip_action = &"cancel"
 
 [node name="Balloon" type="Control" parent="." unique_id=359403728]
 unique_name_in_owner = true
