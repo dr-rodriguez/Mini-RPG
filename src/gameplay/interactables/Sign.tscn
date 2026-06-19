@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ckx7vyjcqgcu6"]
 
 [ext_resource type="Texture2D" uid="uid://b866w4fpwtpf0" path="res://assets/art/world/tilesets/objects.png" id="1_mgtct"]
+[ext_resource type="Script" uid="uid://6r17sfo0lumy" path="res://src/gameplay/interactables/sign.gd" id="1_njkul"]
 [ext_resource type="PackedScene" uid="uid://dsabgn5w06svj" path="res://src/core/components/interactable_component.tscn" id="2_klwkb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_klwkb"]
@@ -16,6 +17,7 @@ radius = 22.0
 [node name="Sign" type="StaticBody2D" unique_id=1260255883]
 y_sort_enabled = true
 collision_mask = 14
+script = ExtResource("1_njkul")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2042806]
 position = Vector2(0, -6)
