@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://xetjb7xjcdvu" path="res://src/gameplay/player/state_machine.gd" id="3_sjr3t"]
 [ext_resource type="Script" uid="uid://btra1nrkavrx4" path="res://src/gameplay/player/move.gd" id="4_d3trc"]
 [ext_resource type="Script" uid="uid://cdi8lolcum36q" path="res://src/gameplay/player/idle.gd" id="5_d3trc"]
-[ext_resource type="PackedScene" uid="uid://d0legpol8mhgk" path="res://src/resources/interacting_component.tscn" id="6_dxsvo"]
+[ext_resource type="PackedScene" uid="uid://d0legpol8mhgk" path="res://src/core/components/interacting_component.tscn" id="6_dxsvo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_64h4j"]
 atlas = ExtResource("1_kh5p4")

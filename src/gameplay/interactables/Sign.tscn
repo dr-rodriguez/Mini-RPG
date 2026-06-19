@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://ckx7vyjcqgcu6"]
 
 [ext_resource type="Texture2D" uid="uid://b866w4fpwtpf0" path="res://assets/art/world/tilesets/objects.png" id="1_mgtct"]
-[ext_resource type="PackedScene" uid="uid://dsabgn5w06svj" path="res://src/resources/interactable_component.tscn" id="2_klwkb"]
+[ext_resource type="PackedScene" uid="uid://dsabgn5w06svj" path="res://src/core/components/interactable_component.tscn" id="2_klwkb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_klwkb"]
 atlas = ExtResource("1_mgtct")

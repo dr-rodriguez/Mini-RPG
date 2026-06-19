@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://jtg26w2r1t7h" path="res://src/gameplay/interactables/quest_npc.gd" id="1_reb0q"]
 [ext_resource type="Texture2D" uid="uid://c6bymdvjtq7yx" path="res://assets/art/characters/enemies/slime.png" id="1_vn1wn"]
-[ext_resource type="PackedScene" uid="uid://dsabgn5w06svj" path="res://src/resources/interactable_component.tscn" id="2_vn1wn"]
+[ext_resource type="PackedScene" uid="uid://dsabgn5w06svj" path="res://src/core/components/interactable_component.tscn" id="2_vn1wn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nca5n"]
 atlas = ExtResource("1_vn1wn")
