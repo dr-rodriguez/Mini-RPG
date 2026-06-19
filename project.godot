@@ -18,10 +18,11 @@ config/icon="res://icon.svg"
 [autoload]
 
 DialogueManager="*uid://c3rodes2l3gxb"
+GameState="*uid://cm1hauw58i7i3"
 
 [dialogue_manager]
 
-runtime/balloon_path="res://src/resources/dialogue/balloon/balloon.tscn"
+runtime/balloon_path="res://src/ui/dialogue/balloon.tscn"
 
 [display]
 
@@ -78,7 +79,7 @@ cancel={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://src/resources/dialogue/misc.dialogue")
+locale/translations_pot_files=PackedStringArray("res://src/resources/dialogue/misc.dialogue", "res://src/resources/dialogue/quest.dialogue")
 
 [layer_names]
 

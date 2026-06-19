@@ -9,4 +9,4 @@ func _on_interact():
 	# Dialogue logic
 	var balloon_scene = load("res://src/ui/dialogue/balloon.tscn")
 	var resource = load("res://src/resources/dialogue/misc.dialogue")
-	DialogueManager.show_dialogue_balloon_scene(balloon_scene, resource, "sign")
+	DialogueManager.show_dialogue_balloon_scene(balloon_scene, resource, "fence")

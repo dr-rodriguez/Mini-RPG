@@ -1,0 +1,21 @@
+~ start
+
+if (not GameState.met_slimey)
+	$> GameState.met_slimey = true
+	Slimey: [[Hi|Hello|Howdy]], I'm Slimey. I live in this forest.
+if (not GameState.quest_active) 
+	Slimey: There are some nasty monsters in the Cursed Woods. Can you help clear them?
+	=> quest
+if (not GameState.quest_complete) 
+	Slimey: [[Hi|Hello|Howdy]]. Have you completed your quest?
+if (GameState.quest_complete)
+	Slimey: Hooray! You cleared all the monsters.
+=> END
+
+~ quest
+- Yes.
+	$> GameState.quest_active = true
+	Slimey: Great! I'll open the way for you.
+- No.
+	Slimey: Oh, OK. I'll keep looking.
+=> END

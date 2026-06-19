@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ca3wn23c4qbcp"]
 
-[ext_resource type="Script" uid="uid://b8n4f8tuuhyq2" path="res://src/resources/dialogue/balloon/balloon.gd" id="1_36de5"]
+[ext_resource type="Script" uid="uid://b8n4f8tuuhyq2" path="res://src/ui/dialogue/balloon.gd" id="1_36de5"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_72ixx"]
 
@@ -188,6 +188,7 @@ theme_override_constants/separation = 2
 alignment = 1
 script = ExtResource("3_72ixx")
 response_template = NodePath("ResponseExample")
+next_action = &"interact"
 
 [node name="ResponseExample" type="Button" parent="Balloon/ResponsesMenu" unique_id=914537232]
 layout_mode = 2

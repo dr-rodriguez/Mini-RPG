@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://djfibfkl5v51r"]
 
 [ext_resource type="Texture2D" uid="uid://cc04wh586gmnt" path="res://assets/art/world/tilesets/fences.png" id="1_1n4jf"]
+[ext_resource type="Script" uid="uid://ctvs3butc6blj" path="res://src/gameplay/interactables/removable_fence.gd" id="1_8gyf8"]
+[ext_resource type="PackedScene" uid="uid://dsabgn5w06svj" path="res://src/core/components/interactable_component.tscn" id="3_pqna2"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0nlun"]
 atlas = ExtResource("1_1n4jf")
@@ -9,8 +11,12 @@ region = Rect2(0, 16, 16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8gyf8"]
 size = Vector2(11, 86)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tuslq"]
+size = Vector2(14, 61)
+
 [node name="RemovableFence" type="StaticBody2D" unique_id=214799066]
 collision_mask = 14
+script = ExtResource("1_8gyf8")
 
 [node name="Node2D" type="Node2D" parent="." unique_id=1349460136]
 
@@ -36,3 +42,11 @@ texture = SubResource("AtlasTexture_0nlun")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=743743962]
 position = Vector2(0.5, 32)
 shape = SubResource("RectangleShape2D_8gyf8")
+
+[node name="InteractableComponent" parent="." unique_id=1662481959 instance=ExtResource("3_pqna2")]
+interact_name = "???"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent" unique_id=352703924]
+position = Vector2(-11, 29.5)
+shape = SubResource("RectangleShape2D_tuslq")
+debug_color = Color(0.24909729, 0.61352485, 0.47895402, 0.41960785)
