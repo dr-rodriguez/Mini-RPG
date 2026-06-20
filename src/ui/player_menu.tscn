@@ -1,9 +1,11 @@
 [gd_scene format=3 uid="uid://divj11vcsefnl"]
 
-[ext_resource type="Texture2D" uid="uid://bk1gg1f0guw58" path="res://icon.svg" id="1_mle6a"]
 [ext_resource type="Theme" uid="uid://28wu85kpcyp0" path="res://src/ui/ui.tres" id="1_ns5me"]
 [ext_resource type="Script" uid="uid://2111qyeq3pjn" path="res://src/ui/player_menu.gd" id="2_og4ro"]
 [ext_resource type="PackedScene" uid="uid://cfy6htvnrgx0s" path="res://src/ui/player_stats.tscn" id="3_ovlo1"]
+[ext_resource type="Texture2D" uid="uid://bimj8engkukpr" path="res://assets/art/ui/icons/HelmetT2.png" id="3_qqbmw"]
+[ext_resource type="Texture2D" uid="uid://111mlg52mud2" path="res://assets/art/ui/icons/Backpack.png" id="4_u63ml"]
+[ext_resource type="Texture2D" uid="uid://bvluprbkx1wfd" path="res://assets/art/ui/icons/Letter.png" id="5_ja101"]
 [ext_resource type="PackedScene" uid="uid://bfd2tcfomnk7q" path="res://src/ui/player_inventory.tscn" id="5_uvyiw"]
 [ext_resource type="PackedScene" uid="uid://yo1bb14qn1wk" path="res://src/ui/options_menu.tscn" id="6_wyoga"]
 
@@ -48,36 +50,34 @@ layout_mode = 2
 [node name="Header" type="HBoxContainer" parent="Panel/MarginContainer/VBox1" unique_id=2048509822]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_constants/separation = 2
 alignment = 1
 
 [node name="StatsButton" type="Button" parent="Panel/MarginContainer/VBox1/Header" unique_id=1396412186]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(30, 30)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 tooltip_text = "Character"
-icon = ExtResource("1_mle6a")
+icon = ExtResource("3_qqbmw")
 flat = true
-icon_alignment = 1
 expand_icon = true
 
 [node name="InventoryButton" type="Button" parent="Panel/MarginContainer/VBox1/Header" unique_id=764149658]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(30, 30)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 tooltip_text = "Inventory"
-icon = ExtResource("1_mle6a")
+icon = ExtResource("4_u63ml")
 flat = true
-icon_alignment = 1
 expand_icon = true
 
 [node name="OptionsButton" type="Button" parent="Panel/MarginContainer/VBox1/Header" unique_id=1393445458]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(30, 30)
+custom_minimum_size = Vector2(40, 40)
 layout_mode = 2
 tooltip_text = "Options"
-icon = ExtResource("1_mle6a")
+icon = ExtResource("5_ja101")
 flat = true
-icon_alignment = 1
 expand_icon = true
 
 [node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBox1" unique_id=1123517134]
