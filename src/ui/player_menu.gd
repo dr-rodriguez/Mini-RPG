@@ -2,9 +2,9 @@ extends Control
 
 # Dictionary of available panel views in UI
 @onready var views := {
-	"stats": %PlayerStats,
-	"inventory": %PlayerInventory,
-	"options": %Options,
+	"stats": %UIStats,
+	"inventory": %UIInventory,
+	"options": %UIOptions,
 }
 # Label for help text
 @onready var help_label := %HelpLabel
@@ -28,6 +28,10 @@ func _ready() -> void:
 func _show_view(view_name: String) -> void:
 	for key in views:
 		views[key].visible = (key == view_name)
+	
+	if view_name == "inventory":
+		for x in PlayerData.inventory.items:
+			print_debug(x)
 	
 	# Update the stats,just in case
 	if view_name == "stats":

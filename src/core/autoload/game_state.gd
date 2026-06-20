@@ -1,5 +1,9 @@
 extends Node
 
+# global signals
+signal quest_active_changed(active: bool)
+signal help_text_changed(help_text: String)
+
 # global variables
 var met_slimey: bool = false
 var quest_complete: bool = false
@@ -16,13 +20,10 @@ var quest_active: bool = false:
 	get:
 		return quest_active
 
-# global signals
-signal quest_active_changed(active: bool)
-signal help_text_changed(help_text: String)
-
 # help text routing with owner guard (prevents exit/enter ordering clobber)
 var _help_source: Object = null
 
+# Functions to emit help_text_changed signals, used by UI elements
 func set_help_text(text: String, source: Object) -> void:
 	_help_source = source
 	help_text_changed.emit(text)

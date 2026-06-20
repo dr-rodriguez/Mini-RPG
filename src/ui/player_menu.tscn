@@ -2,12 +2,12 @@
 
 [ext_resource type="Theme" uid="uid://28wu85kpcyp0" path="res://src/ui/ui.tres" id="1_ns5me"]
 [ext_resource type="Script" uid="uid://2111qyeq3pjn" path="res://src/ui/player_menu.gd" id="2_og4ro"]
-[ext_resource type="PackedScene" uid="uid://cfy6htvnrgx0s" path="res://src/ui/player_stats.tscn" id="3_ovlo1"]
+[ext_resource type="PackedScene" uid="uid://cfy6htvnrgx0s" path="res://src/ui/ui_stats.tscn" id="3_ovlo1"]
 [ext_resource type="Texture2D" uid="uid://bimj8engkukpr" path="res://assets/art/ui/icons/HelmetT2.png" id="3_qqbmw"]
 [ext_resource type="Texture2D" uid="uid://111mlg52mud2" path="res://assets/art/ui/icons/Backpack.png" id="4_u63ml"]
 [ext_resource type="Texture2D" uid="uid://bvluprbkx1wfd" path="res://assets/art/ui/icons/Letter.png" id="5_ja101"]
-[ext_resource type="PackedScene" uid="uid://bfd2tcfomnk7q" path="res://src/ui/player_inventory.tscn" id="5_uvyiw"]
-[ext_resource type="PackedScene" uid="uid://yo1bb14qn1wk" path="res://src/ui/options_menu.tscn" id="6_wyoga"]
+[ext_resource type="PackedScene" uid="uid://bfd2tcfomnk7q" path="res://src/ui/ui_inventory.tscn" id="5_uvyiw"]
+[ext_resource type="PackedScene" uid="uid://yo1bb14qn1wk" path="res://src/ui/ui_options.tscn" id="6_wyoga"]
 [ext_resource type="FontFile" uid="uid://bvkmnolf4se10" path="res://assets/art/ui/fonts/MedievalSharp-Bold.ttf" id="9_u63ml"]
 
 [node name="PlayerMenu" type="Control" unique_id=1523442858]
@@ -84,16 +84,16 @@ expand_icon = true
 [node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBox1" unique_id=1123517134]
 layout_mode = 2
 
-[node name="PlayerStats" parent="Panel/MarginContainer/VBox1" unique_id=1333443231 instance=ExtResource("3_ovlo1")]
+[node name="UIStats" parent="Panel/MarginContainer/VBox1" unique_id=1333443231 instance=ExtResource("3_ovlo1")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="PlayerInventory" parent="Panel/MarginContainer/VBox1" unique_id=1861086160 instance=ExtResource("5_uvyiw")]
+[node name="UIInventory" parent="Panel/MarginContainer/VBox1" unique_id=1861086160 instance=ExtResource("5_uvyiw")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 
-[node name="Options" parent="Panel/MarginContainer/VBox1" unique_id=847762062 instance=ExtResource("6_wyoga")]
+[node name="UIOptions" parent="Panel/MarginContainer/VBox1" unique_id=847762062 instance=ExtResource("6_wyoga")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2

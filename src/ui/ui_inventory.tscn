@@ -1,10 +1,13 @@
 [gd_scene format=3 uid="uid://bfd2tcfomnk7q"]
 
-[node name="PlayerInventory" type="MarginContainer" unique_id=1333443231]
+[ext_resource type="Script" uid="uid://bkfo67bg7j8kf" path="res://src/ui/ui_inventory.gd" id="1_v5prn"]
+
+[node name="UIInventory" type="MarginContainer" unique_id=1333443231]
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
+script = ExtResource("1_v5prn")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=217301019]
 layout_mode = 2

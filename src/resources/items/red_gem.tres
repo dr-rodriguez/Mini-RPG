@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://chgvff8n8fhd0"]
+
+[ext_resource type="Script" uid="uid://kdbmcpfw1x21" path="res://src/resources/scripts/item.gd" id="1_vjrad"]
+[ext_resource type="Texture2D" uid="uid://cskfyjeo2sd5u" path="res://assets/art/ui/icons/GemRed.png" id="2_5ieat"]
+
+[resource]
+script = ExtResource("1_vjrad")
+name = "Red Gem"
+texture = ExtResource("2_5ieat")
+help_text = "Deals 2d6 damage to all enemies."
+metadata/_custom_type_script = "uid://kdbmcpfw1x21"

@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://yo1bb14qn1wk"]
 
-[ext_resource type="Script" uid="uid://da3sgnkdreejg" path="res://src/ui/options_menu.gd" id="1_7b471"]
+[ext_resource type="Script" uid="uid://da3sgnkdreejg" path="res://src/ui/ui_options.gd" id="1_7b471"]
 
-[node name="Options" type="MarginContainer" unique_id=1333443231]
+[node name="UIOptions" type="MarginContainer" unique_id=1333443231]
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5

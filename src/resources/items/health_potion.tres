@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Item" format=3 uid="uid://bjwun3r1pdgaf"]
+
+[ext_resource type="Script" uid="uid://kdbmcpfw1x21" path="res://src/resources/scripts/item.gd" id="1_3ie0b"]
+[ext_resource type="Texture2D" uid="uid://bpk5qoo526txk" path="res://assets/art/ui/icons/PotionRed.png" id="2_k03sp"]
+
+[resource]
+script = ExtResource("1_3ie0b")
+name = "Health Potion"
+texture = ExtResource("2_k03sp")
+help_text = "Heals player for 2d4+2"
+metadata/_custom_type_script = "uid://kdbmcpfw1x21"

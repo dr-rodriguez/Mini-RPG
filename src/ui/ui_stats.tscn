@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cfy6htvnrgx0s"]
 
-[ext_resource type="Script" uid="uid://brm2dcmjdbq3d" path="res://src/ui/player_stats.gd" id="1_ogo65"]
+[ext_resource type="Script" uid="uid://brm2dcmjdbq3d" path="res://src/ui/ui_stats.gd" id="1_ogo65"]
 
-[node name="PlayerStats" type="MarginContainer" unique_id=1333443231]
+[node name="UIStats" type="MarginContainer" unique_id=1333443231]
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
