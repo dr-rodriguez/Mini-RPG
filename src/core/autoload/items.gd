@@ -1,4 +1,3 @@
-class_name Items
 extends Node
 
 var EMPTY : Item = Item.new()
@@ -16,14 +15,14 @@ var item_registry := {}
 
 func _ready() -> void:
 	_register_items()
-	EMPTY.name = "EMPTY"
-	HEALTH_POTION.use = _health_potion
-	RED_GEM.use = _red_gem
+	Items.EMPTY.name = "EMPTY"
+	Items.HEALTH_POTION.use = _health_potion
+	Items.RED_GEM.use = _red_gem
 
 
 func _register_items() -> void:
 	for item in all_items:
-		item_registry[item.item_name] = item
+		item_registry[item.name] = item
 
 
 func get_item(item_name: String) -> Item:

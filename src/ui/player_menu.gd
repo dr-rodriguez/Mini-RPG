@@ -39,7 +39,7 @@ func _show_view(view_name: String) -> void:
 
 # Helper function to call set_stats for the PlayerStats view
 func _set_stats_labels() -> void:
-	%PlayerStats.set_stats()
+	%UIStats.set_stats()
 
 # Helper function to set the help text
 func _on_options_help_text_changed(help_text: String) -> void:

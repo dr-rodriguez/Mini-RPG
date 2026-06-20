@@ -5,9 +5,13 @@ var max_health: int = 10
 var strength: int = 2
 var dexterity: int = 1
 var gold: int = 10
+var inventory := Inventory.new()
 
-# Using Inventory class
-var inventory: Inventory
+# Set up initial inventory
+func _ready() -> void:
+	inventory.add(Items.HEALTH_POTION)
+	inventory.add(Items.HEALTH_POTION)
+	inventory.add(Items.RED_GEM)
 
 # Player Data functions
 func armor_class() -> int:

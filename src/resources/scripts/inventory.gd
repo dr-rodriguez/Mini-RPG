@@ -3,7 +3,8 @@ extends Node
 
 var items: Array[Item]
 
-func _ready() -> void:
-	items.append(Items.HEALTH_POTION)
-	items.append(Items.HEALTH_POTION)
-	items.append(Items.RED_GEM)
+func add(item: Item) -> void:
+	items.append(item)
+
+func remove(item: Item) -> void:
+	items.erase(item)
