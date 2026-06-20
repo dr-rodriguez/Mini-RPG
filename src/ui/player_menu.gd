@@ -1,21 +1,20 @@
 extends Control
 
-@onready var stats_view = %PlayerStats
-@onready var inventory_view = %PlayerInventory
-@onready var options_view = %Options
+# Dictionary of available panel views in UI
+@onready var views := {
+	"stats": %PlayerStats,
+	"inventory": %PlayerInventory,
+	"options": %Options,
+}
 
-func _on_stats_button_pressed() -> void:
-	stats_view.show()
-	inventory_view.hide()
-	options_view.hide()
+func _ready() -> void:
+	# Establish signal connections, set default view
+	%StatsButton.pressed.connect(_show_view.bind("stats"))
+	%InventoryButton.pressed.connect(_show_view.bind("inventory"))
+	%OptionsButton.pressed.connect(_show_view.bind("options"))
+	_show_view("stats")
 
-func _on_invetory_button_pressed() -> void:
-	stats_view.hide()
-	inventory_view.show()
-	options_view.hide()
-
-
-func _on_options_button_pressed() -> void:
-	stats_view.hide()
-	inventory_view.hide()
-	options_view.show()
+# Helper function to activate the specified view
+func _show_view(view_name: String) -> void:
+	for key in views:
+		views[key].visible = (key == view_name)

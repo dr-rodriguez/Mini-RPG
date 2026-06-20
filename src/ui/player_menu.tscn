@@ -51,6 +51,7 @@ size_flags_horizontal = 4
 alignment = 1
 
 [node name="StatsButton" type="Button" parent="Panel/MarginContainer/VBox1/Header" unique_id=1396412186]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 tooltip_text = "Character"
@@ -59,7 +60,8 @@ flat = true
 icon_alignment = 1
 expand_icon = true
 
-[node name="InvetoryButton" type="Button" parent="Panel/MarginContainer/VBox1/Header" unique_id=764149658]
+[node name="InventoryButton" type="Button" parent="Panel/MarginContainer/VBox1/Header" unique_id=764149658]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 tooltip_text = "Inventory"
@@ -69,6 +71,7 @@ icon_alignment = 1
 expand_icon = true
 
 [node name="OptionsButton" type="Button" parent="Panel/MarginContainer/VBox1/Header" unique_id=1393445458]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 30)
 layout_mode = 2
 tooltip_text = "Options"
@@ -93,7 +96,3 @@ layout_mode = 2
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-
-[connection signal="pressed" from="Panel/MarginContainer/VBox1/Header/StatsButton" to="." method="_on_stats_button_pressed"]
-[connection signal="pressed" from="Panel/MarginContainer/VBox1/Header/InvetoryButton" to="." method="_on_invetory_button_pressed"]
-[connection signal="pressed" from="Panel/MarginContainer/VBox1/Header/OptionsButton" to="." method="_on_options_button_pressed"]
