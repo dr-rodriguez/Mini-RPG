@@ -1,9 +1,8 @@
-[gd_scene format=3 uid="uid://ca3wn23c4qbcp"]
+[gd_scene format=3 uid="uid://cydv3350ohqqp"]
 
-[ext_resource type="Script" uid="uid://b8n4f8tuuhyq2" path="res://src/ui/dialogue/balloon.gd" id="1_36de5"]
-[ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
-[ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_72ixx"]
-[ext_resource type="AudioStream" uid="uid://cddn2eunj6giy" path="res://assets/audio/sfx/lttp_se_message_tick.wav" id="4_io3ht"]
+[ext_resource type="Script" uid="uid://b8n4f8tuuhyq2" path="res://src/ui/dialogue/balloon.gd" id="1_8fhtu"]
+[ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_6ktnx"]
+[ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_jsk8h"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
 bg_color = Color(0, 0, 0, 1)
@@ -100,12 +99,11 @@ _data = {
 &"progress": SubResource("Animation_qkmqt")
 }
 
-[node name="DialogueBalloon" type="CanvasLayer" unique_id=1434168376]
+[node name="EnvironmentBalloon" type="CanvasLayer" unique_id=1434168376]
 layer = 100
-script = ExtResource("1_36de5")
+script = ExtResource("1_8fhtu")
 next_action = &"interact"
 skip_action = &"cancel"
-talk_sound = ExtResource("4_io3ht")
 
 [node name="Balloon" type="Control" parent="." unique_id=359403728]
 unique_name_in_owner = true
@@ -152,7 +150,7 @@ text = "Character"
 fit_content = true
 scroll_active = false
 
-[node name="DialogueLabel" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1225160028 instance=ExtResource("2_a8ve6")]
+[node name="DialogueLabel" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1225160028 instance=ExtResource("2_6ktnx")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
@@ -188,7 +186,7 @@ grow_vertical = 2
 size_flags_vertical = 8
 theme_override_constants/separation = 2
 alignment = 1
-script = ExtResource("3_72ixx")
+script = ExtResource("3_jsk8h")
 response_template = NodePath("ResponseExample")
 next_action = &"interact"
 

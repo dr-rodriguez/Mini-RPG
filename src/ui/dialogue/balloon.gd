@@ -1,6 +1,10 @@
 extends CanvasLayer
 ## A basic dialogue balloon for use with Dialogue Manager.
 
+const DIALOGUE_PITCHES = {
+	Slimey = 0.8,
+	Coco = 1
+}
 
 ## The dialogue resource
 @export var dialogue_resource: DialogueResource
@@ -19,6 +23,9 @@ extends CanvasLayer
 
 ## The action to use to skip typing the dialogue
 @export var skip_action: StringName = &"ui_cancel"
+
+# Talk sound to use for this balloon
+@export var talk_sound: AudioStream
 
 ## A sound player for voice lines (if they exist).
 @onready var audio_stream_player: AudioStreamPlayer = %AudioStreamPlayer
@@ -81,6 +88,9 @@ func _ready() -> void:
 
 	mutation_cooldown.timeout.connect(_on_mutation_cooldown_timeout)
 	add_child(mutation_cooldown)
+
+	# Beep once per typed letter
+	dialogue_label.spoke.connect(_on_dialogue_label_spoke)
 
 	if auto_start:
 		if not is_instance_valid(dialogue_resource):
@@ -208,6 +218,22 @@ func _on_balloon_gui_input(event: InputEvent) -> void:
 		next(dialogue_line.next_id)
 	elif event.is_action_pressed(next_action) and get_viewport().gui_get_focus_owner() == balloon:
 		next(dialogue_line.next_id)
+
+
+func _on_dialogue_label_spoke(letter: String, _letter_index: int, _speed: float) -> void:
+	# No beep for whitespace
+	if letter.strip_edges().is_empty():
+		return
+	if not is_instance_valid(talk_sound):
+		return
+	# No beeps for no characters (narrator)
+	if dialogue_line.character.is_empty():
+		return
+	
+	# Set sound and play it
+	audio_stream_player.stream = talk_sound
+	audio_stream_player.pitch_scale = DIALOGUE_PITCHES.get(dialogue_line.character, 1.0)
+	audio_stream_player.play()
 
 
 func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
