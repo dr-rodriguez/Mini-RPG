@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bfd2tcfomnk7q"]
 
 [node name="PlayerInventory" type="MarginContainer" unique_id=1333443231]
-size_flags_vertical = 3
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5

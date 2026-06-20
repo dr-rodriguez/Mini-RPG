@@ -18,3 +18,16 @@ var quest_active: bool = false:
 
 # global signals
 signal quest_active_changed(active: bool)
+signal help_text_changed(help_text: String)
+
+# help text routing with owner guard (prevents exit/enter ordering clobber)
+var _help_source: Object = null
+
+func set_help_text(text: String, source: Object) -> void:
+	_help_source = source
+	help_text_changed.emit(text)
+
+func clear_help_text(source: Object) -> void:
+	if source == _help_source:
+		_help_source = null
+		help_text_changed.emit("")

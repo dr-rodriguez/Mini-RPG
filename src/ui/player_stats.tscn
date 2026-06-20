@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://cfy6htvnrgx0s"]
 
+[ext_resource type="Script" uid="uid://brm2dcmjdbq3d" path="res://src/ui/player_stats.gd" id="1_ogo65"]
+
 [node name="PlayerStats" type="MarginContainer" unique_id=1333443231]
-size_flags_vertical = 3
 theme_override_constants/margin_left = 5
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 5
+script = ExtResource("1_ogo65")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=217301019]
 layout_mode = 2
@@ -38,55 +40,63 @@ theme_override_constants/margin_bottom = 10
 [node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/MarginContainer/Panel/MarginContainer" unique_id=57483524]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer2" unique_id=1680316557]
+[node name="HealthContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer2" unique_id=1680316557]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="HealthLabel" type="Label" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer2/HBoxContainer" unique_id=2035540026]
+[node name="HealthLabel" type="Label" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer2/HealthContainer" unique_id=2035540026]
 layout_mode = 2
 text = "Health:"
 
-[node name="HealthValue" type="Label" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer2/HBoxContainer" unique_id=1113767972]
+[node name="HealthValue" type="Label" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer2/HealthContainer" unique_id=1113767972]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(30, 0)
 layout_mode = 2
 size_flags_horizontal = 10
-text = "10/10"
+text = "0"
 horizontal_alignment = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer2" unique_id=73660201]
+[node name="ACContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer2" unique_id=73660201]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="ACLabel" type="Label" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer2/HBoxContainer2" unique_id=503189605]
+[node name="ACLabel" type="Label" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer2/ACContainer" unique_id=503189605]
 layout_mode = 2
 text = "Armor Class:"
 
-[node name="ACValue" type="Label" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer2/HBoxContainer2" unique_id=1476171359]
+[node name="ACValue" type="Label" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer2/ACContainer" unique_id=1476171359]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
-text = "11"
+text = "0"
 horizontal_alignment = 2
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer2" unique_id=1542494840]
+[node name="StrengthContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer2" unique_id=1542494840]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="StrengthLabel" type="Label" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer2/HBoxContainer3" unique_id=957414889]
+[node name="StrengthLabel" type="Label" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer2/StrengthContainer" unique_id=957414889]
 layout_mode = 2
 text = "Strength:"
 
-[node name="StrengthValue" type="Label" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer2/HBoxContainer3" unique_id=355939384]
+[node name="StrengthValue" type="Label" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer2/StrengthContainer" unique_id=355939384]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
-text = "2"
+text = "0"
 horizontal_alignment = 2
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer2" unique_id=757502200]
+[node name="DexterityContainer" type="HBoxContainer" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer2" unique_id=757502200]
+unique_name_in_owner = true
 layout_mode = 2
 
-[node name="DexterityLabel" type="Label" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer2/HBoxContainer4" unique_id=607796136]
+[node name="DexterityLabel" type="Label" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer2/DexterityContainer" unique_id=607796136]
 layout_mode = 2
 text = "Dexterity:"
 
-[node name="DexterityValue" type="Label" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer2/HBoxContainer4" unique_id=1398134339]
+[node name="DexterityValue" type="Label" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/VBoxContainer2/DexterityContainer" unique_id=1398134339]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
-text = "1"
+text = "0"
 horizontal_alignment = 2

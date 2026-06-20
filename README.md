@@ -1,8 +1,8 @@
 # Mini-RPG
 
-A Godot 4.6 project. 
+A Godot 4.7 project. 
 
-Learning project: building a mini-RPG from scratch to understand Godot patterns and game architecture.
+Building a mini-RPG from scratch to understand Godot patterns and game architecture.
 
 Credits:
 - [Dialogue Manager](https://dialogue.nathanhoad.net/) by Nathan Hoid

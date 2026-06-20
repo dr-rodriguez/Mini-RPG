@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bvluprbkx1wfd" path="res://assets/art/ui/icons/Letter.png" id="5_ja101"]
 [ext_resource type="PackedScene" uid="uid://bfd2tcfomnk7q" path="res://src/ui/player_inventory.tscn" id="5_uvyiw"]
 [ext_resource type="PackedScene" uid="uid://yo1bb14qn1wk" path="res://src/ui/options_menu.tscn" id="6_wyoga"]
+[ext_resource type="FontFile" uid="uid://bvkmnolf4se10" path="res://assets/art/ui/fonts/MedievalSharp-Bold.ttf" id="9_u63ml"]
 
 [node name="PlayerMenu" type="Control" unique_id=1523442858]
 custom_minimum_size = Vector2(50, 0)
@@ -96,3 +97,16 @@ layout_mode = 2
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
+
+[node name="HelpContainer" type="MarginContainer" parent="Panel/MarginContainer/VBox1" unique_id=1163912541]
+layout_mode = 2
+size_flags_vertical = 10
+
+[node name="HelpLabel" type="Label" parent="Panel/MarginContainer/VBox1/HelpContainer" unique_id=1403627297]
+unique_name_in_owner = true
+custom_maximum_size = Vector2(180, -1)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_fonts/font = ExtResource("9_u63ml")
+vertical_alignment = 2
+autowrap_mode = 2

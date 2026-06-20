@@ -13,7 +13,7 @@ config_version=5
 config/name="Mini-RPG"
 config/tags=PackedStringArray("game")
 run/main_scene="res://src/core/main_game/main_game.tscn"
-config/features=PackedStringArray("4.6", "GL Compatibility")
+config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
