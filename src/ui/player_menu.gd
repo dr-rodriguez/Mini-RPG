@@ -29,13 +29,13 @@ func _show_view(view_name: String) -> void:
 	for key in views:
 		views[key].visible = (key == view_name)
 	
-	if view_name == "inventory":
-		for x in PlayerData.inventory.items:
-			print_debug(x)
-	
-	# Update the stats,just in case
+	# Update the stats, just in case they have changed
 	if view_name == "stats":
 		_set_stats_labels()
+	
+	# Update the items, just in case they have changed
+	if view_name == "inventory":
+		%UIInventory._update_items()
 
 # Helper function to call set_stats for the PlayerStats view
 func _set_stats_labels() -> void:
