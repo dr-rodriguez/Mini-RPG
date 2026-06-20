@@ -2,12 +2,15 @@
 
 [ext_resource type="PackedScene" uid="uid://b327hlihadnw" path="res://src/gameplay/player/player.tscn" id="1_3fed5"]
 [ext_resource type="PackedScene" uid="uid://cdotfbw41payy" path="res://src/levels/Level1.tscn" id="1_6yl8a"]
+[ext_resource type="Script" uid="uid://c6u0rf003ahym" path="res://src/core/main_game/main_game.gd" id="1_l0hoa"]
 [ext_resource type="PackedScene" uid="uid://cxwq8xvugqmrb" path="res://src/gameplay/interactables/QuestNPC.tscn" id="3_6n4xl"]
 [ext_resource type="PackedScene" uid="uid://djfibfkl5v51r" path="res://src/gameplay/interactables/RemovableFence.tscn" id="4_ibp4d"]
 [ext_resource type="PackedScene" uid="uid://ckx7vyjcqgcu6" path="res://src/gameplay/interactables/Sign.tscn" id="5_tk58t"]
+[ext_resource type="PackedScene" uid="uid://divj11vcsefnl" path="res://src/ui/player_menu.tscn" id="7_0kore"]
 
 [node name="MainGame" type="Node" unique_id=1872517867]
 process_mode = 3
+script = ExtResource("1_l0hoa")
 
 [node name="Systems" type="Node" parent="." unique_id=325463633]
 
@@ -43,9 +46,16 @@ layer = 10
 
 [node name="HudRoot" type="Control" parent="HudLayer" unique_id=1031107273]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PlayerMenu" parent="HudLayer/HudRoot" unique_id=1523442858 instance=ExtResource("7_0kore")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
 
 [node name="PauseLayer" type="CanvasLayer" parent="." unique_id=787423075]
 process_mode = 2
