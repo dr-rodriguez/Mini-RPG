@@ -1,16 +1,17 @@
 extends Node
 
-# global signals
+# Global signals
 signal quest_active_changed(active: bool)
 signal help_text_changed(help_text: String)
 @warning_ignore("unused_signal")
 signal level_change_requested(scene_path: String)
 
-# global variables
+# Global variables
 var met_slimey: bool = false
 var quest_complete: bool = false
 var current_scene: String = "level1"
 var transition_scene: bool = false
+var _help_source: Object = null  # for help_text handling
 
 # variables with setter/getter
 var quest_active: bool = false:
@@ -24,9 +25,7 @@ var quest_active: bool = false:
 	get:
 		return quest_active
 
-# help text routing with owner guard (prevents exit/enter ordering clobber)
-var _help_source: Object = null
-
+#region Help Text logic
 # Functions to emit help_text_changed signals, used by UI elements
 func set_help_text(text: String, source: Object) -> void:
 	_help_source = source
@@ -36,3 +35,4 @@ func clear_help_text(source: Object) -> void:
 	if source == _help_source:
 		_help_source = null
 		help_text_changed.emit("")
+#endregion
