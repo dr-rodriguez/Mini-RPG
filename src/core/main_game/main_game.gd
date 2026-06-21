@@ -9,6 +9,12 @@ var player_menu_visible: bool = false
 
 func _ready() -> void:
 	player_menu.hide()
+	
+	# Debug mode button
+	if GameState.debug_mode:
+		%DebugButton.show()
+		%DebugButton.connect("pressed", _on_debug_button_pressed)
+	
 	# Connect to level-change signal
 	GameState.level_change_requested.connect(_on_level_change_requested)
 
@@ -63,3 +69,9 @@ func fade_tween(color: Color = Color(0, 0, 0, 0), duration: float = 0.6) -> void
 	await tween.finished
 
 #endregion
+
+
+func _on_debug_button_pressed() -> void:
+	var debug_root = $DebugLayer/DebugRoot
+	# Toggle visiblity of debug ui
+	debug_root.visible = not debug_root.visible

@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://b327hlihadnw" path="res://src/gameplay/player/player.tscn" id="1_3fed5"]
 [ext_resource type="PackedScene" uid="uid://cdotfbw41payy" path="res://src/levels/Level1.tscn" id="1_6yl8a"]
 [ext_resource type="Script" uid="uid://c6u0rf003ahym" path="res://src/core/main_game/main_game.gd" id="1_l0hoa"]
+[ext_resource type="PackedScene" uid="uid://dconjnnnobvgr" path="res://src/ui/debug/ui_debug.tscn" id="5_tk58t"]
 [ext_resource type="PackedScene" uid="uid://divj11vcsefnl" path="res://src/ui/player_menu.tscn" id="7_0kore"]
 
 [node name="MainGame" type="Node" unique_id=1872517867]
@@ -82,10 +83,27 @@ color = Color(0, 0, 0, 0)
 [node name="DebugLayer" type="CanvasLayer" parent="." unique_id=16149501]
 process_mode = 3
 layer = 120
+
+[node name="DebugButton" type="Button" parent="DebugLayer" unique_id=341460980]
+unique_name_in_owner = true
 visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -58.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "Debug"
 
 [node name="DebugRoot" type="Control" parent="DebugLayer" unique_id=1147370014]
+visible = false
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="UiDebug" parent="DebugLayer/DebugRoot" unique_id=37217953 instance=ExtResource("5_tk58t")]
+layout_mode = 1
