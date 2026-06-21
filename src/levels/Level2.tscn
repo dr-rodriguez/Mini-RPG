@@ -3,11 +3,27 @@
 [ext_resource type="TileSet" uid="uid://dl74vb8pbm4yd" path="res://src/levels/tile_set.tres" id="1_0oiss"]
 [ext_resource type="Script" uid="uid://idyuxlhhkdwm" path="res://src/levels/level_2.gd" id="1_glt04"]
 [ext_resource type="PackedScene" uid="uid://hldbratls4s0" path="res://src/gameplay/enemies/skeleton.tscn" id="3_q66yk"]
+[ext_resource type="Shader" uid="uid://t0u1kgwxf4me" path="res://src/levels/level2_shader.tres" id="4_lxwd3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ffcv"]
 size = Vector2(35, 80)
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_46iev"]
+noise_type = 3
+frequency = 0.004
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_k1mqt"]
+noise = SubResource("FastNoiseLite_46iev")
+seamless = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q66yk"]
+shader = ExtResource("4_lxwd3")
+shader_parameter/drift = Vector2(0.02, 0.01)
+shader_parameter/scale = 2.0
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_k1mqt")
+
 [node name="Level2" type="Node2D" unique_id=1771804730 groups=["Levels"]]
+modulate = Color(0.5437438, 0.43660262, 0.77717775, 1)
 y_sort_enabled = true
 script = ExtResource("1_glt04")
 
@@ -70,5 +86,25 @@ position = Vector2(408, 129)
 
 [node name="Marker2D" type="Marker2D" parent="EntityRoot/Skeleton5" unique_id=9886031]
 position = Vector2(31, -62)
+
+[node name="LevelFX" type="CanvasLayer" parent="." unique_id=995949581]
+
+[node name="Control" type="Control" parent="LevelFX" unique_id=737574384]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="LevelFX/Control" unique_id=1722294290]
+material = SubResource("ShaderMaterial_q66yk")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.51749694, 0.3966647, 0.7588151, 1)
 
 [connection signal="body_shape_entered" from="Level1Transition" to="." method="_on_level_1_transition_body_shape_entered"]
