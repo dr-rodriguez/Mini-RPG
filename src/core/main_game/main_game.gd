@@ -1,10 +1,33 @@
 extends Node
 
 @onready var player_menu = %PlayerMenu
+@onready var level_root: Node2D = $World/LevelRoot
+@onready var player: Node2D = $World/EntityRoot/Player
 var player_menu_visible: bool = false
 
 func _ready() -> void:
 	player_menu.hide()
+	# Connect to level-change signal
+	GameState.level_change_requested.connect(_on_level_change_requested)
+
+func _on_level_change_requested(scene_path: String) -> void:
+	# Defer so we don't free a level from inside its own physics callback.
+	_swap_level.call_deferred(scene_path)
+
+func _swap_level(scene_path: String) -> void:
+	# Remove all scene levels
+	for level in get_tree().get_nodes_in_group("Levels"):
+		level.queue_free()
+	
+	# Create the new scene
+	var new_level: Node2D = load(scene_path).instantiate()
+	new_level.add_to_group("Levels")
+	level_root.add_child(new_level)
+
+	# Move the player to the new level's spawn marker if it has one.
+	var spawn: Node2D = new_level.get_node_or_null("StartPosition")
+	if spawn:
+		player.global_position = spawn.global_position
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("menu"):

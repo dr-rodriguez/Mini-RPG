@@ -3,6 +3,8 @@ extends Node
 # global signals
 signal quest_active_changed(active: bool)
 signal help_text_changed(help_text: String)
+@warning_ignore("unused_signal")
+signal level_change_requested(scene_path: String)
 
 # global variables
 var met_slimey: bool = false

@@ -2,11 +2,14 @@
 
 [ext_resource type="Script" uid="uid://br6j68tb6pm63" path="res://src/levels/level_1.gd" id="1_dklsv"]
 [ext_resource type="TileSet" uid="uid://dl74vb8pbm4yd" path="res://src/levels/tile_set.tres" id="1_qsbfr"]
+[ext_resource type="PackedScene" uid="uid://cxwq8xvugqmrb" path="res://src/gameplay/interactables/QuestNPC.tscn" id="3_7y3dr"]
+[ext_resource type="PackedScene" uid="uid://ckx7vyjcqgcu6" path="res://src/gameplay/interactables/Sign.tscn" id="3_r7s8a"]
+[ext_resource type="PackedScene" uid="uid://djfibfkl5v51r" path="res://src/gameplay/interactables/RemovableFence.tscn" id="4_iearj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ffcv"]
 size = Vector2(21, 76)
 
-[node name="Level1" type="Node2D" unique_id=1467662532]
+[node name="Level1" type="Node2D" unique_id=1467662532 groups=["Levels"]]
 y_sort_enabled = true
 script = ExtResource("1_dklsv")
 
@@ -33,9 +36,17 @@ position = Vector2(5, 25)
 shape = SubResource("RectangleShape2D_4ffcv")
 
 [node name="StartPosition" type="Marker2D" parent="." unique_id=328844568]
-position = Vector2(303, 154)
+position = Vector2(592, 160)
 
-[node name="Level2Position" type="Marker2D" parent="." unique_id=1390671982]
-position = Vector2(600, 167)
+[node name="EntityRoot" type="Node2D" parent="." unique_id=1453328322]
+
+[node name="QuestNpc" parent="EntityRoot" unique_id=1048711515 instance=ExtResource("3_7y3dr")]
+position = Vector2(450, 167)
+
+[node name="Sign" parent="EntityRoot" unique_id=1260255883 instance=ExtResource("3_r7s8a")]
+position = Vector2(555, 121)
+
+[node name="RemovableFence" parent="EntityRoot" unique_id=214799066 instance=ExtResource("4_iearj")]
+position = Vector2(600, 134)
 
 [connection signal="body_shape_entered" from="Level2Transition" to="." method="_on_level_2_transition_body_shape_entered"]
