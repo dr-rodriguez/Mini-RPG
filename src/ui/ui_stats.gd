@@ -11,6 +11,7 @@ extends MarginContainer
 @onready var cnt_dex := %DexterityContainer
 
 func _ready() -> void:
+	# Prepare help text
 	var help_texts := {
 		%HealthContainer: "Health is how much damage you can take.",
 		%ACContainer: "Armor class is how well you dodge.",
@@ -24,7 +25,7 @@ func _ready() -> void:
 
 # Helper function to set player data labels
 func set_stats() -> void:
-	health_value.text = str(PlayerData.health) + "/" + str(PlayerData.max_health)
-	ac_value.text = str(PlayerData.armor_class())
-	strength_value.text = str(PlayerData.strength)
-	dexterity_value.text = str(PlayerData.dexterity)
+	health_value.text = str(PlayerData.stats.health) + "/" + str(PlayerData.stats.max_health)
+	ac_value.text = str(PlayerData.stats.armor_class)
+	strength_value.text = str(PlayerData.stats.strength)
+	dexterity_value.text = str(PlayerData.stats.dexterity)

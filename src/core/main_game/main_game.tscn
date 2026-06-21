@@ -69,9 +69,12 @@ grow_vertical = 2
 
 [node name="FadeScreen" type="ColorRect" parent="TransitionLayer/TransitionRoot" unique_id=39914221]
 unique_name_in_owner = true
-layout_mode = 0
-offset_right = 641.0
-offset_bottom = 319.0
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0020001
+anchor_bottom = 1.0
+offset_right = -0.2800293
+offset_bottom = -1.0
 color = Color(0, 0, 0, 0)
 
 [node name="DebugLayer" type="CanvasLayer" parent="." unique_id=16149501]

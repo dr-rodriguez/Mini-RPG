@@ -86,11 +86,11 @@ layout_mode = 2
 
 [node name="UIStats" parent="Panel/MarginContainer/VBox1" unique_id=1333443231 instance=ExtResource("3_ovlo1")]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 
 [node name="UIInventory" parent="Panel/MarginContainer/VBox1" unique_id=1861086160 instance=ExtResource("5_uvyiw")]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 
 [node name="UIOptions" parent="Panel/MarginContainer/VBox1" unique_id=847762062 instance=ExtResource("6_wyoga")]

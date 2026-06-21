@@ -15,10 +15,9 @@ func _ready() -> void:
 	%StatsButton.pressed.connect(_show_view.bind("stats"))
 	%InventoryButton.pressed.connect(_show_view.bind("inventory"))
 	%OptionsButton.pressed.connect(_show_view.bind("options"))
-	_show_view("stats")
 	
-	# Set player stats
-	_set_stats_labels()
+	# Default view is stats
+	_show_view("stats")
 	
 	# Connect and set help text label
 	GameState.help_text_changed.connect(_on_options_help_text_changed.bind())
@@ -28,6 +27,8 @@ func _ready() -> void:
 func _show_view(view_name: String) -> void:
 	for key in views:
 		views[key].visible = (key == view_name)
+		
+	print_debug(view_name)
 	
 	# Update the stats, just in case they have changed
 	if view_name == "stats":
