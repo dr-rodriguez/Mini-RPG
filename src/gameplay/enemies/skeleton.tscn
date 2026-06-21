@@ -51,3 +51,9 @@ script = ExtResource("6_6hm5y")
 [node name="Die" type="Node" parent="States" unique_id=525534672]
 
 [node name="Attack" type="Node" parent="States" unique_id=1984617569]
+
+[node name="IdleTimer" type="Timer" parent="." unique_id=240775547]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]

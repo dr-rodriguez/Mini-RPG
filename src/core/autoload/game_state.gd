@@ -7,7 +7,7 @@ signal help_text_changed(help_text: String)
 signal level_change_requested(scene_path: String)
 
 # Global variables
-var debug_mode: bool = false
+var debug_mode: bool = true
 var met_slimey: bool = false
 var quest_complete: bool = false
 var current_scene: String = "level1"
