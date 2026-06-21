@@ -21,7 +21,7 @@ y_sort_enabled = true
 [node name="LevelRoot" type="Node2D" parent="World" unique_id=624744230]
 y_sort_enabled = true
 
-[node name="Level1" parent="World/LevelRoot" unique_id=1467662532 instance=ExtResource("1_6yl8a")]
+[node name="Level1" parent="World/LevelRoot" unique_id=1467662532 groups=["Levels"] instance=ExtResource("1_6yl8a")]
 
 [node name="EntityRoot" type="Node2D" parent="World" unique_id=518149029]
 y_sort_enabled = true
@@ -33,7 +33,7 @@ position = Vector2(303, 152)
 position = Vector2(457, 157)
 
 [node name="RemovableFence" parent="World/EntityRoot" unique_id=1569724308 instance=ExtResource("4_ibp4d")]
-position = Vector2(632, 134)
+position = Vector2(600, 134)
 
 [node name="Sign" parent="World/EntityRoot" unique_id=1260255883 instance=ExtResource("5_tk58t")]
 position = Vector2(549, 118)

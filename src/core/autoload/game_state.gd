@@ -7,6 +7,8 @@ signal help_text_changed(help_text: String)
 # global variables
 var met_slimey: bool = false
 var quest_complete: bool = false
+var current_scene: String = "level1"
+var transition_scene: bool = false
 
 # variables with setter/getter
 var quest_active: bool = false:

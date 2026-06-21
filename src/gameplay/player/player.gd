@@ -36,3 +36,7 @@ func _on_dialogue_started(_resource: DialogueResource) -> void:
 
 func _on_dialogue_ended(_resource: DialogueResource) -> void:
 	dialogue_active = false
+
+func player() -> void:
+	# Only to detect if this is the player via has_method()
+	pass
