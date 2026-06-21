@@ -27,8 +27,6 @@ func _ready() -> void:
 func _show_view(view_name: String) -> void:
 	for key in views:
 		views[key].visible = (key == view_name)
-		
-	print_debug(view_name)
 	
 	# Update the stats, just in case they have changed
 	if view_name == "stats":
