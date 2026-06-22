@@ -5,12 +5,16 @@ signal quest_active_changed(active: bool)
 signal help_text_changed(help_text: String)
 @warning_ignore("unused_signal")
 signal level_change_requested(scene_path: String)
+@warning_ignore("unused_signal")
+signal battle_requested()
 
 # Global variables
 var debug_mode: bool = true
 var met_slimey: bool = false
 var quest_complete: bool = false
-var current_scene: String = "level1"
+var current_scene: String = "res://src/levels/Level1.tscn"
+var prior_scene: String = ""
+var scene_position: Vector2  # store player location
 var transition_scene: bool = false
 var _help_source: Object = null  # for help_text handling
 

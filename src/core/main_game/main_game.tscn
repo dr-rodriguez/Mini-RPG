@@ -46,6 +46,9 @@ unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
+[node name="BattleLayer" type="CanvasLayer" parent="." unique_id=1085871528]
+layer = 15
+
 [node name="PauseLayer" type="CanvasLayer" parent="." unique_id=787423075]
 process_mode = 2
 layer = 20

@@ -17,9 +17,15 @@ func _ready() -> void:
 	
 	# Connect to level-change signal
 	GameState.level_change_requested.connect(_on_level_change_requested)
+	GameState.battle_requested.connect(_on_battle_requested)
 
 
 func _input(event: InputEvent) -> void:
+	# Don't get inputs if paused
+	if get_tree().paused:
+		return
+	
+	# Show the player menu
 	if event.is_action_pressed("menu"):
 		if player_menu_visible:
 			player_menu.hide()
@@ -40,6 +46,9 @@ func _swap_level(scene_path: String) -> void:
 	# Run fade_tween to go to black
 	await fade_tween(Color(0, 0, 0, 1))
 	
+	# Store a record of the current scene to return to it, if needed
+	GameState.prior_scene = get_tree().get_first_node_in_group("Levels").scene_file_path
+	
 	# Remove all scene levels
 	for level in get_tree().get_nodes_in_group("Levels"):
 		level.queue_free()
@@ -56,6 +65,9 @@ func _swap_level(scene_path: String) -> void:
 		
 	# Run fade_tween to go to transparent
 	await fade_tween(Color(0, 0, 0, 0))
+	
+	# Record current scene
+	GameState.current_scene = scene_path
 
 
 func fade_tween(color: Color = Color(0, 0, 0, 0), duration: float = 0.6) -> void:
@@ -67,6 +79,37 @@ func fade_tween(color: Color = Color(0, 0, 0, 0), duration: float = 0.6) -> void
 	tween.tween_property(fade_screen, "color", color, duration/2.0)
 	
 	await tween.finished
+
+
+func _on_battle_requested():
+	# Swap to battle screen and pause the main world
+	get_tree().paused = true
+	await fade_tween(Color(0, 0, 0, 1))
+
+	# Hide the active level + its LevelFX node (fog)
+	var level = get_tree().get_first_node_in_group("Levels")
+	level.hide()
+	var fx := level.get_node("LevelFX")
+	if fx:
+		fx.hide()
+	
+	# Load the battle screen
+	var battle = load("res://src/levels/Battle.tscn").instantiate()
+	battle.process_mode = Node.PROCESS_MODE_ALWAYS
+	# tree_exited signal hooked up to _restore_level()
+	battle.tree_exited.connect(_restore_level.bind(level))
+	$BattleLayer.add_child(battle)
+	await fade_tween(Color(0, 0, 0, 0))
+
+
+func _restore_level(level: Node) -> void:
+	# Battle node freed (Flee/Won) — re-show the level and unpause.
+	if is_instance_valid(level):
+		level.show()
+		var fx := level.get_node("LevelFX")
+		if fx:
+			fx.show()
+	get_tree().paused = false
 
 #endregion
 

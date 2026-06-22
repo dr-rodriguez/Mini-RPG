@@ -126,7 +126,6 @@ animations = [{
 script = ExtResource("1_nupa0")
 
 [node name="Background" type="CanvasLayer" parent="." unique_id=1909405481]
-layer = -1
 
 [node name="Control" type="Control" parent="Background" unique_id=1063818905]
 layout_mode = 3
@@ -135,6 +134,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="TextureRect" type="TextureRect" parent="Background/Control" unique_id=1580438739]
 layout_mode = 1
@@ -219,6 +219,7 @@ layout_mode = 2
 text = "Item"
 
 [node name="Flee" type="Button" parent="HUD/MainHUD/Panel/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1964788355]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Flee"
 
@@ -257,3 +258,5 @@ grow_vertical = 2
 layout_mode = 2
 text = "Battle Time!"
 horizontal_alignment = 1
+
+[connection signal="pressed" from="HUD/MainHUD/Panel/MarginContainer/HBoxContainer/VBoxContainer/Flee" to="." method="_on_flee_pressed"]
