@@ -1,0 +1,259 @@
+[gd_scene format=3 uid="uid://c6gwb587bg6oc"]
+
+[ext_resource type="Texture2D" uid="uid://dui8c46yaph6u" path="res://assets/art/characters/player/player.png" id="1_1tu6b"]
+[ext_resource type="Script" uid="uid://byx4xis8ftnc5" path="res://src/levels/battle.gd" id="1_nupa0"]
+[ext_resource type="Theme" uid="uid://bvc6jc038xbjs" path="res://src/ui/battle/ui_battle.tres" id="1_wk1dv"]
+[ext_resource type="Texture2D" uid="uid://b6knon0ddiyxi" path="res://assets/art/characters/enemies/skeleton.png" id="3_8rtbn"]
+[ext_resource type="Script" uid="uid://cft2r8pvowrmu" path="res://src/levels/enemy_battle.gd" id="3_70nxv"]
+[ext_resource type="Script" uid="uid://d01wr2dik1thx" path="res://src/resources/scripts/enemy_data.gd" id="4_ab2mu"]
+[ext_resource type="Script" uid="uid://bvk72f5qqa6m" path="res://src/resources/scripts/attributes.gd" id="5_bwonk"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_4ffcv"]
+
+[sub_resource type="Resource" id="Resource_bwonk"]
+script = ExtResource("5_bwonk")
+max_health = 8
+dexterity = -1
+metadata/_custom_type_script = "uid://bvk72f5qqa6m"
+
+[sub_resource type="Resource" id="Resource_ab2mu"]
+script = ExtResource("4_ab2mu")
+stats = SubResource("Resource_bwonk")
+default_anim = &"idle_side"
+metadata/_custom_type_script = "uid://d01wr2dik1thx"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_balv6"]
+atlas = ExtResource("3_8rtbn")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_10hdb"]
+atlas = ExtResource("3_8rtbn")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ib0dh"]
+atlas = ExtResource("3_8rtbn")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ck70p"]
+atlas = ExtResource("3_8rtbn")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rbowa"]
+atlas = ExtResource("3_8rtbn")
+region = Rect2(192, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yw67k"]
+atlas = ExtResource("3_8rtbn")
+region = Rect2(240, 48, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4npkf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_balv6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_10hdb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ib0dh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ck70p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rbowa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yw67k")
+}],
+"loop": 1,
+"name": &"idle_side",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_evrm6"]
+atlas = ExtResource("1_1tu6b")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nupa0"]
+atlas = ExtResource("1_1tu6b")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rtbn"]
+atlas = ExtResource("1_1tu6b")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_70nxv"]
+atlas = ExtResource("1_1tu6b")
+region = Rect2(144, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ab2mu"]
+atlas = ExtResource("1_1tu6b")
+region = Rect2(192, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bwonk"]
+atlas = ExtResource("1_1tu6b")
+region = Rect2(240, 48, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4ffcv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_evrm6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nupa0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8rtbn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_70nxv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ab2mu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bwonk")
+}],
+"loop": 1,
+"name": &"idle_side",
+"speed": 5.0
+}]
+
+[node name="Battle" type="Node2D" unique_id=1410761413]
+script = ExtResource("1_nupa0")
+
+[node name="Background" type="CanvasLayer" parent="." unique_id=1909405481]
+layer = -1
+
+[node name="Control" type="Control" parent="Background" unique_id=1063818905]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Background/Control" unique_id=1580438739]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("PlaceholderTexture2D_4ffcv")
+
+[node name="Entities" type="Node2D" parent="." unique_id=2118801214]
+z_index = 1
+
+[node name="Enemy" type="Node2D" parent="Entities" unique_id=1931007801]
+script = ExtResource("3_70nxv")
+data = SubResource("Resource_ab2mu")
+
+[node name="EnemySprite" type="AnimatedSprite2D" parent="Entities/Enemy" unique_id=1337719689]
+unique_name_in_owner = true
+position = Vector2(100, 130)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_4npkf")
+animation = &"idle_side"
+
+[node name="Player" type="Node2D" parent="Entities" unique_id=703389395]
+
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="Entities/Player" unique_id=486819836]
+unique_name_in_owner = true
+position = Vector2(550, 130)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_4ffcv")
+animation = &"idle_side"
+flip_h = true
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=2144779422]
+layer = 10
+
+[node name="MainHUD" type="Control" parent="HUD" unique_id=1903646095]
+custom_minimum_size = Vector2(0, 120)
+custom_maximum_size = Vector2(560, -1)
+layout_mode = 3
+anchor_top = 0.68700004
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 100.15999
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Panel" type="Panel" parent="HUD/MainHUD" unique_id=391955088]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_wk1dv")
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/MainHUD/Panel" unique_id=494744799]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MainHUD/Panel/MarginContainer" unique_id=801240966]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD/MainHUD/Panel/MarginContainer/HBoxContainer" unique_id=799088423]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="Attack" type="Button" parent="HUD/MainHUD/Panel/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1378477927]
+layout_mode = 2
+text = "Attack"
+
+[node name="Item" type="Button" parent="HUD/MainHUD/Panel/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1280296202]
+layout_mode = 2
+text = "Item"
+
+[node name="Flee" type="Button" parent="HUD/MainHUD/Panel/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1964788355]
+layout_mode = 2
+text = "Flee"
+
+[node name="VSeparator" type="VSeparator" parent="HUD/MainHUD/Panel/MarginContainer/HBoxContainer" unique_id=1640650031]
+layout_mode = 2
+
+[node name="LogHUD" type="Control" parent="HUD" unique_id=242567053]
+custom_minimum_size = Vector2(400, 20)
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme = ExtResource("1_wk1dv")
+
+[node name="Panel" type="Panel" parent="HUD/LogHUD" unique_id=1189767514]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/LogHUD/Panel" unique_id=810442624]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LogLabel" type="Label" parent="HUD/LogHUD/Panel/MarginContainer" unique_id=1836211010]
+layout_mode = 2
+text = "Battle Time!"
+horizontal_alignment = 1
