@@ -92,8 +92,5 @@ func _on_idle_timer_timeout() -> void:
 
 func _on_hurt_box_body_shape_entered(_body_rid: RID, body: Node2D, _body_shape_index: int, _local_shape_index: int) -> void:
 	if body.has_method("player"):
-		# Store attributes
-		GameState.scene_position = body.global_position
-		
 		# Go to battle screen
 		GameState.battle_requested.emit()

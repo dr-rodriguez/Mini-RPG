@@ -45,10 +45,7 @@ func _on_level_change_requested(scene_path: String) -> void:
 func _swap_level(scene_path: String) -> void:
 	# Run fade_tween to go to black
 	await fade_tween(Color(0, 0, 0, 1))
-	
-	# Store a record of the current scene to return to it, if needed
-	GameState.prior_scene = get_tree().get_first_node_in_group("Levels").scene_file_path
-	
+
 	# Remove all scene levels
 	for level in get_tree().get_nodes_in_group("Levels"):
 		level.queue_free()
@@ -65,9 +62,6 @@ func _swap_level(scene_path: String) -> void:
 		
 	# Run fade_tween to go to transparent
 	await fade_tween(Color(0, 0, 0, 0))
-	
-	# Record current scene
-	GameState.current_scene = scene_path
 
 
 func fade_tween(color: Color = Color(0, 0, 0, 0), duration: float = 0.6) -> void:

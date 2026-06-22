@@ -12,9 +12,6 @@ signal battle_requested()
 var debug_mode: bool = true
 var met_slimey: bool = false
 var quest_complete: bool = false
-var current_scene: String = "res://src/levels/Level1.tscn"
-var prior_scene: String = ""
-var scene_position: Vector2  # store player location
 var transition_scene: bool = false
 var _help_source: Object = null  # for help_text handling
 
