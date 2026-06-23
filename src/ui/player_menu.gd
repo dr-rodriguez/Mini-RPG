@@ -7,7 +7,7 @@ extends Control
 	"options": %UIOptions,
 }
 # Label for help text
-@onready var help_label := %HelpLabel
+@onready var help_label: Label = %HelpLabel
 
 
 func _ready() -> void:
@@ -21,6 +21,8 @@ func _ready() -> void:
 	
 	# Connect and set help text label
 	GameState.help_text_changed.connect(_on_options_help_text_changed.bind())
+	# Connect to helper signal to update info
+	visibility_changed.connect(_on_visibility_changed)
 
 
 # Helper function to activate the specified view
@@ -28,18 +30,22 @@ func _show_view(view_name: String) -> void:
 	for key in views:
 		views[key].visible = (key == view_name)
 	
-	# Update the stats, just in case they have changed
-	if view_name == "stats":
-		_set_stats_labels()
-	
-	# Update the items, just in case they have changed
-	if view_name == "inventory":
-		%UIInventory._update_items()
+	# Update the stats and items, just in case they have changed
+	_set_stats_labels()
+	%UIInventory._update_items()
+
 
 # Helper function to call set_stats for the PlayerStats view
 func _set_stats_labels() -> void:
 	%UIStats.set_stats()
 
+
 # Helper function to set the help text
 func _on_options_help_text_changed(help_text: String) -> void:
 	help_label.text = help_text
+
+
+func _on_visibility_changed() -> void:
+	if visible:
+		_set_stats_labels()
+		%UIInventory._update_items()
