@@ -171,6 +171,12 @@ sprite_frames = SubResource("SpriteFrames_4ffcv")
 animation = &"idle_side"
 flip_h = true
 
+[node name="EffectRoot" type="Node2D" parent="." unique_id=278571448]
+
+[node name="Timer" type="Timer" parent="EffectRoot" unique_id=1741415438]
+unique_name_in_owner = true
+one_shot = true
+
 [node name="HUD" type="CanvasLayer" parent="." unique_id=2144779422]
 layer = 10
 
@@ -219,7 +225,6 @@ layout_mode = 2
 text = "Item"
 
 [node name="Flee" type="Button" parent="HUD/MainHUD/Panel/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1964788355]
-unique_name_in_owner = true
 layout_mode = 2
 text = "Flee"
 
@@ -260,5 +265,6 @@ layout_mode = 2
 text = "Battle Time!"
 horizontal_alignment = 1
 
+[connection signal="timeout" from="EffectRoot/Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="HUD/MainHUD/Panel/MarginContainer/HBoxContainer/VBoxContainer/Attack" to="." method="_on_attack_pressed"]
 [connection signal="pressed" from="HUD/MainHUD/Panel/MarginContainer/HBoxContainer/VBoxContainer/Flee" to="." method="_on_flee_pressed"]

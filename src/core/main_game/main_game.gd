@@ -106,7 +106,9 @@ func _restore_level(level: Node) -> void:
 		var fx := level.get_node("LevelFX")
 		if fx:
 			fx.show()
-	get_tree().paused = false
+	# Just a safety check in case closing game from battle screen
+	if get_tree():
+		get_tree().paused = false
 
 #endregion
 
