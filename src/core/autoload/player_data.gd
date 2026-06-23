@@ -36,3 +36,20 @@ func set_hard() -> void:
 	stats.health = 8
 
 #endregion
+
+#region Damage functions
+func take_damage(damage) -> void:
+	stats.health -= damage
+	if PlayerData.stats.health <= 0:
+		# TODO: Go to game over screen
+		pass
+
+
+func roll_attack() -> int:
+	return randi_range(1, 20) + stats.strength
+
+
+func roll_damage() -> int:
+	return randi_range(1, 6) + stats.strength
+
+#endregion

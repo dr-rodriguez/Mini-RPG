@@ -75,7 +75,7 @@ func fade_tween(color: Color = Color(0, 0, 0, 0), duration: float = 0.6) -> void
 	await tween.finished
 
 
-func _on_battle_requested():
+func _on_battle_requested(enemy: Node):
 	# Swap to battle screen and pause the main world
 	get_tree().paused = true
 	await fade_tween(Color(0, 0, 0, 1))
@@ -87,9 +87,12 @@ func _on_battle_requested():
 	if fx:
 		fx.hide()
 	
+	GameState.active_enemy = enemy
+	
 	# Load the battle screen
 	var battle = load("res://src/levels/Battle.tscn").instantiate()
 	battle.process_mode = Node.PROCESS_MODE_ALWAYS
+	battle.enemy = enemy  # passing the node to the battle scene
 	# tree_exited signal hooked up to _restore_level()
 	battle.tree_exited.connect(_restore_level.bind(level))
 	$BattleLayer.add_child(battle)

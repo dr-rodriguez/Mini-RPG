@@ -6,7 +6,7 @@ signal help_text_changed(help_text: String)
 @warning_ignore("unused_signal")
 signal level_change_requested(scene_path: String)
 @warning_ignore("unused_signal")
-signal battle_requested()
+signal battle_requested(enemy: Node)
 
 # Global variables
 var debug_mode: bool = true
@@ -14,6 +14,7 @@ var met_slimey: bool = false
 var quest_complete: bool = false
 var transition_scene: bool = false
 var _help_source: Object = null  # for help_text handling
+var active_enemy: Node = null  # to track which is the active enemy
 
 # variables with setter/getter
 var quest_active: bool = false:

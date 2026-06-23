@@ -12,6 +12,7 @@ var armor_class: int:
 	get:
 		return 10 + dexterity
 
+# Do not use for enemies- shared resource
 var health: int:
 	set(value):
 		health = min(value, max_health)

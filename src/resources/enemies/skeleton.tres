@@ -404,7 +404,7 @@ animations = [{
 
 [sub_resource type="Resource" id="Resource_rapw4"]
 script = ExtResource("2_rapw4")
-max_health = 8
+max_health = 14
 dexterity = -1
 metadata/_custom_type_script = "uid://bvk72f5qqa6m"
 

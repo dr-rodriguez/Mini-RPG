@@ -255,8 +255,10 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="LogLabel" type="Label" parent="HUD/LogHUD/Panel/MarginContainer" unique_id=1836211010]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Battle Time!"
 horizontal_alignment = 1
 
+[connection signal="pressed" from="HUD/MainHUD/Panel/MarginContainer/HBoxContainer/VBoxContainer/Attack" to="." method="_on_attack_pressed"]
 [connection signal="pressed" from="HUD/MainHUD/Panel/MarginContainer/HBoxContainer/VBoxContainer/Flee" to="." method="_on_flee_pressed"]

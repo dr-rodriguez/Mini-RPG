@@ -12,6 +12,7 @@ var distance_threshold: float = 2. # how many pixels for threshold
 enum PHASE {IDLE, WALK_OUT, WALK_BACK}
 var current_phase: PHASE = PHASE.IDLE
 var prior_phase: PHASE = PHASE.IDLE
+var health: int
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var state_machine: StateMachine = $States
@@ -28,6 +29,9 @@ func _ready() -> void:
 	# Set random target location and start walking
 	_get_target_location(random_movement)
 	current_phase = PHASE.WALK_OUT
+	
+	# Set health
+	health = data.stats.max_health
 
 
 func _physics_process(_delta: float) -> void:
@@ -56,6 +60,7 @@ func _physics_process(_delta: float) -> void:
 		_check_arrival(start_location)
 
 
+#region Movement logic
 func _check_arrival(target_loc):
 	if abs(global_position.distance_to(target_loc)) <= distance_threshold:
 		# Start timer
@@ -89,8 +94,14 @@ func _on_idle_timer_timeout() -> void:
 	else:
 		current_phase = PHASE.WALK_OUT
 
+#endregion
+
 
 func _on_hurt_box_body_shape_entered(_body_rid: RID, body: Node2D, _body_shape_index: int, _local_shape_index: int) -> void:
 	if body.has_method("player"):
 		# Go to battle screen
-		GameState.battle_requested.emit()
+		GameState.battle_requested.emit(self)
+
+
+func take_damage(damage) -> void:
+	health -= damage

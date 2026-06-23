@@ -22,9 +22,11 @@ shader_parameter/color = Color(0.543744, 0.436603, 0.777178, 1)
 shader_parameter/drift = Vector2(0.02, 0.01)
 shader_parameter/scale = 1.5
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_k1mqt")
+shader_parameter/Min_Alpha = 0.0
+shader_parameter/Max_Alpha = 0.5070000240825
 
 [node name="Level2" type="Node2D" unique_id=1771804730 groups=["Levels"]]
-modulate = Color(0.5437438, 0.43660262, 0.77717775, 1)
+modulate = Color(0.54509807, 0.43529412, 0.7764706, 1)
 y_sort_enabled = true
 script = ExtResource("1_glt04")
 
