@@ -1,7 +1,7 @@
 class_name Attributes
 extends Resource
 
-@export var max_health: int
+@export var max_health: int  # health is different from max_health
 @export var strength: int
 @export var dexterity: int
 
@@ -11,10 +11,3 @@ var armor_class: int:
 		pass
 	get:
 		return 10 + dexterity
-
-# Do not use for enemies- shared resource
-var health: int:
-	set(value):
-		health = min(value, max_health)
-	get:
-		return health

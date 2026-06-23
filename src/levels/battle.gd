@@ -3,48 +3,36 @@ extends Node2D
 # Passed by the main_game script
 @export var enemy: Node
 
+@onready var battle_state: BattleState = $BattleState
 @onready var player_anim := %PlayerSprite
 @onready var enemy_anim := %EnemySprite
 @onready var timer := %Timer
 @onready var on_cooldown: bool = false
-@onready var label_log := %LogLabel
+@onready var label_log: Label = %LogLabel
 @onready var log_text: String = ""
 
 func _ready() -> void:
+	# Start everyone on their idle animations
+	player_anim.animation = "idle_side"
 	player_anim.play()
+	enemy_anim.animation = "idle_side"
 	enemy_anim.play()
+	
+	roll_initiative()
 
 
-func damage_enemy(damage) -> void:
-	enemy.take_damage(damage)
-	if enemy.health <= 0:
-		label_log.text = "Enemy defeated!"
-		enemy.queue_free()
-		leave_battle()
+func roll_initiative() -> void:
+	var player_roll: int = randi_range(1, 20) + PlayerData.stats.dexterity
+	var enemy_roll: int = randi_range(1, 20) + enemy.data.stats.dexterity
+	print("Initiative: ", player_roll, " vs ", enemy_roll)
+	if player_roll >= enemy_roll:
+		battle_state.change_state(battle_state.State.PLAYER_TURN)
+	else:
+		battle_state.change_state(battle_state.State.ENEMY_TURN)
 
 
 func damage_player(damage) -> void:
 	PlayerData.take_damage(damage)
-
-
-func player_roll_to_hit() -> void:
-	var roll = PlayerData.roll_attack()
-	log_text = "Roll: " + str(roll)
-	if roll >= enemy.data.stats.armor_class:
-		var damage = PlayerData.roll_damage()
-		damage_enemy(damage)
-		log_text += " Hit! " + str(damage) + " damage!"
-	else:
-		log_text += " Miss!"
-	
-	# Set the battle log label
-	label_log.text = log_text
-
-
-func _on_flee_pressed() -> void:
-	# TODO: Add check to see if Flee is successful
-	label_log.text = "Flee successful!"
-	leave_battle()
 
 
 func leave_battle() -> void:
@@ -55,14 +43,19 @@ func leave_battle() -> void:
 	queue_free()
 
 
+#region Signal functions
+func _on_flee_pressed() -> void:
+	# TODO: Add check to see if Flee is successful
+	label_log.text = "Flee successful!"
+	leave_battle()
+
+
 func _on_attack_pressed() -> void:
-	if not on_cooldown:
-		player_roll_to_hit()
-	else:
-		return
-	on_cooldown = true
-	timer.start()
+	if battle_state.current_state == battle_state.State.PLAYER_TURN:
+		# Logic for attack in PlayerTurn State
+		battle_state.state_node.do_attack()
 
 
 func _on_timer_timeout() -> void:
 	on_cooldown = false
+#endregion

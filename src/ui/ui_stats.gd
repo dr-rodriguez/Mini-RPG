@@ -25,7 +25,7 @@ func _ready() -> void:
 
 # Helper function to set player data labels
 func set_stats() -> void:
-	health_value.text = str(PlayerData.stats.health) + "/" + str(PlayerData.stats.max_health)
+	health_value.text = str(PlayerData.health) + "/" + str(PlayerData.stats.max_health)
 	ac_value.text = str(PlayerData.stats.armor_class)
 	strength_value.text = str(PlayerData.stats.strength)
 	dexterity_value.text = str(PlayerData.stats.dexterity)

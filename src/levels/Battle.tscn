@@ -7,6 +7,9 @@
 [ext_resource type="Script" uid="uid://cft2r8pvowrmu" path="res://src/levels/enemy_battle.gd" id="3_70nxv"]
 [ext_resource type="Script" uid="uid://d01wr2dik1thx" path="res://src/resources/scripts/enemy_data.gd" id="4_ab2mu"]
 [ext_resource type="Script" uid="uid://bvk72f5qqa6m" path="res://src/resources/scripts/attributes.gd" id="5_bwonk"]
+[ext_resource type="Script" uid="uid://g08wwuyxlbgq" path="res://src/levels/battle_state.gd" id="8_bwonk"]
+[ext_resource type="Script" uid="uid://cceacnr7bx42n" path="res://src/levels/player_turn.gd" id="9_balv6"]
+[ext_resource type="Script" uid="uid://bcv3drorqrqh0" path="res://src/levels/enemy_turn.gd" id="10_10hdb"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_4ffcv"]
 
@@ -21,6 +24,30 @@ script = ExtResource("4_ab2mu")
 stats = SubResource("Resource_bwonk")
 default_anim = &"idle_side"
 metadata/_custom_type_script = "uid://d01wr2dik1thx"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1f655"]
+atlas = ExtResource("3_8rtbn")
+region = Rect2(0, 336, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2m8nk"]
+atlas = ExtResource("3_8rtbn")
+region = Rect2(48, 336, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t2fpt"]
+atlas = ExtResource("3_8rtbn")
+region = Rect2(96, 336, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_43aso"]
+atlas = ExtResource("3_8rtbn")
+region = Rect2(144, 336, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nakio"]
+atlas = ExtResource("3_8rtbn")
+region = Rect2(192, 336, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d6wd1"]
+atlas = ExtResource("3_8rtbn")
+region = Rect2(240, 336, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_balv6"]
 atlas = ExtResource("3_8rtbn")
@@ -50,6 +77,29 @@ region = Rect2(240, 48, 48, 48)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_1f655")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2m8nk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t2fpt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_43aso")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nakio")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d6wd1")
+}],
+"loop": 0,
+"name": &"attack_side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_balv6")
 }, {
 "duration": 1.0,
@@ -71,6 +121,22 @@ animations = [{
 "name": &"idle_side",
 "speed": 5.0
 }]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1x5qg"]
+atlas = ExtResource("1_1tu6b")
+region = Rect2(0, 336, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ba1j"]
+atlas = ExtResource("1_1tu6b")
+region = Rect2(48, 336, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sxbl7"]
+atlas = ExtResource("1_1tu6b")
+region = Rect2(96, 336, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_skuvk"]
+atlas = ExtResource("1_1tu6b")
+region = Rect2(144, 336, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_evrm6"]
 atlas = ExtResource("1_1tu6b")
@@ -98,6 +164,23 @@ region = Rect2(240, 48, 48, 48)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4ffcv"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1x5qg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ba1j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sxbl7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_skuvk")
+}],
+"loop": 0,
+"name": &"attack_side",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_evrm6")
@@ -159,7 +242,7 @@ unique_name_in_owner = true
 position = Vector2(100, 130)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_4npkf")
-animation = &"idle_side"
+animation = &"attack_side"
 
 [node name="Player" type="Node2D" parent="Entities" unique_id=703389395]
 
@@ -264,6 +347,21 @@ unique_name_in_owner = true
 layout_mode = 2
 text = "Battle Time!"
 horizontal_alignment = 1
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=1872598518]
+
+[node name="SFXPlayer" type="AudioStreamPlayer" parent="." unique_id=2098949520]
+
+[node name="BattleState" type="Node" parent="." unique_id=1983756242]
+script = ExtResource("8_bwonk")
+
+[node name="PlayerTurn" type="Node" parent="BattleState" unique_id=1919513957]
+script = ExtResource("9_balv6")
+
+[node name="EnemyTurn" type="Node" parent="BattleState" unique_id=650499065]
+script = ExtResource("10_10hdb")
+
+[node name="CheckEnd" type="Node" parent="BattleState" unique_id=1260018610]
 
 [connection signal="timeout" from="EffectRoot/Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="HUD/MainHUD/Panel/MarginContainer/HBoxContainer/VBoxContainer/Attack" to="." method="_on_attack_pressed"]
