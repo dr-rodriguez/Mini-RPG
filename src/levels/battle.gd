@@ -11,6 +11,9 @@ extends Node2D
 @onready var label_log: Label = %LogLabel
 @onready var log_text: String = ""
 @onready var health_label: Label = %HealthLabel
+@onready var btn_attack: Button = %Attack
+@onready var btn_item: Button = %Item
+@onready var btn_flee: Button = %Flee
 
 func _ready() -> void:
 	# Start everyone on their idle animations
@@ -25,6 +28,8 @@ func _ready() -> void:
 	_on_player_took_damage()
 	
 	# Global signal connections
+	battle_state.player_turn.connect(_on_player_turn)
+	battle_state.enemy_turn.connect(_on_enemy_turn)
 	PlayerData.player_took_damage.connect(_on_player_took_damage)
 
 
@@ -69,5 +74,17 @@ func _on_timer_timeout() -> void:
 
 func _on_player_took_damage() -> void:
 	health_label.text = "Health: " + str(PlayerData.health) + "/" + str(PlayerData.stats.max_health)
+
+
+func _on_player_turn() -> void:
+	btn_attack.disabled = false
+	btn_item.disabled = false
+	btn_flee.disabled = false
+
+
+func _on_enemy_turn() -> void:
+	btn_attack.disabled = true
+	btn_item.disabled = true
+	btn_flee.disabled = true
 
 #endregion

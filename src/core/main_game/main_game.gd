@@ -18,6 +18,7 @@ func _ready() -> void:
 	# Connect to level-change signal
 	GameState.level_change_requested.connect(_on_level_change_requested)
 	GameState.battle_requested.connect(_on_battle_requested)
+	
 
 
 func _input(event: InputEvent) -> void:

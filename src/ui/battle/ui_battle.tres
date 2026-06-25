@@ -3,6 +3,22 @@
 [ext_resource type="FontFile" uid="uid://bvkmnolf4se10" path="res://assets/art/ui/fonts/MedievalSharp-Bold.ttf" id="1_x4gg0"]
 [ext_resource type="FontFile" uid="uid://dmgd8b3yfkrkf" path="res://assets/art/ui/fonts/MedievalSharp-Book.ttf" id="2_nbm5w"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x4gg0"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.40948617, 0.51730317, 0.5646121, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 1
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 1
+expand_margin_left = 2.0
+expand_margin_top = 1.0
+expand_margin_right = 2.0
+expand_margin_bottom = 1.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bwonk"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 border_width_left = 2
@@ -37,6 +53,7 @@ vertical = true
 
 [resource]
 Button/fonts/font = ExtResource("1_x4gg0")
+Button/styles/disabled = SubResource("StyleBoxFlat_x4gg0")
 Button/styles/normal = SubResource("StyleBoxFlat_bwonk")
 Label/fonts/font = ExtResource("2_nbm5w")
 MarginContainer/constants/margin_bottom = 10

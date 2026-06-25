@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://cft2r8pvowrmu" path="res://src/levels/enemy_battle.gd" id="3_70nxv"]
 [ext_resource type="Script" uid="uid://d01wr2dik1thx" path="res://src/resources/scripts/enemy_data.gd" id="4_ab2mu"]
 [ext_resource type="Script" uid="uid://bvk72f5qqa6m" path="res://src/resources/scripts/attributes.gd" id="5_bwonk"]
+[ext_resource type="Texture2D" uid="uid://8ikc6uqvkpde" path="res://assets/art/characters/enemies/skeleton_swordless.png" id="6_ib0dh"]
 [ext_resource type="Script" uid="uid://g08wwuyxlbgq" path="res://src/levels/battle_state.gd" id="8_bwonk"]
 [ext_resource type="Script" uid="uid://cceacnr7bx42n" path="res://src/levels/player_turn.gd" id="9_balv6"]
 [ext_resource type="Script" uid="uid://bcv3drorqrqh0" path="res://src/levels/enemy_turn.gd" id="10_10hdb"]
@@ -48,6 +49,38 @@ region = Rect2(192, 336, 48, 48)
 [sub_resource type="AtlasTexture" id="AtlasTexture_d6wd1"]
 atlas = ExtResource("3_8rtbn")
 region = Rect2(240, 336, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mnr1o"]
+atlas = ExtResource("6_ib0dh")
+region = Rect2(0, 576, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gh23w"]
+atlas = ExtResource("6_ib0dh")
+region = Rect2(48, 576, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6bas"]
+atlas = ExtResource("6_ib0dh")
+region = Rect2(96, 576, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_os5jw"]
+atlas = ExtResource("6_ib0dh")
+region = Rect2(144, 576, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ggty"]
+atlas = ExtResource("6_ib0dh")
+region = Rect2(192, 576, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8xnuf"]
+atlas = ExtResource("6_ib0dh")
+region = Rect2(0, 480, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_62a3t"]
+atlas = ExtResource("6_ib0dh")
+region = Rect2(48, 480, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qfjnn"]
+atlas = ExtResource("6_ib0dh")
+region = Rect2(96, 480, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_balv6"]
 atlas = ExtResource("3_8rtbn")
@@ -96,6 +129,40 @@ animations = [{
 }],
 "loop": 0,
 "name": &"attack_side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mnr1o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gh23w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x6bas")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_os5jw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ggty")
+}],
+"loop": 0,
+"name": &"death",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8xnuf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_62a3t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qfjnn")
+}],
+"loop": 0,
+"name": &"hit_side",
 "speed": 5.0
 }, {
 "frames": [{
@@ -242,7 +309,7 @@ unique_name_in_owner = true
 position = Vector2(100, 130)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_4npkf")
-animation = &"attack_side"
+animation = &"death"
 
 [node name="Player" type="Node2D" parent="Entities" unique_id=703389395]
 
@@ -251,7 +318,7 @@ unique_name_in_owner = true
 position = Vector2(550, 130)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_4ffcv")
-animation = &"idle_side"
+animation = &"attack_side"
 flip_h = true
 
 [node name="EffectRoot" type="Node2D" parent="." unique_id=278571448]
@@ -300,14 +367,17 @@ theme_override_constants/separation = 8
 alignment = 1
 
 [node name="Attack" type="Button" parent="HUD/MainHUD/Panel/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1378477927]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Attack"
 
 [node name="Item" type="Button" parent="HUD/MainHUD/Panel/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1280296202]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Item"
 
 [node name="Flee" type="Button" parent="HUD/MainHUD/Panel/MarginContainer/HBoxContainer/VBoxContainer" unique_id=1964788355]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Flee"
 

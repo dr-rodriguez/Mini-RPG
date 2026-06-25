@@ -50,6 +50,13 @@ func damage_enemy(damage) -> void:
 	owner.enemy.take_damage(damage)
 	if owner.enemy.health <= 0:
 		owner.label_log.text = "Enemy defeated!"
+		owner.enemy_anim.animation = "death"
+		owner.enemy_anim.play()
+		await owner.enemy_anim.animation_finished
 		owner.enemy.queue_free()
 		# TODO: Change to CHECK_END state
 		owner.leave_battle()
+	else:
+		owner.enemy_anim.animation = "hit_side"
+		owner.enemy_anim.play()
+		await owner.enemy_anim.animation_finished

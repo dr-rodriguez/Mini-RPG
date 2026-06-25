@@ -1,6 +1,9 @@
 extends Node
 class_name BattleState
 
+signal player_turn();
+signal enemy_turn();
+
 enum State {PLAYER_TURN, ENEMY_TURN, CHECK_END}
 @onready var states_map = {
 	State.PLAYER_TURN: $PlayerTurn,
@@ -17,9 +20,11 @@ func change_state(new_state: State) -> void:
 		State.PLAYER_TURN:
 			# Select appropriate node and call it's enter function
 			state_node = states_map[State.PLAYER_TURN]
+			player_turn.emit()
 			state_node.enter()
 		State.ENEMY_TURN:
 			state_node = states_map[State.ENEMY_TURN]
+			enemy_turn.emit()
 			state_node.enter()
 		State.CHECK_END:
 			state_node = states_map[State.CHECK_END]
