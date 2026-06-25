@@ -1,5 +1,9 @@
 extends Node
 
+# Player related signals
+signal player_took_damage
+signal player_died
+
 var stats := Attributes.new()
 var gold: int = 10
 var inventory := Inventory.new()
@@ -47,9 +51,11 @@ func set_hard() -> void:
 #region Damage functions
 func take_damage(damage) -> void:
 	health -= damage
+	player_took_damage.emit()
 	if PlayerData.health <= 0:
 		# TODO: Go to game over screen
 		print_debug("player dead")
+		player_died.emit()
 		pass
 
 

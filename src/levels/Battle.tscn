@@ -314,6 +314,16 @@ text = "Flee"
 [node name="VSeparator" type="VSeparator" parent="HUD/MainHUD/Panel/MarginContainer/HBoxContainer" unique_id=1640650031]
 layout_mode = 2
 
+[node name="VBoxContainer2" type="VBoxContainer" parent="HUD/MainHUD/Panel/MarginContainer/HBoxContainer" unique_id=1699088839]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="HealthLabel" type="Label" parent="HUD/MainHUD/Panel/MarginContainer/HBoxContainer/VBoxContainer2" unique_id=1348541433]
+unique_name_in_owner = true
+layout_mode = 2
+horizontal_alignment = 2
+
 [node name="LogHUD" type="Control" parent="HUD" unique_id=242567053]
 custom_minimum_size = Vector2(400, 20)
 layout_mode = 3

@@ -10,6 +10,7 @@ extends Node2D
 @onready var on_cooldown: bool = false
 @onready var label_log: Label = %LogLabel
 @onready var log_text: String = ""
+@onready var health_label: Label = %HealthLabel
 
 func _ready() -> void:
 	# Start everyone on their idle animations
@@ -19,6 +20,12 @@ func _ready() -> void:
 	enemy_anim.play()
 	
 	roll_initiative()
+	
+	# Set initial health label
+	_on_player_took_damage()
+	
+	# Global signal connections
+	PlayerData.player_took_damage.connect(_on_player_took_damage)
 
 
 func roll_initiative() -> void:
@@ -58,4 +65,9 @@ func _on_attack_pressed() -> void:
 
 func _on_timer_timeout() -> void:
 	on_cooldown = false
+
+
+func _on_player_took_damage() -> void:
+	health_label.text = "Health: " + str(PlayerData.health) + "/" + str(PlayerData.stats.max_health)
+
 #endregion

@@ -83,7 +83,7 @@ func _on_battle_requested(enemy: Node):
 	# Hide the active level + its LevelFX node (fog)
 	var level = get_tree().get_first_node_in_group("Levels")
 	level.hide()
-	var fx := level.get_node("LevelFX")
+	var fx := level.get_node_or_null("LevelFX")
 	if fx:
 		fx.hide()
 	
@@ -103,7 +103,7 @@ func _restore_level(level: Node) -> void:
 	# Battle node freed (Flee/Won) — re-show the level and unpause.
 	if is_instance_valid(level):
 		level.show()
-		var fx := level.get_node("LevelFX")
+		var fx := level.get_node_or_null("LevelFX")
 		if fx:
 			fx.show()
 	# Just a safety check in case closing game from battle screen
