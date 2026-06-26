@@ -102,6 +102,17 @@ func _on_hurt_box_body_shape_entered(_body_rid: RID, body: Node2D, _body_shape_i
 		# Go to battle screen
 		GameState.battle_requested.emit(self)
 
-
+#region Attack logic
 func take_damage(damage) -> void:
 	health -= damage
+
+
+func roll_attack() -> int:
+	return randi_range(1, 20) + data.stats.strength
+
+
+func roll_damage() -> int:
+	return randi_range(1,4)
+
+
+#endregion

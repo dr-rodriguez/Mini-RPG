@@ -17,7 +17,7 @@ func do_attack() -> void:
 
 
 func enemy_roll_to_hit() -> void:
-	var roll = PlayerData.roll_attack()
+	var roll = owner.enemy.roll_attack()
 	log_text = "Enemy Roll: " + str(roll)
 	
 	# Run the attack animation
@@ -26,7 +26,7 @@ func enemy_roll_to_hit() -> void:
 	await owner.enemy_anim.animation_finished
 	
 	if roll >= PlayerData.stats.armor_class:
-		var damage = PlayerData.roll_damage()
+		var damage = owner.enemy.roll_damage()
 		PlayerData.take_damage(damage)
 		log_text += " Hit! " + str(damage) + " damage!"
 	else:

@@ -33,6 +33,7 @@ func _ready() -> void:
 	PlayerData.player_took_damage.connect(_on_player_took_damage)
 
 
+## Roll initiave in the battle scene
 func roll_initiative() -> void:
 	var player_roll: int = randi_range(1, 20) + PlayerData.stats.dexterity
 	var enemy_roll: int = randi_range(1, 20) + enemy.data.stats.dexterity
@@ -43,23 +44,25 @@ func roll_initiative() -> void:
 		battle_state.change_state(battle_state.State.ENEMY_TURN)
 
 
-func damage_player(damage) -> void:
-	PlayerData.take_damage(damage)
-
-
+## Leave the battle scene
 func leave_battle() -> void:
-	# Wait for timer
-	on_cooldown = true
-	timer.start()
-	await timer.timeout
 	queue_free()
 
 
 #region Signal functions
 func _on_flee_pressed() -> void:
 	# TODO: Add check to see if Flee is successful
-	label_log.text = "Flee successful!"
-	leave_battle()
+	var player_roll: int = randi_range(1, 20) + PlayerData.stats.dexterity
+	var enemy_roll: int = randi_range(1, 20) + enemy.data.stats.dexterity
+	if player_roll >= enemy_roll:
+		label_log.text = "Flee successful!"
+		on_cooldown = true
+		timer.start()
+		await timer.timeout
+		leave_battle()
+	else:
+		label_log.text = "Failed to flee."
+		battle_state.change_state(battle_state.State.ENEMY_TURN)
 
 
 func _on_attack_pressed() -> void:
