@@ -64,7 +64,7 @@ func leave_battle() -> void:
 
 
 ## Helper function to wait for the timer
-func run_and_await_timer() -> void:
+func run_timer() -> void:
 	on_cooldown = true
 	timer.start()
 	await timer.timeout
@@ -98,19 +98,16 @@ func _update_items():
 
 func _use_item(item: Item) -> void:
 	var value: int = item.use.call()
-	# TODO: Hook up the logic to heal/damage and end player turn
 	match item.name:
 		"Health Potion":
-			print_debug(value)
 			PlayerData.take_damage(-1*value)
-			run_and_await_timer()
 			change_label_text.emit("Healed " + str(value))
+			await run_timer()
 			battle_state.change_state(battle_state.State.ENEMY_TURN)
 		"Red Gem":
-			print_debug(value)
 			await $BattleState/PlayerTurn.damage_enemy(value)
-			run_and_await_timer()
 			change_label_text.emit("Dealt " + str(value) + " damage")
+			await run_timer()
 			battle_state.change_state(battle_state.State.ENEMY_TURN)
 	
 	# Remove the item used
@@ -125,12 +122,12 @@ func _on_flee_pressed() -> void:
 	if player_roll >= enemy_roll:
 		log_text = "Flee successful!"
 		change_label_text.emit(log_text)
-		run_and_await_timer()
+		await run_timer()
 		leave_battle()
 	else:
 		log_text = "Failed to flee."
 		change_label_text.emit(log_text)
-		run_and_await_timer()
+		await run_timer()
 		battle_state.change_state(battle_state.State.ENEMY_TURN)
 
 

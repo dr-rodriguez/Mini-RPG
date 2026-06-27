@@ -4,6 +4,7 @@ extends Node
 
 var log_text: String = ""
 
+
 func enter() -> void:
 	battle.change_label_text.emit("Your turn.")
 
@@ -14,14 +15,9 @@ func do_attack() -> void:
 	await player_roll_to_hit()
 	if not is_instance_valid(battle.enemy) or battle.enemy.health <= 0:
 		return
-	battle.run_and_await_timer()
+	await battle.run_timer()
 	# Change to ENEMY_TURN state
 	battle.battle_state.change_state(battle.battle_state.State.ENEMY_TURN)
-
-
-func use_item(_item_name: String) -> void:
-	# TODO: Implement item use logic
-	pass
 
 
 func player_roll_to_hit() -> void:
