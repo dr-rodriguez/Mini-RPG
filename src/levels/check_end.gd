@@ -1,10 +1,12 @@
 extends Node
 
 var battle: Battle  # injected via setup()
+var manager: TurnManager  # injected via setup()
 
 
-func setup(b: Battle) -> void:
+func setup(b: Battle, m: TurnManager) -> void:
 	battle = b
+	manager = m
 
 
 func enter() -> void:
@@ -17,8 +19,11 @@ func enter() -> void:
 		pass
 	
 	# Hand off to the *other* side
-	var tm := battle.turn_manager
-	if tm.previous_state == TurnManager.State.PLAYER_TURN:
-		tm.change_state(TurnManager.State.ENEMY_TURN)
+	if manager.previous_state == TurnManager.State.PLAYER_TURN:
+		manager.change_state(TurnManager.State.ENEMY_TURN)
 	else:
-		tm.change_state(TurnManager.State.PLAYER_TURN)
+		manager.change_state(TurnManager.State.PLAYER_TURN)
+
+
+func exit() -> void:
+	pass

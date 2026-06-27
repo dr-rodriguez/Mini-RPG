@@ -1,9 +1,6 @@
 extends Node
 class_name TurnManager
 
-signal player_turn
-signal enemy_turn
-
 enum State {PLAYER_TURN, ENEMY_TURN, CHECK_END}
 @onready var states_map = {
 	State.PLAYER_TURN: $PlayerTurn,
@@ -14,27 +11,23 @@ var previous_state: State = State.PLAYER_TURN
 var current_state: State = State.PLAYER_TURN
 var state_node: Node
 
-## Inject the owning Battle into every turn state.
+## Inject the owning Battle and this manager into every turn state.
 func setup(battle: Battle) -> void:
 	for node in states_map.values():
-		node.setup(battle)
+		node.setup(battle, self)
 
 
-## Core function to handle changing combat turns
+## The single entry point for every transition. States request a transition by
+## calling this; the manager owns the exit -> bookkeeping -> enter sequence.
 func change_state(new_state: State) -> void:
-	# Manage the various states
+	# Let the outgoing state tear down (guard: the first transition has none)
+	if state_node:
+		state_node.exit()
+	
+	# Bookkeeping
 	previous_state = current_state
 	current_state = new_state
-	match new_state:
-		State.PLAYER_TURN:
-			# Select appropriate node and call it's enter function
-			state_node = states_map[State.PLAYER_TURN]
-			player_turn.emit()
-			state_node.enter()
-		State.ENEMY_TURN:
-			state_node = states_map[State.ENEMY_TURN]
-			enemy_turn.emit()
-			state_node.enter()
-		State.CHECK_END:
-			state_node = states_map[State.CHECK_END]
-			state_node.enter()
+	state_node = states_map[new_state]
+	
+	# Let the incoming state run
+	state_node.enter()

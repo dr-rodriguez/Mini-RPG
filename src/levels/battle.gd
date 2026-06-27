@@ -24,6 +24,9 @@ func _ready() -> void:
 	play_player_anim("idle_side")
 	play_enemy_anim("idle_side")
 	
+	# Inputs stay locked until the PlayerTurn state enables them on enter()
+	set_inputs_enabled(false)
+	
 	# Inject this Battle into the turn states before any turn starts
 	turn_manager.setup(self)
 	roll_initiative()
@@ -35,8 +38,6 @@ func _ready() -> void:
 	items_panel.visible = false
 	
 	# Signal connections
-	turn_manager.player_turn.connect(_on_player_turn)
-	turn_manager.enemy_turn.connect(_on_enemy_turn)
 	PlayerData.player_took_damage.connect(_on_player_took_damage)
 
 
@@ -74,23 +75,23 @@ func _update_items():
 	# Clear all child items first
 	for child in cnt_items.get_children():
 		child.queue_free()
-	
+
 	# Add items specifically from the players' inventory
 	for i in PlayerData.inventory.items:
 		var new_item = Button.new()
 		var icon = TextureRect.new()
-		
+
 		# Add the icon
 		icon.texture = i.texture
 		icon.custom_minimum_size = Vector2(32, 32)
 		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-		
+
 		# The Hbox is buttons with icon and labels
 		new_item.icon = icon
 		new_item.text = i.name
 		new_item.alignment = HORIZONTAL_ALIGNMENT_CENTER
-		
+
 		# Set up mouse actions and finalize the Hbox
 		new_item.pressed.connect(_use_item.bind(i))
 		cnt_items.add_child(new_item)
@@ -99,7 +100,7 @@ func _update_items():
 func _use_item(item: Item) -> void:
 	if on_cooldown:
 		return
-	
+
 	var value: int = item.use.call()
 	match item.name:
 		"Health Potion":
@@ -112,7 +113,7 @@ func _use_item(item: Item) -> void:
 			set_log("Dealt " + str(value) + " damage")
 			await run_timer()
 			turn_manager.change_state(turn_manager.State.CHECK_END)
-	
+
 	# Remove the item used
 	PlayerData.inventory.remove(item)
 	_update_items()
@@ -162,7 +163,7 @@ func handle_enemy_defeated() -> void:
 func _on_flee_pressed() -> void:
 	if on_cooldown:
 		return
-	
+
 	if opposed_check(PlayerData.stats.dexterity, enemy.data.stats.dexterity):
 		set_log("Flee successful!")
 		await run_timer()
@@ -191,16 +192,12 @@ func _on_player_took_damage() -> void:
 	health_label.text = "Health: " + str(PlayerData.health) + "/" + str(PlayerData.stats.max_health)
 
 
-func _on_player_turn() -> void:
-	btn_attack.disabled = false
-	btn_item.disabled = false
-	btn_flee.disabled = false
-
-
-func _on_enemy_turn() -> void:
-	btn_attack.disabled = true
-	btn_item.disabled = true
-	btn_flee.disabled = true
+## Enable/disable the player's action buttons. Owned by the PlayerTurn state,
+## which calls this on enter() (true) and exit() (false).
+func set_inputs_enabled(enabled: bool) -> void:
+	btn_attack.disabled = not enabled
+	btn_item.disabled = not enabled
+	btn_flee.disabled = not enabled
 
 
 func _on_item_toggled(toggled_on: bool) -> void:

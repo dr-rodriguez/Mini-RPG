@@ -55,7 +55,7 @@ Recommended stopping point for a learning project: **end of Tier 2.**
 - [x] Stop the state nodes from reaching into `owner`. Give states a small,
       explicit context (pass `battle` into `enter()`/actions, or expose a narrow
       API on Battle) instead of touching the parent's internals.
-- [ ] Make the turn manager own transitions. Add `enter()`/`exit()`; have states
+- [x] Make the turn manager own transitions. Add `enter()`/`exit()`; have states
       *return* or *request* the next state rather than calling
       `battle_state.change_state(...)` themselves.
 - [x] Reinstate a single end-of-turn resolution step (the commented-out
