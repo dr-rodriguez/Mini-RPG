@@ -5,7 +5,19 @@ extends Node
 @onready var player: Node2D = $World/EntityRoot/Player
 @onready var fade_screen = %FadeScreen
 @onready var timer: Timer = %Timer
+@onready var music: AudioStreamPlayer = %Music
 var player_menu_visible: bool = false
+var current_track: String = ""   # what's playing now
+var level_track: String = ""     # the level song to resume after battle
+var music_tween: Tween
+
+const LEVEL_MUSIC := {
+	"res://src/levels/Level1.tscn": "res://assets/audio/music/audio_hero_Just-Ducky_SIPML_K-04-57-01.mp3",
+	"res://src/levels/Level2.tscn": "res://assets/audio/music/music_zapsplat_realization_111.mp3",
+}
+const BATTLE_MUSIC := "res://assets/audio/music/music_zapsplat_tuff_enough.mp3"
+const MUSIC_FADE_TIME := 0.6
+const MUSIC_SILENT_DB := -40.0
 
 
 func _ready() -> void:
@@ -15,6 +27,10 @@ func _ready() -> void:
 	if GameState.debug_mode:
 		%DebugButton.show()
 		%DebugButton.connect("pressed", _on_debug_button_pressed)
+	
+	# Start the music for the level that's already in the scene tree
+	level_track = LEVEL_MUSIC.get("res://src/levels/Level1.tscn", "")
+	play_music(level_track)
 	
 	# Connect to level-change signal
 	GameState.level_change_requested.connect(_on_level_change_requested)
@@ -61,7 +77,11 @@ func _swap_level(scene_path: String) -> void:
 	var spawn: Node2D = new_level.get_node_or_null("StartPosition")
 	if spawn:
 		player.global_position = spawn.global_position
-		
+
+	# Switch to the new level's music
+	level_track = LEVEL_MUSIC.get(scene_path, "")
+	play_music(level_track)
+
 	# Run fade_tween to go to transparent
 	await fade_tween(Color(0, 0, 0, 0))
 
@@ -90,7 +110,10 @@ func _on_battle_requested(enemy: Node):
 		fx.hide()
 	
 	GameState.active_enemy = enemy
-	
+
+	# Switch to battle music (keeps level_track so we can resume it after)
+	play_music(BATTLE_MUSIC)
+
 	# Load the battle screen
 	var battle = load("res://src/levels/Battle.tscn").instantiate()
 	battle.process_mode = Node.PROCESS_MODE_ALWAYS
@@ -108,6 +131,8 @@ func _restore_level(level: Node) -> void:
 		var fx := level.get_node_or_null("LevelFX")
 		if fx:
 			fx.show()
+		# Resume the level music we paused for the battle
+		play_music(level_track)
 	# Just a safety check in case closing game from battle screen
 	if get_tree():
 		get_tree().paused = false
@@ -121,6 +146,42 @@ func _on_player_died() -> void:
 	timer.start()
 	await timer.timeout
 	get_tree().quit()
+
+#endregion
+
+
+#region Music
+
+
+
+
+func play_music(path: String) -> void:
+	
+	# Exit if already playing
+	if path.is_empty() or (path == current_track and music.playing):
+		return
+	current_track = path
+
+	# Kill any in-progress fade so overlapping transitions don't fight.
+	if music_tween and music_tween.is_valid():
+		music_tween.kill()
+
+	# Nothing playing yet (game start): just fade in from silence.
+	if not music.playing:
+		music.stream = load(path)
+		music.volume_db = MUSIC_SILENT_DB
+		music.play()
+		music_tween = create_tween()
+		music_tween.tween_property(music, "volume_db", 0.0, MUSIC_FADE_TIME)
+		return
+
+	# Cross-fade: dip current track to silence, swap stream, bring it back up.
+	music_tween = create_tween()
+	music_tween.tween_property(music, "volume_db", MUSIC_SILENT_DB, MUSIC_FADE_TIME / 2.0)
+	music_tween.tween_callback(func() -> void:
+		music.stream = load(path)
+		music.play())
+	music_tween.tween_property(music, "volume_db", 0.0, MUSIC_FADE_TIME / 2.0)
 
 #endregion
 
