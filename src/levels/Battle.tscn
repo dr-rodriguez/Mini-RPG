@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dui8c46yaph6u" path="res://assets/art/characters/player/player.png" id="1_1tu6b"]
 [ext_resource type="Script" uid="uid://byx4xis8ftnc5" path="res://src/levels/battle.gd" id="1_nupa0"]
 [ext_resource type="Theme" uid="uid://bvc6jc038xbjs" path="res://src/ui/battle/ui_battle.tres" id="1_wk1dv"]
+[ext_resource type="Texture2D" uid="uid://cugys1ornf1by" path="res://assets/art/world/backgrounds/Background.png" id="2_yw67k"]
 [ext_resource type="Texture2D" uid="uid://b6knon0ddiyxi" path="res://assets/art/characters/enemies/skeleton.png" id="3_8rtbn"]
 [ext_resource type="Script" uid="uid://cft2r8pvowrmu" path="res://src/levels/enemy_battle.gd" id="3_70nxv"]
 [ext_resource type="Script" uid="uid://d01wr2dik1thx" path="res://src/resources/scripts/enemy_data.gd" id="4_ab2mu"]
@@ -13,8 +14,6 @@
 [ext_resource type="Script" uid="uid://cceacnr7bx42n" path="res://src/levels/player_turn.gd" id="9_balv6"]
 [ext_resource type="Script" uid="uid://bcv3drorqrqh0" path="res://src/levels/enemy_turn.gd" id="10_10hdb"]
 [ext_resource type="Script" uid="uid://bl62wxlr7kvss" path="res://src/levels/check_end.gd" id="12_ck70p"]
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_4ffcv"]
 
 [sub_resource type="Resource" id="Resource_bwonk"]
 script = ExtResource("5_bwonk")
@@ -289,15 +288,19 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="TextureRect" type="TextureRect" parent="Background/Control" unique_id=1580438739]
+modulate = Color(0.7271458, 0.45379645, 0.7331978, 1)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 1.0
-offset_bottom = 1.0
+anchors_preset = -1
+anchor_top = -1.0708333
+anchor_right = 1.0046875
+anchor_bottom = 1.0111111
+offset_left = -3.0
+offset_top = 216.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = SubResource("PlaceholderTexture2D_4ffcv")
+texture = ExtResource("2_yw67k")
+expand_mode = 3
+metadata/_edit_use_anchors_ = true
 
 [node name="Entities" type="Node2D" parent="." unique_id=2118801214]
 z_index = 1
@@ -311,7 +314,7 @@ unique_name_in_owner = true
 position = Vector2(100, 130)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_4npkf")
-animation = &"attack_side"
+animation = &"death"
 
 [node name="EnemyFX" type="AudioStreamPlayer" parent="Entities/Enemy/EnemySprite" unique_id=777556090]
 unique_name_in_owner = true
