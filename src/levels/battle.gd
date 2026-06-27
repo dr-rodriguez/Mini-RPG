@@ -79,16 +79,10 @@ func _update_items():
 	# Add items specifically from the players' inventory
 	for i in PlayerData.inventory.items:
 		var new_item = Button.new()
-		var icon = TextureRect.new()
 
-		# Add the icon
-		icon.texture = i.texture
-		icon.custom_minimum_size = Vector2(32, 32)
-		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-
-		# The Hbox is buttons with icon and labels
-		new_item.icon = icon
+		# Button.icon takes a Texture2D directly, not a TextureRect node
+		new_item.icon = i.texture
+		new_item.expand_icon = true
 		new_item.text = i.name
 		new_item.alignment = HORIZONTAL_ALIGNMENT_CENTER
 

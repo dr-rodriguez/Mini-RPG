@@ -409,6 +409,7 @@ theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 10
 
 [node name="ScrollContainer" type="ScrollContainer" parent="HUD/MainHUD/Panel/MarginContainer/HBoxContainer/ItemsMargin" unique_id=1133067298]
+clip_contents = false
 layout_mode = 2
 horizontal_scroll_mode = 0
 
