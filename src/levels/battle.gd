@@ -18,6 +18,12 @@ class_name Battle
 @onready var cnt_items: VBoxContainer = %ItemsContainer
 var on_cooldown: bool = false
 
+const SWORD_SFX = [
+	"res://assets/audio/sfx/zapsplat_warfare_sword_swing_fast_whoosh_metal_001.mp3",
+	"res://assets/audio/sfx/zapsplat_warfare_sword_swing_fast_whoosh_metal_002.mp3",
+	"res://assets/audio/sfx/zapsplat_warfare_sword_swing_fast_whoosh_metal_003.mp3",
+	"res://assets/audio/sfx/zapsplat_warfare_sword_swing_fast_whoosh_metal_004.mp3",
+]
 
 func _ready() -> void:
 	# Start everyone on their idle animations
@@ -115,6 +121,18 @@ func _use_item(item: Item) -> void:
 	turn_manager.change_state(turn_manager.State.CHECK_END)
 
 
+## Helper function to play a sound effect
+func play_sword_sfx(target: String) -> void:
+	var index: int = randi_range(0, 3)
+	var sfx: String = SWORD_SFX[index]
+	var sfx_player: AudioStreamPlayer
+	if target == "enemy":
+		sfx_player = %EnemyFX
+	else:
+		sfx_player = %PlayerFX
+	sfx_player.stream = load(sfx)
+
+
 #region Animation logic
 func play_player_anim(anim_name: String) -> void:
 	player_anim.play(anim_name)
@@ -138,9 +156,6 @@ func await_enemy_anim(anim_name: String) -> void:
 #region Enemy state logic
 func damage_enemy(damage) -> void:
 	enemy.take_damage(damage)
-	#if enemy.health <= 0:
-		#handle_enemy_defeated()
-	#else:
 	enemy_anim.animation = "hit_side"
 	enemy_anim.play()
 	await enemy_anim.animation_finished

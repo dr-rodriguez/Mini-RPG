@@ -152,9 +152,6 @@ func _on_player_died() -> void:
 
 #region Music
 
-
-
-
 func play_music(path: String) -> void:
 	
 	# Exit if already playing

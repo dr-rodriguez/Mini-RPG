@@ -33,6 +33,9 @@ func player_roll_to_hit() -> void:
 	var roll = PlayerData.roll_attack()
 	log_text = "Your Roll: " + str(roll)
 	
+	# Play sound effect
+	battle.play_sword_sfx("player")
+	
 	# Run the attack animation
 	await battle.await_player_anim("attack_side")
 	

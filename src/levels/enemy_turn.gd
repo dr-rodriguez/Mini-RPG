@@ -31,6 +31,9 @@ func enemy_roll_to_hit() -> void:
 	var roll = battle.enemy.roll_attack()
 	log_text = "Enemy Roll: " + str(roll)
 	
+	# Play sound effect (skeleton attack takes longer)
+	battle.play_sword_sfx("enemy")
+	
 	# Run the attack animation
 	await battle.await_enemy_anim("attack_side")
 	

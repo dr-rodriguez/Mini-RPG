@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://d01wr2dik1thx" path="res://src/resources/scripts/enemy_data.gd" id="4_ab2mu"]
 [ext_resource type="Script" uid="uid://bvk72f5qqa6m" path="res://src/resources/scripts/attributes.gd" id="5_bwonk"]
 [ext_resource type="Texture2D" uid="uid://8ikc6uqvkpde" path="res://assets/art/characters/enemies/skeleton_swordless.png" id="6_ib0dh"]
+[ext_resource type="Script" uid="uid://bhlf23o7fvbu4" path="res://src/levels/player_battle.gd" id="7_rbowa"]
 [ext_resource type="Script" uid="uid://g08wwuyxlbgq" path="res://src/levels/turn_manager.gd" id="8_bwonk"]
 [ext_resource type="Script" uid="uid://cceacnr7bx42n" path="res://src/levels/player_turn.gd" id="9_balv6"]
 [ext_resource type="Script" uid="uid://bcv3drorqrqh0" path="res://src/levels/enemy_turn.gd" id="10_10hdb"]
@@ -310,9 +311,13 @@ unique_name_in_owner = true
 position = Vector2(100, 130)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_4npkf")
-animation = &"death"
+animation = &"attack_side"
+
+[node name="EnemyFX" type="AudioStreamPlayer" parent="Entities/Enemy/EnemySprite" unique_id=777556090]
+unique_name_in_owner = true
 
 [node name="Player" type="Node2D" parent="Entities" unique_id=703389395]
+script = ExtResource("7_rbowa")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="Entities/Player" unique_id=486819836]
 unique_name_in_owner = true
@@ -321,6 +326,9 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_4ffcv")
 animation = &"attack_side"
 flip_h = true
+
+[node name="PlayerFX" type="AudioStreamPlayer" parent="Entities/Player/PlayerSprite" unique_id=1407661414]
+unique_name_in_owner = true
 
 [node name="EffectRoot" type="Node2D" parent="." unique_id=278571448]
 
@@ -453,9 +461,8 @@ layout_mode = 2
 text = "Battle Time!"
 horizontal_alignment = 1
 
-[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=1872598518]
-
 [node name="SFXPlayer" type="AudioStreamPlayer" parent="." unique_id=2098949520]
+volume_db = 1.0
 
 [node name="TurnManager" type="Node" parent="." unique_id=1983756242]
 script = ExtResource("8_bwonk")

@@ -2,15 +2,15 @@ extends Node2D
 
 @export var data: EnemyData
 
-@onready var enemy_sprite: AnimatedSprite2D = %EnemySprite
-@onready var audio_player: AudioStreamPlayer = %EnemyFX
+@onready var player_sprite: AnimatedSprite2D = %PlayerSprite
+@onready var audio_player: AudioStreamPlayer = %PlayerFX
 
 func _ready() -> void:
 	# Connect the frame changed signal
-	enemy_sprite.frame_changed.connect(_on_frame_changed)
+	player_sprite.frame_changed.connect(_on_frame_changed)
 
 func _on_frame_changed() -> void:
 	# Check the current frame index and play sound if it matches
 	# (Frame indexes start at 0, so frame 3 is the 4th visual frame)
-	if enemy_sprite.frame == 3 and enemy_sprite.animation == "attack_side": 
+	if player_sprite.frame == 1 and player_sprite.animation == "attack_side": 
 		audio_player.play()
