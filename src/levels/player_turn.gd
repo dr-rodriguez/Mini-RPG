@@ -31,7 +31,7 @@ func player_roll_to_hit() -> void:
 
 	if roll >= battle.enemy.data.stats.armor_class:
 		var damage = PlayerData.roll_damage()
-		await damage_enemy(damage)
+		await battle.damage_enemy(damage)
 		log_text += " Hit! " + str(damage) + " damage!"
 	else:
 		log_text += " Miss!"
@@ -42,13 +42,3 @@ func player_roll_to_hit() -> void:
 
 	# Set the battle log label
 	battle.set_log(log_text)
-
-
-func damage_enemy(damage) -> void:
-	battle.enemy.take_damage(damage)
-	if battle.enemy.health <= 0:
-		battle.handle_enemy_defeated()
-	else:
-		battle.enemy_anim.animation = "hit_side"
-		battle.enemy_anim.play()
-		await battle.enemy_anim.animation_finished

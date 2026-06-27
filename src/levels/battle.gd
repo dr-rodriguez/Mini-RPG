@@ -8,9 +8,7 @@ class_name Battle
 @onready var player_anim := %PlayerSprite
 @onready var enemy_anim := %EnemySprite
 @onready var timer := %Timer
-var on_cooldown: bool = false
 @onready var label_log: Label = %LogLabel
-var log_text: String = ""
 @onready var health_label: Label = %HealthLabel
 @onready var btn_attack: Button = %Attack
 @onready var btn_item: Button = %Item
@@ -18,6 +16,7 @@ var log_text: String = ""
 @onready var health_panel: VBoxContainer = %HealthVBox
 @onready var items_panel: MarginContainer = %ItemsMargin
 @onready var cnt_items: VBoxContainer = %ItemsContainer
+var on_cooldown: bool = false
 
 
 func _ready() -> void:
@@ -41,12 +40,19 @@ func _ready() -> void:
 	PlayerData.player_took_damage.connect(_on_player_took_damage)
 
 
+## Helper method to do an opposed check
+func opposed_check(player_mod: int, enemy_mod: int) -> bool:
+	var player_roll: int = randi_range(1, 20) + player_mod
+	var enemy_roll: int = randi_range(1, 20) + enemy_mod
+	if player_roll >= enemy_roll:
+		return true
+	else:
+		return false
+
+
 ## Roll initiave in the battle scene
 func roll_initiative() -> void:
-	var player_roll: int = randi_range(1, 20) + PlayerData.stats.dexterity
-	var enemy_roll: int = randi_range(1, 20) + enemy.data.stats.dexterity
-	print("Initiative: ", player_roll, " vs ", enemy_roll)
-	if player_roll >= enemy_roll:
+	if opposed_check(PlayerData.stats.dexterity, enemy.data.stats.dexterity):
 		battle_state.change_state(battle_state.State.PLAYER_TURN)
 	else:
 		battle_state.change_state(battle_state.State.ENEMY_TURN)
@@ -102,7 +108,7 @@ func _use_item(item: Item) -> void:
 			await run_timer()
 			battle_state.change_state(battle_state.State.ENEMY_TURN)
 		"Red Gem":
-			await $BattleState/PlayerTurn.damage_enemy(value)
+			await damage_enemy(value)
 			set_log("Dealt " + str(value) + " damage")
 			await run_timer()
 			battle_state.change_state(battle_state.State.ENEMY_TURN)
@@ -112,21 +118,37 @@ func _use_item(item: Item) -> void:
 	_update_items()
 
 
+#region Enemy state logic
+func damage_enemy(damage) -> void:
+	enemy.take_damage(damage)
+	if enemy.health <= 0:
+		handle_enemy_defeated()
+	else:
+		enemy_anim.animation = "hit_side"
+		enemy_anim.play()
+		await enemy_anim.animation_finished
+
+
+func handle_enemy_defeated() -> void:
+	set_log("Enemy defeated!")
+	enemy_anim.animation = "death"
+	enemy_anim.play()
+	await enemy_anim.animation_finished
+	enemy.queue_free()
+	leave_battle()
+#endregion
+
 #region Signal functions
 func _on_flee_pressed() -> void:
 	if on_cooldown:
 		return
 	
-	var player_roll: int = randi_range(1, 20) + PlayerData.stats.dexterity
-	var enemy_roll: int = randi_range(1, 20) + enemy.data.stats.dexterity
-	if player_roll >= enemy_roll:
-		log_text = "Flee successful!"
-		set_log(log_text)
+	if opposed_check(PlayerData.stats.dexterity, enemy.data.stats.dexterity):
+		set_log("Flee successful!")
 		await run_timer()
 		leave_battle()
 	else:
-		log_text = "Failed to flee."
-		set_log(log_text)
+		set_log("Failed to flee.")
 		await run_timer()
 		battle_state.change_state(battle_state.State.ENEMY_TURN)
 
@@ -170,13 +192,5 @@ func _on_item_toggled(toggled_on: bool) -> void:
 		items_panel.visible = false
 		health_panel.visible = true
 
-
-func handle_enemy_defeated() -> void:
-	set_log("Enemy defeated!")
-	enemy_anim.animation = "death"
-	enemy_anim.play()
-	await enemy_anim.animation_finished
-	enemy.queue_free()
-	leave_battle()
 
 #endregion
