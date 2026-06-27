@@ -17,7 +17,7 @@ var _help_source: Object = null  # for help_text handling
 var active_enemy: Node = null  # to track which is the active enemy
 
 # variables with setter/getter
-var quest_active: bool = false:
+var quest_active: bool = true:
 	set(value):
 		if quest_active == value:
 			# Same value, no action

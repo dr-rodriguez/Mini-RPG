@@ -1,4 +1,8 @@
 extends Node2D
+class_name Battle
+
+# Battle signals
+signal change_label_text(log_text: String)
 
 # Passed by the main_game script
 @export var enemy: Node
@@ -27,7 +31,8 @@ func _ready() -> void:
 	# Set initial health label
 	_on_player_took_damage()
 	
-	# Global signal connections
+	# Signal connections
+	change_label_text.connect(_on_change_label_text)
 	battle_state.player_turn.connect(_on_player_turn)
 	battle_state.enemy_turn.connect(_on_enemy_turn)
 	PlayerData.player_took_damage.connect(_on_player_took_damage)
@@ -51,17 +56,21 @@ func leave_battle() -> void:
 
 #region Signal functions
 func _on_flee_pressed() -> void:
-	# TODO: Add check to see if Flee is successful
 	var player_roll: int = randi_range(1, 20) + PlayerData.stats.dexterity
 	var enemy_roll: int = randi_range(1, 20) + enemy.data.stats.dexterity
 	if player_roll >= enemy_roll:
-		label_log.text = "Flee successful!"
+		log_text = "Flee successful!"
+		change_label_text.emit(log_text)
 		on_cooldown = true
 		timer.start()
 		await timer.timeout
 		leave_battle()
 	else:
-		label_log.text = "Failed to flee."
+		log_text = "Failed to flee."
+		change_label_text.emit(log_text)
+		on_cooldown = true
+		timer.start()
+		await timer.timeout
 		battle_state.change_state(battle_state.State.ENEMY_TURN)
 
 
@@ -73,6 +82,10 @@ func _on_attack_pressed() -> void:
 
 func _on_timer_timeout() -> void:
 	on_cooldown = false
+
+
+func _on_change_label_text(text: String) -> void:
+	label_log.text = text
 
 
 func _on_player_took_damage() -> void:

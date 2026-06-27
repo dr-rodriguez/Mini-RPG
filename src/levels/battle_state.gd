@@ -1,8 +1,8 @@
 extends Node
 class_name BattleState
 
-signal player_turn();
-signal enemy_turn();
+signal player_turn
+signal enemy_turn
 
 enum State {PLAYER_TURN, ENEMY_TURN, CHECK_END}
 @onready var states_map = {

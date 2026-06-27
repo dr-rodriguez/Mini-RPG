@@ -28,23 +28,22 @@ func _ready() -> void:
 func set_easy() -> void:
 	stats.strength = 4
 	stats.dexterity = 2
-	stats.max_health = 20
-	# TODO: Figure out why this doesn't respect the health setter when going from hard to easy
-	health = 20
+	stats.max_health = 40
+	health = stats.max_health
 
 
 func set_normal() -> void:
 	stats.strength = 2
 	stats.dexterity = 1
-	stats.max_health = 10
-	health = 10
+	stats.max_health = 20
+	health = stats.max_health
 
 
 func set_hard() -> void:
 	stats.strength = 1
 	stats.dexterity = 0
-	stats.max_health = 8
-	health = 8
+	stats.max_health = 14
+	health = stats.max_health
 
 #endregion
 

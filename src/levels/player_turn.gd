@@ -1,20 +1,22 @@
 extends Node
 
+@onready var battle: Battle = owner
+
 var log_text: String = ""
 
 func enter() -> void:
-	owner.label_log.text = "Your turn."
+	battle.change_label_text.emit("Your turn.")
 
 
 func do_attack() -> void:
-	if owner.on_cooldown:
+	if battle.on_cooldown:
 		return
 	await player_roll_to_hit()
-	owner.on_cooldown = true
-	owner.timer.start()
-	await owner.timer.timeout
+	battle.on_cooldown = true
+	battle.timer.start()
+	await battle.timer.timeout
 	# Change to ENEMY_TURN state
-	owner.battle_state.change_state(owner.battle_state.State.ENEMY_TURN)
+	battle.battle_state.change_state(battle.battle_state.State.ENEMY_TURN)
 
 
 func use_item(_item_name: String) -> void:
@@ -25,38 +27,38 @@ func use_item(_item_name: String) -> void:
 func player_roll_to_hit() -> void:
 	var roll = PlayerData.roll_attack()
 	log_text = "Your Roll: " + str(roll)
-	
+
 	# Run the attack animation
-	owner.player_anim.animation = "attack_side"
-	owner.player_anim.play()
-	await owner.player_anim.animation_finished
-	
-	if roll >= owner.enemy.data.stats.armor_class:
+	battle.player_anim.animation = "attack_side"
+	battle.player_anim.play()
+	await battle.player_anim.animation_finished
+
+	if roll >= battle.enemy.data.stats.armor_class:
 		var damage = PlayerData.roll_damage()
 		damage_enemy(damage)
 		log_text += " Hit! " + str(damage) + " damage!"
 	else:
 		log_text += " Miss!"
-		
+
 	# Revert back to idle
-	owner.player_anim.animation = "idle_side"
-	owner.player_anim.play()
-	
+	battle.player_anim.animation = "idle_side"
+	battle.player_anim.play()
+
 	# Set the battle log label
-	owner.label_log.text = log_text
+	battle.change_label_text.emit(log_text)
 
 
 func damage_enemy(damage) -> void:
-	owner.enemy.take_damage(damage)
-	if owner.enemy.health <= 0:
-		owner.label_log.text = "Enemy defeated!"
-		owner.enemy_anim.animation = "death"
-		owner.enemy_anim.play()
-		await owner.enemy_anim.animation_finished
-		owner.enemy.queue_free()
+	battle.enemy.take_damage(damage)
+	if battle.enemy.health <= 0:
+		battle.change_label_text.emit("Enemy defeated!")
+		battle.enemy_anim.animation = "death"
+		battle.enemy_anim.play()
+		await battle.enemy_anim.animation_finished
+		battle.enemy.queue_free()
 		# TODO: Change to CHECK_END state
-		owner.leave_battle()
+		battle.leave_battle()
 	else:
-		owner.enemy_anim.animation = "hit_side"
-		owner.enemy_anim.play()
-		await owner.enemy_anim.animation_finished
+		battle.enemy_anim.animation = "hit_side"
+		battle.enemy_anim.play()
+		await battle.enemy_anim.animation_finished
