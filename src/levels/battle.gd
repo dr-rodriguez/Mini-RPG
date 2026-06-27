@@ -1,10 +1,6 @@
 extends Node2D
 class_name Battle
 
-# Battle signals
-signal change_label_text(log_text: String)
-signal enemy_defeated()
-
 # Passed by the main_game script
 @export var enemy: Node
 
@@ -12,9 +8,9 @@ signal enemy_defeated()
 @onready var player_anim := %PlayerSprite
 @onready var enemy_anim := %EnemySprite
 @onready var timer := %Timer
-@onready var on_cooldown: bool = false
+var on_cooldown: bool = false
 @onready var label_log: Label = %LogLabel
-@onready var log_text: String = ""
+var log_text: String = ""
 @onready var health_label: Label = %HealthLabel
 @onready var btn_attack: Button = %Attack
 @onready var btn_item: Button = %Item
@@ -40,11 +36,9 @@ func _ready() -> void:
 	items_panel.visible = false
 	
 	# Signal connections
-	change_label_text.connect(_on_change_label_text)
 	battle_state.player_turn.connect(_on_player_turn)
 	battle_state.enemy_turn.connect(_on_enemy_turn)
 	PlayerData.player_took_damage.connect(_on_player_took_damage)
-	enemy_defeated.connect(_on_enemy_defeated)
 
 
 ## Roll initiave in the battle scene
@@ -97,16 +91,19 @@ func _update_items():
 
 
 func _use_item(item: Item) -> void:
+	if on_cooldown:
+		return
+	
 	var value: int = item.use.call()
 	match item.name:
 		"Health Potion":
 			PlayerData.take_damage(-1*value)
-			change_label_text.emit("Healed " + str(value))
+			set_log("Healed " + str(value))
 			await run_timer()
 			battle_state.change_state(battle_state.State.ENEMY_TURN)
 		"Red Gem":
 			await $BattleState/PlayerTurn.damage_enemy(value)
-			change_label_text.emit("Dealt " + str(value) + " damage")
+			set_log("Dealt " + str(value) + " damage")
 			await run_timer()
 			battle_state.change_state(battle_state.State.ENEMY_TURN)
 	
@@ -117,16 +114,19 @@ func _use_item(item: Item) -> void:
 
 #region Signal functions
 func _on_flee_pressed() -> void:
+	if on_cooldown:
+		return
+	
 	var player_roll: int = randi_range(1, 20) + PlayerData.stats.dexterity
 	var enemy_roll: int = randi_range(1, 20) + enemy.data.stats.dexterity
 	if player_roll >= enemy_roll:
 		log_text = "Flee successful!"
-		change_label_text.emit(log_text)
+		set_log(log_text)
 		await run_timer()
 		leave_battle()
 	else:
 		log_text = "Failed to flee."
-		change_label_text.emit(log_text)
+		set_log(log_text)
 		await run_timer()
 		battle_state.change_state(battle_state.State.ENEMY_TURN)
 
@@ -141,7 +141,7 @@ func _on_timer_timeout() -> void:
 	on_cooldown = false
 
 
-func _on_change_label_text(text: String) -> void:
+func set_log(text: String) -> void:
 	label_log.text = text
 
 
@@ -171,8 +171,8 @@ func _on_item_toggled(toggled_on: bool) -> void:
 		health_panel.visible = true
 
 
-func _on_enemy_defeated() -> void:
-	change_label_text.emit("Enemy defeated!")
+func handle_enemy_defeated() -> void:
+	set_log("Enemy defeated!")
 	enemy_anim.animation = "death"
 	enemy_anim.play()
 	await enemy_anim.animation_finished

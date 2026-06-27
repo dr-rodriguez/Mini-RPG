@@ -6,7 +6,7 @@ var log_text: String = ""
 
 
 func enter() -> void:
-	battle.change_label_text.emit("Your turn.")
+	battle.set_log("Your turn.")
 
 
 func do_attack() -> void:
@@ -41,13 +41,13 @@ func player_roll_to_hit() -> void:
 	battle.player_anim.play()
 
 	# Set the battle log label
-	battle.change_label_text.emit(log_text)
+	battle.set_log(log_text)
 
 
 func damage_enemy(damage) -> void:
 	battle.enemy.take_damage(damage)
 	if battle.enemy.health <= 0:
-		battle.enemy_defeated.emit()
+		battle.handle_enemy_defeated()
 	else:
 		battle.enemy_anim.animation = "hit_side"
 		battle.enemy_anim.play()
