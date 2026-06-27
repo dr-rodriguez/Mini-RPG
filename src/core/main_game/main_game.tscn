@@ -36,7 +36,6 @@ one_shot = true
 
 [node name="Music" type="AudioStreamPlayer" parent="World/EffectRoot" unique_id=1498422001]
 unique_name_in_owner = true
-autoplay = true
 
 [node name="HudLayer" type="CanvasLayer" parent="." unique_id=260491376]
 process_mode = 1
