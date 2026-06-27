@@ -1,43 +1,48 @@
 extends Node
 
-@onready var battle: Battle = owner
+var battle: Battle  # injected via setup()
+var manager: TurnManager  # injected via setup()
 
 var log_text: String = ""
 
+
+func setup(b: Battle, m: TurnManager) -> void:
+	battle = b
+	manager = m
+
+
 func enter() -> void:
-	if battle.enemy.health <= 0:
-		battle.enemy_defeated.emit()
-	else:
-		battle.change_label_text.emit("Enemy turn.")
-		await do_attack()
+	battle.set_log("Enemy turn.")
+	await do_attack()
+
+
+func exit() -> void:
+	pass
 
 
 func do_attack() -> void:
 	await enemy_roll_to_hit()
 	await battle.run_timer()
-	# Change to PlayerTurn state
-	battle.battle_state.change_state(battle.battle_state.State.PLAYER_TURN)
+	# Check for end of battle
+	manager.change_state(TurnManager.State.CHECK_END)
 
 
 func enemy_roll_to_hit() -> void:
 	var roll = battle.enemy.roll_attack()
 	log_text = "Enemy Roll: " + str(roll)
-
+	
 	# Run the attack animation
-	battle.enemy_anim.animation = "attack_side"
-	battle.enemy_anim.play()
-	await battle.enemy_anim.animation_finished
-
+	await battle.await_enemy_anim("attack_side")
+	
 	if roll >= PlayerData.stats.armor_class:
 		var damage = battle.enemy.roll_damage()
 		PlayerData.take_damage(damage)
 		log_text += " Hit! " + str(damage) + " damage!"
 	else:
 		log_text += " Miss!"
-
+	
 	# Revert back to idle
-	battle.enemy_anim.animation = "idle_side"
-	battle.enemy_anim.play()
-
+	battle.play_enemy_anim("idle_side")
+	
 	# Set the battle log label
-	battle.change_label_text.emit(log_text)
+	battle.set_log(log_text)
