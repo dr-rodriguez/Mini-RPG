@@ -7,15 +7,17 @@ extends Node
 @onready var timer: Timer = %Timer
 @onready var music: AudioStreamPlayer = %Music
 var player_menu_visible: bool = false
+var current_track: String = ""   # what's playing now
+var level_track: String = ""     # the level song to resume after battle
+var music_tween: Tween
 
 const LEVEL_MUSIC := {
 	"res://src/levels/Level1.tscn": "res://assets/audio/music/audio_hero_Just-Ducky_SIPML_K-04-57-01.mp3",
 	"res://src/levels/Level2.tscn": "res://assets/audio/music/music_zapsplat_realization_111.mp3",
 }
 const BATTLE_MUSIC := "res://assets/audio/music/music_zapsplat_tuff_enough.mp3"
-
-var _current_track: String = ""   # what's playing now
-var _level_track: String = ""     # the level song to resume after battle
+const MUSIC_FADE_TIME := 0.6
+const MUSIC_SILENT_DB := -40.0
 
 
 func _ready() -> void:
@@ -27,8 +29,8 @@ func _ready() -> void:
 		%DebugButton.connect("pressed", _on_debug_button_pressed)
 	
 	# Start the music for the level that's already in the scene tree
-	_level_track = LEVEL_MUSIC.get("res://src/levels/Level1.tscn", "")
-	_play_music(_level_track)
+	level_track = LEVEL_MUSIC.get("res://src/levels/Level1.tscn", "")
+	play_music(level_track)
 	
 	# Connect to level-change signal
 	GameState.level_change_requested.connect(_on_level_change_requested)
@@ -77,8 +79,8 @@ func _swap_level(scene_path: String) -> void:
 		player.global_position = spawn.global_position
 
 	# Switch to the new level's music
-	_level_track = LEVEL_MUSIC.get(scene_path, "")
-	_play_music(_level_track)
+	level_track = LEVEL_MUSIC.get(scene_path, "")
+	play_music(level_track)
 
 	# Run fade_tween to go to transparent
 	await fade_tween(Color(0, 0, 0, 0))
@@ -109,8 +111,8 @@ func _on_battle_requested(enemy: Node):
 	
 	GameState.active_enemy = enemy
 
-	# Switch to battle music (keeps _level_track so we can resume it after)
-	_play_music(BATTLE_MUSIC)
+	# Switch to battle music (keeps level_track so we can resume it after)
+	play_music(BATTLE_MUSIC)
 
 	# Load the battle screen
 	var battle = load("res://src/levels/Battle.tscn").instantiate()
@@ -130,7 +132,7 @@ func _restore_level(level: Node) -> void:
 		if fx:
 			fx.show()
 		# Resume the level music we paused for the battle
-		_play_music(_level_track)
+		play_music(level_track)
 	# Just a safety check in case closing game from battle screen
 	if get_tree():
 		get_tree().paused = false
@@ -150,39 +152,36 @@ func _on_player_died() -> void:
 
 #region Music
 
-const MUSIC_FADE_TIME := 0.6
-const MUSIC_SILENT_DB := -40.0
-
-var _music_tween: Tween
 
 
-func _play_music(path: String) -> void:
-	# No-op if this track is already playing so re-entering a level
-	# doesn't restart its song.
-	if path.is_empty() or (path == _current_track and music.playing):
+
+func play_music(path: String) -> void:
+	
+	# Exit if already playing
+	if path.is_empty() or (path == current_track and music.playing):
 		return
-	_current_track = path
+	current_track = path
 
 	# Kill any in-progress fade so overlapping transitions don't fight.
-	if _music_tween and _music_tween.is_valid():
-		_music_tween.kill()
+	if music_tween and music_tween.is_valid():
+		music_tween.kill()
 
 	# Nothing playing yet (game start): just fade in from silence.
 	if not music.playing:
 		music.stream = load(path)
 		music.volume_db = MUSIC_SILENT_DB
 		music.play()
-		_music_tween = create_tween()
-		_music_tween.tween_property(music, "volume_db", 0.0, MUSIC_FADE_TIME)
+		music_tween = create_tween()
+		music_tween.tween_property(music, "volume_db", 0.0, MUSIC_FADE_TIME)
 		return
 
 	# Cross-fade: dip current track to silence, swap stream, bring it back up.
-	_music_tween = create_tween()
-	_music_tween.tween_property(music, "volume_db", MUSIC_SILENT_DB, MUSIC_FADE_TIME / 2.0)
-	_music_tween.tween_callback(func() -> void:
+	music_tween = create_tween()
+	music_tween.tween_property(music, "volume_db", MUSIC_SILENT_DB, MUSIC_FADE_TIME / 2.0)
+	music_tween.tween_callback(func() -> void:
 		music.stream = load(path)
 		music.play())
-	_music_tween.tween_property(music, "volume_db", 0.0, MUSIC_FADE_TIME / 2.0)
+	music_tween.tween_property(music, "volume_db", 0.0, MUSIC_FADE_TIME / 2.0)
 
 #endregion
 
