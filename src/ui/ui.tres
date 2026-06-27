@@ -1,6 +1,38 @@
 [gd_resource type="Theme" format=3 uid="uid://28wu85kpcyp0"]
 
-[ext_resource type="FontFile" uid="uid://hlw1isa26sjf" path="res://assets/art/ui/fonts/BLKCHCRY.TTF" id="1_pcbei"]
+[ext_resource type="FontFile" uid="uid://dmgd8b3yfkrkf" path="res://assets/art/ui/fonts/MedievalSharp-Book.ttf" id="1_pcbei"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pcbei"]
+bg_color = Color(0.30446225, 0.30446228, 0.30446208, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.40948617, 0.51730317, 0.5646121, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 1
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 1
+expand_margin_left = 2.0
+expand_margin_top = 1.0
+expand_margin_right = 2.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gisro"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.40948617, 0.51730317, 0.5646121, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 1
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 1
+expand_margin_left = 2.0
+expand_margin_top = 1.0
+expand_margin_right = 2.0
+expand_margin_bottom = 1.0
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_pcbei"]
 color = Color(0.0627451, 0.13725491, 0.24705882, 1)
@@ -21,6 +53,8 @@ corner_radius_bottom_left = 5
 [resource]
 Button/font_sizes/font_size = 12
 Button/fonts/font = ExtResource("1_pcbei")
+Button/styles/hover = SubResource("StyleBoxFlat_pcbei")
+Button/styles/normal = SubResource("StyleBoxFlat_gisro")
 HSeparator/styles/separator = SubResource("StyleBoxLine_pcbei")
 Label/font_sizes/font_size = 10
 Label/fonts/font = ExtResource("1_pcbei")

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://yo1bb14qn1wk"]
 
 [ext_resource type="Script" uid="uid://da3sgnkdreejg" path="res://src/ui/ui_options.gd" id="1_7b471"]
+[ext_resource type="FontFile" uid="uid://hlw1isa26sjf" path="res://assets/art/ui/fonts/BLKCHCRY.TTF" id="2_fs7dl"]
 
 [node name="UIOptions" type="MarginContainer" unique_id=1333443231]
 theme_override_constants/margin_left = 5
@@ -15,6 +16,7 @@ alignment = 1
 
 [node name="Stats" type="Label" parent="VBoxContainer" unique_id=928526331]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_fs7dl")
 theme_override_font_sizes/font_size = 16
 text = "Options"
 horizontal_alignment = 1

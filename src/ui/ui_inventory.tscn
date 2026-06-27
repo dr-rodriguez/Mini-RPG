@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bfd2tcfomnk7q"]
 
 [ext_resource type="Script" uid="uid://bkfo67bg7j8kf" path="res://src/ui/ui_inventory.gd" id="1_v5prn"]
+[ext_resource type="FontFile" uid="uid://hlw1isa26sjf" path="res://assets/art/ui/fonts/BLKCHCRY.TTF" id="2_tyyns"]
 
 [node name="UIInventory" type="MarginContainer" unique_id=1333443231]
 offset_right = 85.0
@@ -16,6 +17,7 @@ layout_mode = 2
 
 [node name="Stats" type="Label" parent="VBoxContainer" unique_id=928526331]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_tyyns")
 theme_override_font_sizes/font_size = 16
 text = "Inventory"
 horizontal_alignment = 1
@@ -47,6 +49,7 @@ horizontal_scroll_mode = 0
 
 [node name="ItemsContainer" type="VBoxContainer" parent="VBoxContainer/MarginContainer/Panel/MarginContainer/ScrollContainer" unique_id=878412771]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(80, 80)
+custom_minimum_size = Vector2(100, 80)
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 6
+alignment = 1
