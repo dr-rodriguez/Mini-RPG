@@ -12,6 +12,8 @@ func do_attack() -> void:
 	if battle.on_cooldown:
 		return
 	await player_roll_to_hit()
+	if not is_instance_valid(battle.enemy) or battle.enemy.health <= 0:
+		return
 	battle.on_cooldown = true
 	battle.timer.start()
 	await battle.timer.timeout
@@ -35,7 +37,7 @@ func player_roll_to_hit() -> void:
 
 	if roll >= battle.enemy.data.stats.armor_class:
 		var damage = PlayerData.roll_damage()
-		damage_enemy(damage)
+		await damage_enemy(damage)
 		log_text += " Hit! " + str(damage) + " damage!"
 	else:
 		log_text += " Miss!"
@@ -56,7 +58,6 @@ func damage_enemy(damage) -> void:
 		battle.enemy_anim.play()
 		await battle.enemy_anim.animation_finished
 		battle.enemy.queue_free()
-		# TODO: Change to CHECK_END state
 		battle.leave_battle()
 	else:
 		battle.enemy_anim.animation = "hit_side"
