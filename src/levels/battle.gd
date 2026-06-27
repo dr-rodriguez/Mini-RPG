@@ -18,6 +18,10 @@ signal change_label_text(log_text: String)
 @onready var btn_attack: Button = %Attack
 @onready var btn_item: Button = %Item
 @onready var btn_flee: Button = %Flee
+@onready var health_panel: VBoxContainer = %HealthVBox
+@onready var items_panel: MarginContainer = %ItemsMargin
+@onready var cnt_items: VBoxContainer = %ItemsContainer
+
 
 func _ready() -> void:
 	# Start everyone on their idle animations
@@ -30,6 +34,9 @@ func _ready() -> void:
 	
 	# Set initial health label
 	_on_player_took_damage()
+	
+	# Items panel starts invisible
+	items_panel.visible = false
 	
 	# Signal connections
 	change_label_text.connect(_on_change_label_text)
@@ -59,6 +66,32 @@ func run_and_await_timer() -> void:
 	on_cooldown = true
 	timer.start()
 	await timer.timeout
+
+
+func _update_items():
+	# Clear all child items first
+	for child in cnt_items.get_children():
+		child.queue_free()
+	
+	# Add items specifically from the players' inventory
+	for i in PlayerData.inventory.items:
+		var new_item = Button.new()
+		var icon = TextureRect.new()
+		
+		# Add the icon
+		icon.texture = i.texture
+		icon.custom_minimum_size = Vector2(32, 32)
+		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		
+		# The Hbox is buttons with icon and labels
+		new_item.icon = icon
+		new_item.text = i.name
+		new_item.alignment = HORIZONTAL_ALIGNMENT_CENTER
+		
+		# Set up mouse actions and finalize the Hbox
+		new_item.pressed.connect(i.use)
+		cnt_items.add_child(new_item)
 
 
 #region Signal functions
@@ -105,5 +138,16 @@ func _on_enemy_turn() -> void:
 	btn_attack.disabled = true
 	btn_item.disabled = true
 	btn_flee.disabled = true
+
+
+func _on_item_toggled(toggled_on: bool) -> void:
+	_update_items()
+	if toggled_on:
+		items_panel.visible = true
+		health_panel.visible = false
+	else:
+		items_panel.visible = false
+		health_panel.visible = true
+
 
 #endregion
