@@ -130,7 +130,9 @@ func _restore_level(level: Node) -> void:
 		level.show()
 		var fx := level.get_node_or_null("LevelFX")
 		if fx:
-			fx.show()
+			# Once every enemy in the level is defeated, kill the fog for good.
+			var cleared: bool = level.has_method("check_enemies") and level.check_enemies()
+			fx.visible = not cleared
 		# Resume the level music we paused for the battle
 		play_music(level_track)
 	# Just a safety check in case closing game from battle screen

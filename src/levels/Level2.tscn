@@ -61,31 +61,31 @@ shape = SubResource("RectangleShape2D_4ffcv")
 
 [node name="EntityRoot" type="Node2D" parent="." unique_id=1090692724]
 
-[node name="Skeleton" parent="EntityRoot" unique_id=1826616707 instance=ExtResource("3_q66yk")]
+[node name="Skeleton" parent="EntityRoot" unique_id=1826616707 groups=["Enemies"] instance=ExtResource("3_q66yk")]
 position = Vector2(128, 139)
 
 [node name="Marker2D" type="Marker2D" parent="EntityRoot/Skeleton" unique_id=1709806095]
 position = Vector2(38, 29)
 
-[node name="Skeleton2" parent="EntityRoot" unique_id=184232201 instance=ExtResource("3_q66yk")]
+[node name="Skeleton2" parent="EntityRoot" unique_id=184232201 groups=["Enemies"] instance=ExtResource("3_q66yk")]
 position = Vector2(301, 110)
 
 [node name="Marker2D" type="Marker2D" parent="EntityRoot/Skeleton2" unique_id=489430373]
 position = Vector2(-108, 17)
 
-[node name="Skeleton3" parent="EntityRoot" unique_id=176020741 instance=ExtResource("3_q66yk")]
+[node name="Skeleton3" parent="EntityRoot" unique_id=176020741 groups=["Enemies"] instance=ExtResource("3_q66yk")]
 position = Vector2(324, 208)
 
 [node name="Marker2D" type="Marker2D" parent="EntityRoot/Skeleton3" unique_id=314761247]
 position = Vector2(-9, 75)
 
-[node name="Skeleton4" parent="EntityRoot" unique_id=1324736188 instance=ExtResource("3_q66yk")]
+[node name="Skeleton4" parent="EntityRoot" unique_id=1324736188 groups=["Enemies"] instance=ExtResource("3_q66yk")]
 position = Vector2(507, 286)
 
 [node name="Marker2D" type="Marker2D" parent="EntityRoot/Skeleton4" unique_id=1995299470]
 position = Vector2(36, -96)
 
-[node name="Skeleton5" parent="EntityRoot" unique_id=1339565655 instance=ExtResource("3_q66yk")]
+[node name="Skeleton5" parent="EntityRoot" unique_id=1339565655 groups=["Enemies"] instance=ExtResource("3_q66yk")]
 position = Vector2(408, 129)
 
 [node name="Marker2D" type="Marker2D" parent="EntityRoot/Skeleton5" unique_id=9886031]
