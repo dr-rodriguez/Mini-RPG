@@ -9,7 +9,7 @@ signal level_change_requested(scene_path: String)
 signal battle_requested(enemy: Node)
 
 # Global variables
-var debug_mode: bool = true
+var debug_mode: bool = false
 var met_slimey: bool = false
 var quest_complete: bool = false
 var transition_scene: bool = false
@@ -17,7 +17,7 @@ var _help_source: Object = null  # for help_text handling
 var active_enemy: Node = null  # to track which is the active enemy
 
 # variables with setter/getter
-var quest_active: bool = true:
+var quest_active: bool = false:
 	set(value):
 		if quest_active == value:
 			# Same value, no action
