@@ -28,13 +28,13 @@ Recommended stopping point for a learning project: **end of Tier 2.**
 ---
 
 ## Tier 0 — Bug fixes (do first; small and high-value)
-- [ ] Connect `PlayerData.player_died` in `battle.gd._ready()` and handle it
+- [x] REJECTED. Connect `PlayerData.player_died` in `battle.gd._ready()` and handle it
       (show log, then route to game-over / leave battle). It is currently emitted
       but never connected, so the player dying on the enemy's turn does nothing.
 - [x] Apply the cooldown/turn guard consistently: block `_use_item()` and
       `_on_flee_pressed()` while `on_cooldown` (or while it isn't the player's
       turn), the same way `PlayerTurn.do_attack()` already does.
-- [ ] Pick ONE input-lock mechanism (button `disabled` vs `on_cooldown`) as the
+- [x] Pick ONE input-lock mechanism (button `disabled` vs `on_cooldown`) as the
       source of truth and make the other follow it, so they can't disagree.
 
 ## Tier 1 — Quick cleanups (readability, no structural change)
@@ -78,7 +78,7 @@ Recommended stopping point for a learning project: **end of Tier 2.**
 - [ ] Collapse `player_turn.gd` + `enemy_turn.gd` into a single parametrized
       attack-resolution routine taking `attacker`/`defender` Combatants (they are
       near-mirror images today).
-- [ ] Move item effects onto the item resources (target + apply), so `_use_item`
+- [x] Move item effects onto the item resources (target + apply), so `_use_item`
       no longer `match`es on `item.name` (`"Health Potion"` / `"Red Gem"`).
       Adding an item should not require editing the battle controller.
 - [ ] Split UI out of `battle.gd` into a `BattleHUD` controller (item-button

@@ -470,6 +470,5 @@ script = ExtResource("12_ck70p")
 
 [connection signal="timeout" from="EffectRoot/Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="HUD/MainHUD/Panel/MarginContainer/HBoxContainer/VBoxContainer/Attack" to="." method="_on_attack_pressed"]
-[connection signal="pressed" from="HUD/MainHUD/Panel/MarginContainer/HBoxContainer/VBoxContainer/Item" to="." method="_on_item_pressed"]
 [connection signal="toggled" from="HUD/MainHUD/Panel/MarginContainer/HBoxContainer/VBoxContainer/Item" to="." method="_on_item_toggled"]
 [connection signal="pressed" from="HUD/MainHUD/Panel/MarginContainer/HBoxContainer/VBoxContainer/Flee" to="." method="_on_flee_pressed"]

@@ -7,5 +7,6 @@
 script = ExtResource("1_vjrad")
 name = "Red Gem"
 texture = ExtResource("2_5ieat")
-help_text = "Deals 2d6 damage to all enemies."
+help_text = "Deals 2d8+2 damage to all enemies."
+target = 1
 metadata/_custom_type_script = "uid://kdbmcpfw1x21"

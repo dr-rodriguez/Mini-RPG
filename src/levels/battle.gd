@@ -97,26 +97,28 @@ func _update_items():
 		cnt_items.add_child(new_item)
 
 
+## Helper function to use the item
 func _use_item(item: Item) -> void:
 	if on_cooldown:
 		return
-
+	
+	# Compute the value from the item then determine if we apply it to player or enemy
 	var value: int = item.use.call()
-	match item.name:
-		"Health Potion":
+	match item.target:
+		item.TargetType.PLAYER:
 			PlayerData.take_damage(-1*value)
 			set_log("Healed " + str(value))
-			await run_timer()
-			turn_manager.change_state(turn_manager.State.CHECK_END)
-		"Red Gem":
+		item.TargetType.ENEMY:
 			await damage_enemy(value)
 			set_log("Dealt " + str(value) + " damage")
-			await run_timer()
-			turn_manager.change_state(turn_manager.State.CHECK_END)
-
+	
 	# Remove the item used
 	PlayerData.inventory.remove(item)
-	_update_items()
+	
+	# End turn
+	_on_item_toggled(false)
+	await run_timer()
+	turn_manager.change_state(turn_manager.State.CHECK_END)
 
 
 #region Animation logic
@@ -200,14 +202,12 @@ func set_inputs_enabled(enabled: bool) -> void:
 	btn_flee.disabled = not enabled
 
 
+## Handle visibility of the item panel
 func _on_item_toggled(toggled_on: bool) -> void:
 	_update_items()
-	if toggled_on:
-		items_panel.visible = true
-		health_panel.visible = false
-	else:
-		items_panel.visible = false
-		health_panel.visible = true
+	btn_item.button_pressed = toggled_on
+	items_panel.visible = toggled_on
+	health_panel.visible = not toggled_on
 
 
 #endregion
