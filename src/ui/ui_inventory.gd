@@ -15,14 +15,30 @@ func _update_items():
 	for i in PlayerData.inventory.items:
 		var new_item = Button.new()
 
-		# Button.icon takes a Texture2D directly, not a TextureRect node
+		# Button styling
 		new_item.icon = i.texture
 		new_item.expand_icon = true
 		new_item.text = i.name
 		new_item.alignment = HORIZONTAL_ALIGNMENT_CENTER
 
 		# Set up custom help text and finalize the button.
-		# Pressing does nothing yet — only hover drives the helper tooltip.
+		new_item.pressed.connect(_use_item.bind(i))
 		new_item.mouse_entered.connect(GameState.set_help_text.bind(i.help_text, new_item))
 		new_item.mouse_exited.connect(GameState.clear_help_text.bind(new_item))
 		cnt_items.add_child(new_item)
+
+
+## Logic for pressing an item button
+func _use_item(item: Item) -> void:
+	# Compute the value from the item
+	var value: int = item.use.call()
+	match item.target:
+		item.TargetType.PLAYER:
+			# We only code in logic for healing player
+			PlayerData.take_damage(-1*value)
+		item.TargetType.ENEMY:
+			pass
+	
+	# Remove the item used
+	PlayerData.inventory.remove(item)
+	_update_items()
