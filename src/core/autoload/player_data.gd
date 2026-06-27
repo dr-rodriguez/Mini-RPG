@@ -52,10 +52,9 @@ func take_damage(damage) -> void:
 	health -= damage
 	player_took_damage.emit()
 	if PlayerData.health <= 0:
-		# TODO: Go to game over screen
+		# Go to game over screen
 		print_debug("player dead")
 		player_died.emit()
-		pass
 
 
 func roll_attack() -> int:

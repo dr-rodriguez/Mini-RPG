@@ -5,8 +5,11 @@ extends Node
 var log_text: String = ""
 
 func enter() -> void:
-	battle.change_label_text.emit("Enemy turn.")
-	await do_attack()
+	if battle.enemy.health <= 0:
+		battle.enemy_defeated.emit()
+	else:
+		battle.change_label_text.emit("Enemy turn.")
+		await do_attack()
 
 
 func do_attack() -> void:

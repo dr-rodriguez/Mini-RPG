@@ -30,9 +30,7 @@ func get_item(item_name: String) -> Item:
 
 
 func _health_potion() -> int:
-	print_debug("health clicked")
 	return randi_range(1,4) + randi_range(1,4) + 2
 
 func _red_gem() -> int:
-	print_debug("gem clicked")
-	return randi_range(1,6) + randi_range(1,6)
+	return randi_range(1,8) + randi_range(1,8) + 2

@@ -3,6 +3,7 @@ class_name Battle
 
 # Battle signals
 signal change_label_text(log_text: String)
+signal enemy_defeated()
 
 # Passed by the main_game script
 @export var enemy: Node
@@ -43,6 +44,7 @@ func _ready() -> void:
 	battle_state.player_turn.connect(_on_player_turn)
 	battle_state.enemy_turn.connect(_on_enemy_turn)
 	PlayerData.player_took_damage.connect(_on_player_took_damage)
+	enemy_defeated.connect(_on_enemy_defeated)
 
 
 ## Roll initiave in the battle scene
@@ -100,8 +102,20 @@ func _use_item(item: Item) -> void:
 	match item.name:
 		"Health Potion":
 			print_debug(value)
+			PlayerData.take_damage(-1*value)
+			run_and_await_timer()
+			change_label_text.emit("Healed " + str(value))
+			battle_state.change_state(battle_state.State.ENEMY_TURN)
 		"Red Gem":
 			print_debug(value)
+			await $BattleState/PlayerTurn.damage_enemy(value)
+			run_and_await_timer()
+			change_label_text.emit("Dealt " + str(value) + " damage")
+			battle_state.change_state(battle_state.State.ENEMY_TURN)
+	
+	# Remove the item used
+	PlayerData.inventory.remove(item)
+	_update_items()
 
 
 #region Signal functions
@@ -159,5 +173,13 @@ func _on_item_toggled(toggled_on: bool) -> void:
 		items_panel.visible = false
 		health_panel.visible = true
 
+
+func _on_enemy_defeated() -> void:
+	change_label_text.emit("Enemy defeated!")
+	enemy_anim.animation = "death"
+	enemy_anim.play()
+	await enemy_anim.animation_finished
+	enemy.queue_free()
+	leave_battle()
 
 #endregion

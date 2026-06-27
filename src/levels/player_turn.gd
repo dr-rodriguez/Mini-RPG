@@ -51,12 +51,7 @@ func player_roll_to_hit() -> void:
 func damage_enemy(damage) -> void:
 	battle.enemy.take_damage(damage)
 	if battle.enemy.health <= 0:
-		battle.change_label_text.emit("Enemy defeated!")
-		battle.enemy_anim.animation = "death"
-		battle.enemy_anim.play()
-		await battle.enemy_anim.animation_finished
-		battle.enemy.queue_free()
-		battle.leave_battle()
+		battle.enemy_defeated.emit()
 	else:
 		battle.enemy_anim.animation = "hit_side"
 		battle.enemy_anim.play()
