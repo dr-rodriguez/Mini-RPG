@@ -1,5 +1,5 @@
 extends Node
-class_name BattleState
+class_name TurnManager
 
 signal player_turn
 signal enemy_turn
@@ -12,6 +12,12 @@ enum State {PLAYER_TURN, ENEMY_TURN, CHECK_END}
 }
 var current_state: State = State.PLAYER_TURN
 var state_node: Node
+
+## Inject the owning Battle into every turn state.
+func setup(battle: Battle) -> void:
+	for node in states_map.values():
+		node.setup(battle)
+
 
 func change_state(new_state: State) -> void:
 	# Manage the various states

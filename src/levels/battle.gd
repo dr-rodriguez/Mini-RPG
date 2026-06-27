@@ -4,7 +4,7 @@ class_name Battle
 # Passed by the main_game script
 @export var enemy: Node
 
-@onready var battle_state: BattleState = $BattleState
+@onready var turn_manager: TurnManager = $TurnManager
 @onready var player_anim := %PlayerSprite
 @onready var enemy_anim := %EnemySprite
 @onready var timer := %Timer
@@ -21,11 +21,11 @@ var on_cooldown: bool = false
 
 func _ready() -> void:
 	# Start everyone on their idle animations
-	player_anim.animation = "idle_side"
-	player_anim.play()
-	enemy_anim.animation = "idle_side"
-	enemy_anim.play()
+	play_player_anim("idle_side")
+	play_enemy_anim("idle_side")
 	
+	# Inject this Battle into the turn states before any turn starts
+	turn_manager.setup(self)
 	roll_initiative()
 	
 	# Set initial health label
@@ -35,8 +35,8 @@ func _ready() -> void:
 	items_panel.visible = false
 	
 	# Signal connections
-	battle_state.player_turn.connect(_on_player_turn)
-	battle_state.enemy_turn.connect(_on_enemy_turn)
+	turn_manager.player_turn.connect(_on_player_turn)
+	turn_manager.enemy_turn.connect(_on_enemy_turn)
 	PlayerData.player_took_damage.connect(_on_player_took_damage)
 
 
@@ -53,9 +53,9 @@ func opposed_check(player_mod: int, enemy_mod: int) -> bool:
 ## Roll initiave in the battle scene
 func roll_initiative() -> void:
 	if opposed_check(PlayerData.stats.dexterity, enemy.data.stats.dexterity):
-		battle_state.change_state(battle_state.State.PLAYER_TURN)
+		turn_manager.change_state(turn_manager.State.PLAYER_TURN)
 	else:
-		battle_state.change_state(battle_state.State.ENEMY_TURN)
+		turn_manager.change_state(turn_manager.State.ENEMY_TURN)
 
 
 ## Leave the battle scene
@@ -106,17 +106,37 @@ func _use_item(item: Item) -> void:
 			PlayerData.take_damage(-1*value)
 			set_log("Healed " + str(value))
 			await run_timer()
-			battle_state.change_state(battle_state.State.ENEMY_TURN)
+			turn_manager.change_state(turn_manager.State.ENEMY_TURN)
 		"Red Gem":
 			await damage_enemy(value)
 			set_log("Dealt " + str(value) + " damage")
 			await run_timer()
-			battle_state.change_state(battle_state.State.ENEMY_TURN)
+			turn_manager.change_state(turn_manager.State.ENEMY_TURN)
 	
 	# Remove the item used
 	PlayerData.inventory.remove(item)
 	_update_items()
 
+
+#region Animation logic
+func play_player_anim(anim_name: String) -> void:
+	player_anim.play(anim_name)
+
+
+func play_enemy_anim(anim_name: String) -> void:
+	enemy_anim.play(anim_name)
+
+
+## Same as above, but waits for a one-shot animation to finish.
+func await_player_anim(anim_name: String) -> void:
+	player_anim.play(anim_name)
+	await player_anim.animation_finished
+
+
+func await_enemy_anim(anim_name: String) -> void:
+	enemy_anim.play(anim_name)
+	await enemy_anim.animation_finished
+#endregion
 
 #region Enemy state logic
 func damage_enemy(damage) -> void:
@@ -150,13 +170,13 @@ func _on_flee_pressed() -> void:
 	else:
 		set_log("Failed to flee.")
 		await run_timer()
-		battle_state.change_state(battle_state.State.ENEMY_TURN)
+		turn_manager.change_state(turn_manager.State.ENEMY_TURN)
 
 
 func _on_attack_pressed() -> void:
-	if battle_state.current_state == battle_state.State.PLAYER_TURN:
+	if turn_manager.current_state == turn_manager.State.PLAYER_TURN:
 		# Logic for attack in PlayerTurn State
-		battle_state.state_node.do_attack()
+		turn_manager.state_node.do_attack()
 
 
 func _on_timer_timeout() -> void:

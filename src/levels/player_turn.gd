@@ -1,8 +1,12 @@
 extends Node
 
-@onready var battle: Battle = owner
+var battle: Battle  # injected via setup()
 
 var log_text: String = ""
+
+
+func setup(b: Battle) -> void:
+	battle = b
 
 
 func enter() -> void:
@@ -17,7 +21,7 @@ func do_attack() -> void:
 		return
 	await battle.run_timer()
 	# Change to ENEMY_TURN state
-	battle.battle_state.change_state(battle.battle_state.State.ENEMY_TURN)
+	battle.turn_manager.change_state(battle.turn_manager.State.ENEMY_TURN)
 
 
 func player_roll_to_hit() -> void:
@@ -25,9 +29,7 @@ func player_roll_to_hit() -> void:
 	log_text = "Your Roll: " + str(roll)
 
 	# Run the attack animation
-	battle.player_anim.animation = "attack_side"
-	battle.player_anim.play()
-	await battle.player_anim.animation_finished
+	await battle.await_player_anim("attack_side")
 
 	if roll >= battle.enemy.data.stats.armor_class:
 		var damage = PlayerData.roll_damage()
@@ -37,8 +39,7 @@ func player_roll_to_hit() -> void:
 		log_text += " Miss!"
 
 	# Revert back to idle
-	battle.player_anim.animation = "idle_side"
-	battle.player_anim.play()
+	battle.play_player_anim("idle_side")
 
 	# Set the battle log label
 	battle.set_log(log_text)

@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://d01wr2dik1thx" path="res://src/resources/scripts/enemy_data.gd" id="4_ab2mu"]
 [ext_resource type="Script" uid="uid://bvk72f5qqa6m" path="res://src/resources/scripts/attributes.gd" id="5_bwonk"]
 [ext_resource type="Texture2D" uid="uid://8ikc6uqvkpde" path="res://assets/art/characters/enemies/skeleton_swordless.png" id="6_ib0dh"]
-[ext_resource type="Script" uid="uid://g08wwuyxlbgq" path="res://src/levels/battle_state.gd" id="8_bwonk"]
+[ext_resource type="Script" uid="uid://g08wwuyxlbgq" path="res://src/levels/turn_manager.gd" id="8_bwonk"]
 [ext_resource type="Script" uid="uid://cceacnr7bx42n" path="res://src/levels/player_turn.gd" id="9_balv6"]
 [ext_resource type="Script" uid="uid://bcv3drorqrqh0" path="res://src/levels/enemy_turn.gd" id="10_10hdb"]
 
@@ -455,13 +455,13 @@ horizontal_alignment = 1
 
 [node name="SFXPlayer" type="AudioStreamPlayer" parent="." unique_id=2098949520]
 
-[node name="BattleState" type="Node" parent="." unique_id=1983756242]
+[node name="TurnManager" type="Node" parent="." unique_id=1983756242]
 script = ExtResource("8_bwonk")
 
-[node name="PlayerTurn" type="Node" parent="BattleState" unique_id=1919513957]
+[node name="PlayerTurn" type="Node" parent="TurnManager" unique_id=1919513957]
 script = ExtResource("9_balv6")
 
-[node name="EnemyTurn" type="Node" parent="BattleState" unique_id=650499065]
+[node name="EnemyTurn" type="Node" parent="TurnManager" unique_id=650499065]
 script = ExtResource("10_10hdb")
 
 [connection signal="timeout" from="EffectRoot/Timer" to="." method="_on_timer_timeout"]
