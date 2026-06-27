@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://g08wwuyxlbgq" path="res://src/levels/turn_manager.gd" id="8_bwonk"]
 [ext_resource type="Script" uid="uid://cceacnr7bx42n" path="res://src/levels/player_turn.gd" id="9_balv6"]
 [ext_resource type="Script" uid="uid://bcv3drorqrqh0" path="res://src/levels/enemy_turn.gd" id="10_10hdb"]
+[ext_resource type="Script" uid="uid://bl62wxlr7kvss" path="res://src/levels/check_end.gd" id="12_ck70p"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_4ffcv"]
 
@@ -463,6 +464,9 @@ script = ExtResource("9_balv6")
 
 [node name="EnemyTurn" type="Node" parent="TurnManager" unique_id=650499065]
 script = ExtResource("10_10hdb")
+
+[node name="CheckEnd" type="Node" parent="TurnManager" unique_id=579828505]
+script = ExtResource("12_ck70p")
 
 [connection signal="timeout" from="EffectRoot/Timer" to="." method="_on_timer_timeout"]
 [connection signal="pressed" from="HUD/MainHUD/Panel/MarginContainer/HBoxContainer/VBoxContainer/Attack" to="." method="_on_attack_pressed"]

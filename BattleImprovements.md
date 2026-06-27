@@ -58,12 +58,12 @@ Recommended stopping point for a learning project: **end of Tier 2.**
 - [ ] Make the turn manager own transitions. Add `enter()`/`exit()`; have states
       *return* or *request* the next state rather than calling
       `battle_state.change_state(...)` themselves.
-- [ ] Reinstate a single end-of-turn resolution step (the commented-out
+- [x] Reinstate a single end-of-turn resolution step (the commented-out
       `CHECK_END`): one place that asks "is anyone at 0 HP?" and routes to
       victory / defeat, removing the duplicated death checks in
       `player_turn.damage_enemy()`, `enemy_turn.enter()`, and the `do_attack`
       guards.
-- [ ] Move `damage_enemy()` to where damage is owned (Battle or a combat helper),
+- [x] Move `damage_enemy()` to where damage is owned (Battle or a combat helper),
       not on `PlayerTurn`; have both player attack and item use call it.
 - [x] Rename `BattleState` → `TurnManager` (and the `battle_state` var) to match
       what it actually does.

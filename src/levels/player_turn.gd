@@ -17,11 +17,9 @@ func do_attack() -> void:
 	if battle.on_cooldown:
 		return
 	await player_roll_to_hit()
-	if not is_instance_valid(battle.enemy) or battle.enemy.health <= 0:
-		return
 	await battle.run_timer()
-	# Change to ENEMY_TURN state
-	battle.turn_manager.change_state(battle.turn_manager.State.ENEMY_TURN)
+	# Check for end of battle
+	battle.turn_manager.change_state(battle.turn_manager.State.CHECK_END)
 
 
 func player_roll_to_hit() -> void:

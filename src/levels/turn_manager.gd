@@ -8,8 +8,9 @@ enum State {PLAYER_TURN, ENEMY_TURN, CHECK_END}
 @onready var states_map = {
 	State.PLAYER_TURN: $PlayerTurn,
 	State.ENEMY_TURN: $EnemyTurn,
-	#State.CHECK_END: $CheckEnd,
+	State.CHECK_END: $CheckEnd,
 }
+var previous_state: State = State.PLAYER_TURN
 var current_state: State = State.PLAYER_TURN
 var state_node: Node
 
@@ -19,8 +20,10 @@ func setup(battle: Battle) -> void:
 		node.setup(battle)
 
 
+## Core function to handle changing combat turns
 func change_state(new_state: State) -> void:
 	# Manage the various states
+	previous_state = current_state
 	current_state = new_state
 	match new_state:
 		State.PLAYER_TURN:
@@ -31,4 +34,7 @@ func change_state(new_state: State) -> void:
 		State.ENEMY_TURN:
 			state_node = states_map[State.ENEMY_TURN]
 			enemy_turn.emit()
+			state_node.enter()
+		State.CHECK_END:
+			state_node = states_map[State.CHECK_END]
 			state_node.enter()

@@ -4,7 +4,7 @@ A Godot 4.7 project.
 
 Building a mini-RPG from scratch to understand Godot patterns and game architecture.
 
-AI disclaimer: Used for helping debug errors and issues. 
+AI disclaimer: Used for helping debug errors and refactoring logic. 
 Models used: Opus 4.8
 
 Credits:

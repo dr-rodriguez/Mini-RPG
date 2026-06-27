@@ -106,12 +106,12 @@ func _use_item(item: Item) -> void:
 			PlayerData.take_damage(-1*value)
 			set_log("Healed " + str(value))
 			await run_timer()
-			turn_manager.change_state(turn_manager.State.ENEMY_TURN)
+			turn_manager.change_state(turn_manager.State.CHECK_END)
 		"Red Gem":
 			await damage_enemy(value)
 			set_log("Dealt " + str(value) + " damage")
 			await run_timer()
-			turn_manager.change_state(turn_manager.State.ENEMY_TURN)
+			turn_manager.change_state(turn_manager.State.CHECK_END)
 	
 	# Remove the item used
 	PlayerData.inventory.remove(item)
@@ -141,12 +141,12 @@ func await_enemy_anim(anim_name: String) -> void:
 #region Enemy state logic
 func damage_enemy(damage) -> void:
 	enemy.take_damage(damage)
-	if enemy.health <= 0:
-		handle_enemy_defeated()
-	else:
-		enemy_anim.animation = "hit_side"
-		enemy_anim.play()
-		await enemy_anim.animation_finished
+	#if enemy.health <= 0:
+		#handle_enemy_defeated()
+	#else:
+	enemy_anim.animation = "hit_side"
+	enemy_anim.play()
+	await enemy_anim.animation_finished
 
 
 func handle_enemy_defeated() -> void:
@@ -170,7 +170,7 @@ func _on_flee_pressed() -> void:
 	else:
 		set_log("Failed to flee.")
 		await run_timer()
-		turn_manager.change_state(turn_manager.State.ENEMY_TURN)
+		turn_manager.change_state(turn_manager.State.CHECK_END)
 
 
 func _on_attack_pressed() -> void:

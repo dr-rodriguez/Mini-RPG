@@ -10,18 +10,15 @@ func setup(b: Battle) -> void:
 
 
 func enter() -> void:
-	if battle.enemy.health <= 0:
-		battle.handle_enemy_defeated()
-	else:
-		battle.set_log("Enemy turn.")
-		await do_attack()
+	battle.set_log("Enemy turn.")
+	await do_attack()
 
 
 func do_attack() -> void:
 	await enemy_roll_to_hit()
 	await battle.run_timer()
-	# Change to PlayerTurn state
-	battle.turn_manager.change_state(battle.turn_manager.State.PLAYER_TURN)
+	# Check for end of battle
+	battle.turn_manager.change_state(battle.turn_manager.State.CHECK_END)
 
 
 func enemy_roll_to_hit() -> void:
