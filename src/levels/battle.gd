@@ -90,8 +90,18 @@ func _update_items():
 		new_item.alignment = HORIZONTAL_ALIGNMENT_CENTER
 		
 		# Set up mouse actions and finalize the Hbox
-		new_item.pressed.connect(i.use)
+		new_item.pressed.connect(_use_item.bind(i))
 		cnt_items.add_child(new_item)
+
+
+func _use_item(item: Item) -> void:
+	var value: int = item.use.call()
+	# TODO: Hook up the logic to heal/damage and end player turn
+	match item.name:
+		"Health Potion":
+			print_debug(value)
+		"Red Gem":
+			print_debug(value)
 
 
 #region Signal functions

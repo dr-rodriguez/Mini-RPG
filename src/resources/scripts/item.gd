@@ -7,5 +7,4 @@ extends Resource
 
 # To be set per-resource (what happens when you use the item)
 var use: Callable = func(): 
-	print_debug("use clicked")
 	pass
