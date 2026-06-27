@@ -4,6 +4,7 @@ extends Node
 @onready var level_root: Node2D = $World/LevelRoot
 @onready var player: Node2D = $World/EntityRoot/Player
 @onready var fade_screen = %FadeScreen
+@onready var timer: Timer = %Timer
 var player_menu_visible: bool = false
 
 
@@ -18,7 +19,7 @@ func _ready() -> void:
 	# Connect to level-change signal
 	GameState.level_change_requested.connect(_on_level_change_requested)
 	GameState.battle_requested.connect(_on_battle_requested)
-	
+	PlayerData.player_died.connect(_on_player_died)
 
 
 func _input(event: InputEvent) -> void:
@@ -110,6 +111,16 @@ func _restore_level(level: Node) -> void:
 	# Just a safety check in case closing game from battle screen
 	if get_tree():
 		get_tree().paused = false
+
+
+func _on_player_died() -> void:
+	get_tree().paused = false
+	# Run fade_tween to go to black
+	await fade_tween(Color(0, 0, 0, 1))
+	%GameOver.visible = true
+	timer.start()
+	await timer.timeout
+	get_tree().quit()
 
 #endregion
 

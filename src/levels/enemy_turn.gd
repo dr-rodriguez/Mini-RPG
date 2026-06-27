@@ -11,9 +11,7 @@ func enter() -> void:
 
 func do_attack() -> void:
 	await enemy_roll_to_hit()
-	battle.on_cooldown = true
-	battle.timer.start()
-	await battle.timer.timeout
+	battle.run_and_await_timer()
 	# Change to PlayerTurn state
 	battle.battle_state.change_state(battle.battle_state.State.PLAYER_TURN)
 

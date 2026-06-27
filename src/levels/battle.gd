@@ -54,6 +54,13 @@ func leave_battle() -> void:
 	queue_free()
 
 
+## Helper function to wait for the timer
+func run_and_await_timer() -> void:
+	on_cooldown = true
+	timer.start()
+	await timer.timeout
+
+
 #region Signal functions
 func _on_flee_pressed() -> void:
 	var player_roll: int = randi_range(1, 20) + PlayerData.stats.dexterity
@@ -61,16 +68,12 @@ func _on_flee_pressed() -> void:
 	if player_roll >= enemy_roll:
 		log_text = "Flee successful!"
 		change_label_text.emit(log_text)
-		on_cooldown = true
-		timer.start()
-		await timer.timeout
+		run_and_await_timer()
 		leave_battle()
 	else:
 		log_text = "Failed to flee."
 		change_label_text.emit(log_text)
-		on_cooldown = true
-		timer.start()
-		await timer.timeout
+		run_and_await_timer()
 		battle_state.change_state(battle_state.State.ENEMY_TURN)
 
 

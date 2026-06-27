@@ -14,9 +14,7 @@ func do_attack() -> void:
 	await player_roll_to_hit()
 	if not is_instance_valid(battle.enemy) or battle.enemy.health <= 0:
 		return
-	battle.on_cooldown = true
-	battle.timer.start()
-	await battle.timer.timeout
+	battle.run_and_await_timer()
 	# Change to ENEMY_TURN state
 	battle.battle_state.change_state(battle.battle_state.State.ENEMY_TURN)
 

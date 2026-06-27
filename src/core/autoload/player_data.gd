@@ -42,7 +42,7 @@ func set_normal() -> void:
 func set_hard() -> void:
 	stats.strength = 1
 	stats.dexterity = 0
-	stats.max_health = 14
+	stats.max_health = 10
 	health = stats.max_health
 
 #endregion

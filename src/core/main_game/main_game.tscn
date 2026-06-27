@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://b327hlihadnw" path="res://src/gameplay/player/player.tscn" id="1_3fed5"]
 [ext_resource type="PackedScene" uid="uid://cdotfbw41payy" path="res://src/levels/Level1.tscn" id="1_6yl8a"]
 [ext_resource type="Script" uid="uid://c6u0rf003ahym" path="res://src/core/main_game/main_game.gd" id="1_l0hoa"]
+[ext_resource type="PackedScene" uid="uid://bxvbp4b8is740" path="res://src/ui/battle/game_over.tscn" id="5_n4iq1"]
 [ext_resource type="PackedScene" uid="uid://dconjnnnobvgr" path="res://src/ui/debug/ui_debug.tscn" id="5_tk58t"]
 [ext_resource type="PackedScene" uid="uid://divj11vcsefnl" path="res://src/ui/player_menu.tscn" id="7_0kore"]
 
@@ -28,6 +29,10 @@ y_sort_enabled = true
 position = Vector2(303, 152)
 
 [node name="EffectRoot" type="Node2D" parent="World" unique_id=1141262815]
+
+[node name="Timer" type="Timer" parent="World/EffectRoot" unique_id=155834719]
+unique_name_in_owner = true
+one_shot = true
 
 [node name="HudLayer" type="CanvasLayer" parent="." unique_id=260491376]
 process_mode = 1
@@ -82,6 +87,11 @@ offset_right = -0.2800293
 offset_bottom = -1.0
 mouse_filter = 2
 color = Color(0, 0, 0, 0)
+
+[node name="GameOver" parent="TransitionLayer/TransitionRoot" unique_id=1946007991 instance=ExtResource("5_n4iq1")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
 
 [node name="DebugLayer" type="CanvasLayer" parent="." unique_id=16149501]
 process_mode = 3
