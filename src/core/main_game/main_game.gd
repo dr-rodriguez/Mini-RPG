@@ -126,7 +126,10 @@ func _on_battle_requested(enemy: Node):
 
 func _restore_level(level: Node) -> void:
 	# Battle node freed (Flee/Won) — re-show the level and unpause.
-	if is_instance_valid(level):
+	# tree_exited also fires while the whole tree tears down (e.g. quitting
+	# from the battle screen). In that case the level is still a valid object
+	# but already detached, so get_tree() on it is null — skip the restore.
+	if is_instance_valid(level) and level.is_inside_tree():
 		level.show()
 		var fx := level.get_node_or_null("LevelFX")
 		if fx:
