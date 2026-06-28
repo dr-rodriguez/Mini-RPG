@@ -50,6 +50,41 @@ Recommended stopping point for a learning project: **end of Tier 2.**
 - [x] Remove the dead `log_text` field(s) that aren't actually read.
 - [x] Replace the hardcoded `$BattleState/PlayerTurn.damage_enemy(value)` path
       (resolved properly in Tier 2 by moving `damage_enemy` off the player state).
+- [ ] Merge `enemy_battle.gd` and `player_battle.gd` into one shared
+      `battle_actor.gd`. They are near-identical: each connects its sprite's
+      `frame_changed` and plays a sound when the current animation is
+      `"attack_side"` and the frame matches a hardcoded index (enemy: frame 3,
+      player: frame 1). ~12 lines of copy-paste → one file.
+
+      Setup (so the exports are clear when you fill them in):
+      - Attach `battle_actor.gd` to each *per-side wrapper* — `Entities/Enemy`
+        and `Entities/Player` — one instance on each, replacing the two old
+        scripts. NOT the parent `Entities` node: a parent-level script would
+        have to juggle both sprites/sounds/frame indices and reintroduce the
+        `if enemy … else player` branching this dedup removes. This is an
+        *actor* component, not a manager.
+      - The script can't use the `%EnemySprite`/`%PlayerSprite` unique names
+        (a single shared script can't hardcode one name that resolves to two
+        different nodes). Instead expose `@export var sprite: AnimatedSprite2D`,
+        `@export var audio_player: AudioStreamPlayer`, and
+        `@export var attack_sfx_frame: int`, wired per instance in the Inspector:
+          - Enemy:  sprite=EnemySprite,  audio_player=EnemyFX,  attack_sfx_frame=3
+          - Player: sprite=PlayerSprite, audio_player=PlayerFX, attack_sfx_frame=1
+        Body is just: on `frame_changed`, if `sprite.animation == "attack_side"`
+        and `sprite.frame == attack_sfx_frame`, `audio_player.play()`.
+      - The `unique_name_in_owner` flags on the sprite/FX nodes can stay; the
+        rest of `battle.gd` still uses `%PlayerSprite`/`%EnemySprite`. Only the
+        actor script stops relying on them.
+      - While here: drop the vestigial `data = EnemyData` export on the battle
+        `Enemy` node (and the two `Resource_*` sub-resources feeding it).
+        `battle.gd` reads `enemy.data` off the *passed-in overworld node*, never
+        off this visual stand-in, so `battle_actor.gd` needs no `data` field.
+
+      NOTE: this is the *visual* battle stand-in only — purely the sprite +
+      frame-timed SFX. It is unrelated to the Tier 3 `Combatant` abstraction,
+      which unifies the *combat logic* (stats, health, rolls, damage) and lives
+      on PlayerData/the enemy node, not these sprite scripts. Doing one does not
+      address the other.
 
 ## Tier 2 — Structural refactor (clarify ownership)
 - [x] Stop the state nodes from reaching into `owner`. Give states a small,
