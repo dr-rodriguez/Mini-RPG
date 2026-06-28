@@ -24,8 +24,8 @@ file.
 ### 1. Add counting + top-up helpers to `Inventory`
 File: `src/resources/scripts/inventory.gd`
 
-- [ ] Add a `count(item)` helper
-- [ ] Add a `fill_to(item, target)` helper
+- [x] Add a `count(item)` helper
+- [x] Add a `fill_to(item, target)` helper
 
 Append two helpers next to the existing `add`/`remove`:
 
@@ -53,8 +53,8 @@ func fill_to(item: Item, target: int) -> int:
 ### 2. Wire the give/refuse branch into `quest.dialogue`
 File: `src/resources/dialogue/quest.dialogue`
 
-- [ ] Add a potion-check `if/else` branch to Slimey's greeting
-- [ ] Confirm condition uses `count(...)` and the `$>` mutation uses `fill_to(...)`
+- [x] Add a potion-check `if/else` branch to Slimey's greeting
+- [x] Confirm condition uses `count(...)` and the `$>` mutation uses `fill_to(...)`
 
 Example placement: as part of Slimey's greeting, after the existing
 `if (not GameState.met_slimey)` block. The condition reads the count via the new
@@ -98,8 +98,8 @@ Then the dialogue becomes `if (PlayerData.potion_count() < 2)` /
 
 ## Verification
 
-- [ ] Run the main scene in Godot 4.6
-- [ ] First talk to Slimey: he **refuses** (player starts with exactly 2 potions — `player_data.gd:22-23`)
-- [ ] Use/remove potions down to 0 or 1, talk again: Slimey tops you back up to 2; inventory panel shows 2
-- [ ] Talk again at 2 potions: he refuses and does not add more
+- [x] Run the main scene in Godot 4.6
+- [x] First talk to Slimey: he **refuses** (player starts with exactly 2 potions — `player_data.gd:22-23`)
+- [x] Use/remove potions down to 0 or 1, talk again: Slimey tops you back up to 2; inventory panel shows 2
+- [x] Talk again at 2 potions: he refuses and does not add more
 - [ ] (Optional) Temporarily `print(PlayerData.inventory.count(Items.HEALTH_POTION))` in `quest_npc.gd:_on_interact` to log the count, then remove it

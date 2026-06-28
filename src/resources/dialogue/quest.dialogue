@@ -8,6 +8,11 @@ if (not GameState.quest_active)
 	=> quest
 if (not GameState.quest_complete) 
 	Slimey: [[Hi|Hello|Howdy]]. Have you completed your quest?
+	if (PlayerData.inventory.count(Items.HEALTH_POTION) < 2)
+		$> PlayerData.inventory.fill_to(Items.HEALTH_POTION, 2)
+		Slimey: You look low on potions. Here, take a few.
+	else
+		Slimey: You have enough potions. Go clear out the monsters in the Cursed Woods.
 if (GameState.quest_complete)
 	Slimey: Hooray! You cleared all the monsters.
 => END
@@ -15,7 +20,7 @@ if (GameState.quest_complete)
 ~ quest
 - Yes.
 	$> GameState.quest_active = true
-	Slimey: Great! I'll open the way for you.
+	Slimey: Great! I'll open the way for you. Come back if you need health potions.
 - No.
 	Slimey: Oh, OK. I'll keep looking.
 => END
