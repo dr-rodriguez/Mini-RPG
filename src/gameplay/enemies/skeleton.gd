@@ -13,6 +13,7 @@ enum PHASE {IDLE, WALK_OUT, WALK_BACK}
 var current_phase: PHASE = PHASE.IDLE
 var prior_phase: PHASE = PHASE.IDLE
 var health: int
+var enemy_id: String  # stable, level-unique key for persistence
 
 @onready var anim: AnimatedSprite2D = $AnimatedSprite2D
 @onready var state_machine: StateMachine = $States
@@ -20,6 +21,12 @@ var health: int
 
 
 func _ready() -> void:
+	# If this enemy was already defeated in a previous visit, stay gone.
+	enemy_id = _compute_enemy_id()
+	if GameState.is_enemy_defeated(enemy_id):
+		queue_free()
+		return
+
 	# Start the sprite animation
 	anim.sprite_frames = data.frames
 	anim.play(data.default_anim)
@@ -116,3 +123,13 @@ func roll_damage() -> int:
 
 
 #endregion
+
+
+## Build a key that's stable across reloads and unique per placed enemy.
+## Combines the owning level's scene path with this node's path inside it
+## (e.g. "res://src/levels/Level2.tscn::EntityRoot/Skeleton3").
+func _compute_enemy_id() -> String:
+	if owner:
+		return "%s::%s" % [owner.scene_file_path, owner.get_path_to(self)]
+	# Fallback for an enemy spawned outside a saved scene.
+	return str(get_path())

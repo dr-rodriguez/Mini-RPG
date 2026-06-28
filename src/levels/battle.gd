@@ -166,6 +166,9 @@ func handle_enemy_defeated() -> void:
 	enemy_anim.animation = "death"
 	enemy_anim.play()
 	await enemy_anim.animation_finished
+	# Remember this enemy is gone for good, then remove it from the level.
+	if "enemy_id" in enemy:
+		GameState.mark_enemy_defeated(enemy.enemy_id)
 	enemy.queue_free()
 	leave_battle()
 #endregion

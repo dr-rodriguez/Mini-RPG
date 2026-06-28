@@ -16,6 +16,10 @@ var transition_scene: bool = false
 var _help_source: Object = null  # for help_text handling
 var active_enemy: Node = null  # to track which is the active enemy
 
+## Set of enemy IDs the player has defeated. 
+# Persists across level swaps so a beaten enemy stays gone.
+var defeated_enemies: Dictionary = {}
+
 # variables with setter/getter
 var quest_active: bool = false:
 	set(value):
@@ -38,4 +42,13 @@ func clear_help_text(source: Object) -> void:
 	if source == _help_source:
 		_help_source = null
 		help_text_changed.emit("")
+#endregion
+
+#region Defeated enemy tracking
+func mark_enemy_defeated(enemy_id: String) -> void:
+	defeated_enemies[enemy_id] = true
+
+
+func is_enemy_defeated(enemy_id: String) -> bool:
+	return defeated_enemies.has(enemy_id)
 #endregion
