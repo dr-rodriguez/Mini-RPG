@@ -7,9 +7,11 @@ signal help_text_changed(help_text: String)
 signal level_change_requested(scene_path: String)
 @warning_ignore("unused_signal")
 signal battle_requested(enemy: Node)
+@warning_ignore("unused_signal")
+signal quest_completed
 
 # Global variables
-var debug_mode: bool = false
+var debug_mode: bool = true
 var met_slimey: bool = false
 var quest_complete: bool = false
 var transition_scene: bool = false

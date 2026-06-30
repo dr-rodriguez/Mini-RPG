@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://c6u0rf003ahym" path="res://src/core/main_game/main_game.gd" id="1_l0hoa"]
 [ext_resource type="PackedScene" uid="uid://bxvbp4b8is740" path="res://src/ui/battle/game_over.tscn" id="5_n4iq1"]
 [ext_resource type="PackedScene" uid="uid://dconjnnnobvgr" path="res://src/ui/debug/ui_debug.tscn" id="5_tk58t"]
+[ext_resource type="PackedScene" uid="uid://v44b8rh7fvo8" path="res://src/ui/battle/quest_complete.tscn" id="6_l0hoa"]
 [ext_resource type="PackedScene" uid="uid://divj11vcsefnl" path="res://src/ui/player_menu.tscn" id="7_0kore"]
 
 [node name="MainGame" type="Node" unique_id=1872517867]
@@ -92,6 +93,11 @@ mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
 [node name="GameOver" parent="TransitionLayer/TransitionRoot" unique_id=1946007991 instance=ExtResource("5_n4iq1")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[node name="QuestComplete" parent="TransitionLayer/TransitionRoot" unique_id=92898068 instance=ExtResource("6_l0hoa")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1

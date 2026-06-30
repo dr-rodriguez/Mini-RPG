@@ -22,6 +22,14 @@ func _ready() -> void:
 	inventory.add(Items.HEALTH_POTION)
 	inventory.add(Items.HEALTH_POTION)
 	inventory.add(Items.RED_GEM)
+	if GameState.debug_mode:
+		inventory.add(Items.RED_GEM)
+		inventory.add(Items.RED_GEM)
+		inventory.add(Items.RED_GEM)
+		inventory.add(Items.RED_GEM)
+		inventory.add(Items.RED_GEM)
+		stats.strength = 20
+		stats.dexterity = 20
 
 
 #region  Player stat functions

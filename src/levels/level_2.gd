@@ -10,6 +10,7 @@ func _on_level_1_transition_body_shape_entered(_body_rid: RID, body: Node2D, _bo
 func check_enemies() -> bool:
 	if get_tree().get_node_count_in_group("Enemies") == 0:
 		GameState.quest_complete = true
+		GameState.quest_completed.emit()
 		return true
 	else:
 		return false

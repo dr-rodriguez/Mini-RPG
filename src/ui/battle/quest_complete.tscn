@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://v44b8rh7fvo8"]
+
+[ext_resource type="FontFile" uid="uid://hlw1isa26sjf" path="res://assets/art/ui/fonts/BLKCHCRY.TTF" id="1_lmne1"]
+
+[node name="QuestComplete" type="Control" unique_id=92898068]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="." unique_id=1946106731]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.0
+offset_top = -11.5
+offset_right = 65.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.6431373, 0.8901961, 0.07058824, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_lmne1")
+theme_override_font_sizes/font_size = 28
+text = "Quest Complete!"
+horizontal_alignment = 1
+vertical_alignment = 1

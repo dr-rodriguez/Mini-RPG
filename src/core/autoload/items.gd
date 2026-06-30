@@ -16,6 +16,7 @@ var item_registry := {}
 func _ready() -> void:
 	_register_items()
 	Items.EMPTY.name = "EMPTY"
+	# Attach functions to item use
 	Items.HEALTH_POTION.use = _health_potion
 	Items.RED_GEM.use = _red_gem
 

@@ -36,6 +36,7 @@ func _ready() -> void:
 	GameState.level_change_requested.connect(_on_level_change_requested)
 	GameState.battle_requested.connect(_on_battle_requested)
 	PlayerData.player_died.connect(_on_player_died)
+	GameState.quest_completed.connect(_on_quest_completion)
 
 
 func _input(event: InputEvent) -> void:
@@ -45,15 +46,15 @@ func _input(event: InputEvent) -> void:
 	
 	# Show the player menu
 	if event.is_action_pressed("menu"):
-		if player_menu_visible:
-			player_menu.hide()
-			player_menu_visible = false
-		else:
-			player_menu.show()
-			player_menu_visible = true
+		hide_player_menu(player_menu_visible)
 
 
 #region Scene Handling
+
+func hide_player_menu(state: bool) -> void:
+	player_menu.visible = not state
+	player_menu_visible = not state
+
 
 func _on_level_change_requested(scene_path: String) -> void:
 	# Defer so we don't free a level from inside its own physics callback.
@@ -98,6 +99,9 @@ func fade_tween(color: Color = Color(0, 0, 0, 0), duration: float = 0.6) -> void
 
 
 func _on_battle_requested(enemy: Node):
+	# Hide the player menu in case it's visible
+	hide_player_menu(true)
+	
 	# Swap to battle screen and pause the main world
 	get_tree().paused = true
 	await fade_tween(Color(0, 0, 0, 1))
@@ -152,8 +156,29 @@ func _on_player_died() -> void:
 	await timer.timeout
 	get_tree().quit()
 
-#endregion
 
+## Show splash text for quest completion
+func _on_quest_completion() -> void:
+	var quest_scene: Control = %QuestComplete
+	var tween = quest_scene.create_tween()
+	var duration: float = 0.6
+	
+	# Set the tween properites
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.set_trans(Tween.TRANS_LINEAR)
+	quest_scene.visible = true
+	
+	tween.tween_property(quest_scene, "visible", true, duration/2.0)
+	
+	await tween.finished
+	tween.stop()
+	
+	# TODO: Figure out why this doesn't seem to fire?
+	tween.tween_property(quest_scene, "visible", false, duration/2.0)
+	
+	await tween.finished
+
+#endregion
 
 #region Music
 

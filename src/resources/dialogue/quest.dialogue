@@ -12,7 +12,8 @@ if (not GameState.quest_complete)
 		$> PlayerData.inventory.fill_to(Items.HEALTH_POTION, 2)
 		Slimey: You look low on potions. Here, take a few.
 	else
-		Slimey: You have enough potions. Go clear out the monsters in the Cursed Woods.
+		Slimey: You look like you have enough potions. 
+	Slimey: Go clear out the monsters in the Cursed Woods.
 if (GameState.quest_complete)
 	Slimey: Hooray! You cleared all the monsters.
 => END
