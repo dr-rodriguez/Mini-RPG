@@ -11,7 +11,7 @@ signal battle_requested(enemy: Node)
 signal quest_completed
 
 # Global variables
-var debug_mode: bool = true
+var debug_mode: bool = false
 var met_slimey: bool = false
 var quest_complete: bool = false
 var transition_scene: bool = false
