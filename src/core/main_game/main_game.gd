@@ -161,7 +161,7 @@ func _on_player_died() -> void:
 func _on_quest_completion() -> void:
 	var quest_scene: Control = %QuestComplete
 	var tween = quest_scene.create_tween()
-	var duration: float = 0.6
+	var duration: float = 0.8
 	
 	# Set the tween properites
 	tween.set_ease(Tween.EASE_IN_OUT)
@@ -173,10 +173,19 @@ func _on_quest_completion() -> void:
 	await tween.finished
 	tween.stop()
 	
-	# TODO: Figure out why this doesn't seem to fire?
-	tween.tween_property(quest_scene, "visible", false, duration/2.0)
+	# Timer between fading
+	timer.wait_time = 1.0
+	timer.start()
+	await timer.timeout
 	
-	await tween.finished
+	# New tween for the fade-out effect
+	var tween2 = quest_scene.create_tween()
+	tween2.set_ease(Tween.EASE_IN_OUT)
+	tween2.set_trans(Tween.TRANS_LINEAR)
+	
+	tween2.tween_property(quest_scene, "visible", false, duration/2.0)
+	
+	await tween2.finished
 
 #endregion
 
