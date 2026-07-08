@@ -140,7 +140,11 @@ func _on_battle_requested(enemy: Node):
 	var fx := level.get_node_or_null("LevelFX")
 	if fx:
 		fx.hide()
-	
+
+	# Hide overworld player (lives under EntityRoot, not the level, so hiding
+	# the level doesn't cover it). Battle scene has its own placeholder sprite.
+	player.hide()
+
 	GameState.active_enemy = enemy
 
 	# Switch to battle music (keeps level_track so we can resume it after)
@@ -163,6 +167,7 @@ func _restore_level(level: Node) -> void:
 	# but already detached, so get_tree() on it is null — skip the restore.
 	if is_instance_valid(level) and level.is_inside_tree():
 		level.show()
+		player.show()
 		hide_menu_button(false)
 		var fx := level.get_node_or_null("LevelFX")
 		if fx:
