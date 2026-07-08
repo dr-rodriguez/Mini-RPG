@@ -13,3 +13,5 @@ Credits:
 - [Fantasy Icon Pack](https://ravenmore.itch.io/fantasy-icon-pack)
 - [Zasplat](https://www.zapsplat.com/) for music/sfx
 - [Free Pixel Art Forest](https://edermunizz.itch.io/free-pixel-art-forest)
+
+Try it out on itch.io at: https://strakul.itch.io/mini-rpg 
