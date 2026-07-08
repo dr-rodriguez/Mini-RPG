@@ -36,9 +36,10 @@ func _use_item(item: Item) -> void:
 		item.TargetType.PLAYER:
 			# We only code in logic for healing player
 			PlayerData.take_damage(-1*value)
+			# Remove the item used
+			PlayerData.inventory.remove(item)
 		item.TargetType.ENEMY:
+			# If clicking the red gem, do nothing
 			pass
 	
-	# Remove the item used
-	PlayerData.inventory.remove(item)
 	_update_items()

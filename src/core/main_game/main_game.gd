@@ -1,12 +1,16 @@
 extends Node
 
 @onready var player_menu = %PlayerMenu
+@onready var help_menu = %UiHelp
+@onready var menu_button: TextureButton = %MenuButton
+@onready var help_button: TextureButton = %HelpButton
 @onready var level_root: Node2D = $World/LevelRoot
 @onready var player: Node2D = $World/EntityRoot/Player
 @onready var fade_screen = %FadeScreen
 @onready var timer: Timer = %Timer
 @onready var music: AudioStreamPlayer = %Music
 var player_menu_visible: bool = false
+var help_menu_visible: bool = true
 var current_track: String = ""   # what's playing now
 var level_track: String = ""     # the level song to resume after battle
 var music_tween: Tween
@@ -38,6 +42,9 @@ func _ready() -> void:
 	PlayerData.player_died.connect(_on_player_died)
 	GameState.quest_completed.connect(_on_quest_completion)
 
+	# Hide the help menu the first time the player moves.
+	player.first_moved.connect(_on_player_first_moved)
+
 
 func _input(event: InputEvent) -> void:
 	# Don't get inputs if paused
@@ -51,9 +58,27 @@ func _input(event: InputEvent) -> void:
 
 #region Scene Handling
 
+## Toggle visibility of player menu
 func hide_player_menu(state: bool) -> void:
 	player_menu.visible = not state
 	player_menu_visible = not state
+
+
+## Toggle the menu/help button
+func hide_menu_button(state: bool) -> void:
+	menu_button.visible = not state
+	help_button.visible = not state
+
+
+## Hide the help menu when the player starts moving
+func _on_player_first_moved() -> void:
+	hide_help_menu(true)
+
+
+## Togle the help menu
+func hide_help_menu(state: bool) -> void:
+	help_menu.visible = not state
+	help_menu_visible = not state
 
 
 func _on_level_change_requested(scene_path: String) -> void:
@@ -101,6 +126,8 @@ func fade_tween(color: Color = Color(0, 0, 0, 0), duration: float = 0.6) -> void
 func _on_battle_requested(enemy: Node):
 	# Hide the player menu in case it's visible
 	hide_player_menu(true)
+	hide_menu_button(true)
+	hide_help_menu(true)
 	
 	# Swap to battle screen and pause the main world
 	get_tree().paused = true
@@ -135,6 +162,7 @@ func _restore_level(level: Node) -> void:
 	# but already detached, so get_tree() on it is null — skip the restore.
 	if is_instance_valid(level) and level.is_inside_tree():
 		level.show()
+		hide_menu_button(false)
 		var fx := level.get_node_or_null("LevelFX")
 		if fx:
 			# Once every enemy in the level is defeated, kill the fog for good.
@@ -226,3 +254,11 @@ func _on_debug_button_pressed() -> void:
 	var debug_root = $DebugLayer/DebugRoot
 	# Toggle visiblity of debug ui
 	debug_root.visible = not debug_root.visible
+
+
+func _on_menu_button_pressed() -> void:
+	hide_player_menu(player_menu_visible)
+
+
+func _on_help_button_pressed() -> void:
+	hide_help_menu(help_menu_visible)

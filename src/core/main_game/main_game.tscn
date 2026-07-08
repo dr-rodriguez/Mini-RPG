@@ -3,10 +3,13 @@
 [ext_resource type="PackedScene" uid="uid://b327hlihadnw" path="res://src/gameplay/player/player.tscn" id="1_3fed5"]
 [ext_resource type="PackedScene" uid="uid://cdotfbw41payy" path="res://src/levels/Level1.tscn" id="1_6yl8a"]
 [ext_resource type="Script" uid="uid://c6u0rf003ahym" path="res://src/core/main_game/main_game.gd" id="1_l0hoa"]
+[ext_resource type="Texture2D" uid="uid://111mlg52mud2" path="res://assets/art/ui/icons/Backpack.png" id="4_0kore"]
 [ext_resource type="PackedScene" uid="uid://bxvbp4b8is740" path="res://src/ui/battle/game_over.tscn" id="5_n4iq1"]
 [ext_resource type="PackedScene" uid="uid://dconjnnnobvgr" path="res://src/ui/debug/ui_debug.tscn" id="5_tk58t"]
 [ext_resource type="PackedScene" uid="uid://v44b8rh7fvo8" path="res://src/ui/battle/quest_complete.tscn" id="6_l0hoa"]
+[ext_resource type="Texture2D" uid="uid://bvluprbkx1wfd" path="res://assets/art/ui/icons/Letter.png" id="6_tc86p"]
 [ext_resource type="PackedScene" uid="uid://divj11vcsefnl" path="res://src/ui/player_menu.tscn" id="7_0kore"]
+[ext_resource type="PackedScene" uid="uid://cic7uu0dl1xrn" path="res://src/ui/ui_help.tscn" id="7_86u7o"]
 
 [node name="MainGame" type="Node" unique_id=1872517867]
 process_mode = 3
@@ -50,9 +53,33 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="MenuButton" type="TextureButton" parent="HudLayer/HudRoot" unique_id=697774957]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 601.0
+offset_top = 322.0
+offset_right = 665.0
+offset_bottom = 386.0
+scale = Vector2(0.6, 0.6)
+texture_normal = ExtResource("4_0kore")
+
 [node name="PlayerMenu" parent="HudLayer/HudRoot" unique_id=1523442858 instance=ExtResource("7_0kore")]
 unique_name_in_owner = true
 visible = false
+layout_mode = 1
+
+[node name="HelpButton" type="TextureButton" parent="HudLayer/HudRoot" unique_id=624232431]
+unique_name_in_owner = true
+layout_mode = 0
+offset_left = 567.0
+offset_top = 321.0
+offset_right = 631.0
+offset_bottom = 385.0
+scale = Vector2(0.6, 0.6)
+texture_normal = ExtResource("6_tc86p")
+
+[node name="UiHelp" parent="HudLayer/HudRoot" unique_id=1546776378 instance=ExtResource("7_86u7o")]
+unique_name_in_owner = true
 layout_mode = 1
 
 [node name="BattleLayer" type="CanvasLayer" parent="." unique_id=1085871528]
@@ -80,6 +107,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+metadata/_edit_lock_ = true
 
 [node name="FadeScreen" type="ColorRect" parent="TransitionLayer/TransitionRoot" unique_id=39914221]
 unique_name_in_owner = true
@@ -129,3 +157,6 @@ mouse_filter = 2
 
 [node name="UiDebug" parent="DebugLayer/DebugRoot" unique_id=37217953 instance=ExtResource("5_tk58t")]
 layout_mode = 1
+
+[connection signal="pressed" from="HudLayer/HudRoot/MenuButton" to="." method="_on_menu_button_pressed"]
+[connection signal="pressed" from="HudLayer/HudRoot/HelpButton" to="." method="_on_help_button_pressed"]

@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://cic7uu0dl1xrn"]
+
+[ext_resource type="Theme" uid="uid://28wu85kpcyp0" path="res://src/ui/ui.tres" id="1_2dufu"]
+
+[node name="UiHelp" type="Control" unique_id=1546776378]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme = ExtResource("1_2dufu")
+
+[node name="Panel" type="Panel" parent="." unique_id=1836553861]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -0.62000275
+offset_right = 100.0
+offset_bottom = 0.62000275
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=886785930]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBox1" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=717932366]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="Panel/MarginContainer/VBox1" unique_id=1783343054]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBox1/Header" unique_id=2101028524]
+layout_mode = 2
+text = "Help Menu"
+
+[node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBox1" unique_id=1725677784]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBox1" unique_id=1251803644]
+layout_mode = 2
+text = "Use WASD/Arrow keys to move"
+
+[node name="Label2" type="Label" parent="Panel/MarginContainer/VBox1" unique_id=37535147]
+layout_mode = 2
+text = "Press Enter/E to interact (chat/read)"
+
+[node name="Label3" type="Label" parent="Panel/MarginContainer/VBox1" unique_id=2006818161]
+layout_mode = 2
+text = "Press Tab/I for the player menu"

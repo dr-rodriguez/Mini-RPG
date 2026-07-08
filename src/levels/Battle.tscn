@@ -277,6 +277,7 @@ animations = [{
 script = ExtResource("1_nupa0")
 
 [node name="Background" type="CanvasLayer" parent="." unique_id=1909405481]
+layer = -1
 
 [node name="Control" type="Control" parent="Background" unique_id=1063818905]
 layout_mode = 3
@@ -314,7 +315,7 @@ unique_name_in_owner = true
 position = Vector2(100, 130)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_4npkf")
-animation = &"death"
+animation = &"idle_side"
 
 [node name="EnemyFX" type="AudioStreamPlayer" parent="Entities/Enemy/EnemySprite" unique_id=777556090]
 unique_name_in_owner = true
@@ -327,7 +328,7 @@ unique_name_in_owner = true
 position = Vector2(550, 130)
 scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_4ffcv")
-animation = &"attack_side"
+animation = &"idle_side"
 flip_h = true
 
 [node name="PlayerFX" type="AudioStreamPlayer" parent="Entities/Player/PlayerSprite" unique_id=1407661414]
