@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cic7uu0dl1xrn"]
 
 [ext_resource type="Theme" uid="uid://28wu85kpcyp0" path="res://src/ui/ui.tres" id="1_2dufu"]
+[ext_resource type="FontFile" uid="uid://hlw1isa26sjf" path="res://assets/art/ui/fonts/BLKCHCRY.TTF" id="2_riwys"]
 
 [node name="UiHelp" type="Control" unique_id=1546776378]
 layout_mode = 3
@@ -50,6 +51,8 @@ alignment = 1
 
 [node name="Label" type="Label" parent="Panel/MarginContainer/VBox1/Header" unique_id=2101028524]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_riwys")
+theme_override_font_sizes/font_size = 16
 text = "Help Menu"
 
 [node name="HSeparator" type="HSeparator" parent="Panel/MarginContainer/VBox1" unique_id=1725677784]

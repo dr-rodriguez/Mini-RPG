@@ -53,15 +53,16 @@ func _input(event: InputEvent) -> void:
 	
 	# Show the player menu
 	if event.is_action_pressed("menu"):
-		hide_player_menu(player_menu_visible)
+		set_player_menu_visible(not player_menu_visible)
+		set_help_menu_visible(false)
 
 
 #region Scene Handling
 
-## Toggle visibility of player menu
-func hide_player_menu(state: bool) -> void:
-	player_menu.visible = not state
-	player_menu_visible = not state
+## Set visibility of player menu
+func set_player_menu_visible(should_show: bool) -> void:
+	player_menu.visible = should_show
+	player_menu_visible = should_show
 
 
 ## Toggle the menu/help button
@@ -72,13 +73,13 @@ func hide_menu_button(state: bool) -> void:
 
 ## Hide the help menu when the player starts moving
 func _on_player_first_moved() -> void:
-	hide_help_menu(true)
+	set_help_menu_visible(false)
 
 
-## Togle the help menu
-func hide_help_menu(state: bool) -> void:
-	help_menu.visible = not state
-	help_menu_visible = not state
+## Set visibility of help menu
+func set_help_menu_visible(should_show: bool) -> void:
+	help_menu.visible = should_show
+	help_menu_visible = should_show
 
 
 func _on_level_change_requested(scene_path: String) -> void:
@@ -125,9 +126,9 @@ func fade_tween(color: Color = Color(0, 0, 0, 0), duration: float = 0.6) -> void
 
 func _on_battle_requested(enemy: Node):
 	# Hide the player menu in case it's visible
-	hide_player_menu(true)
+	set_player_menu_visible(false)
 	hide_menu_button(true)
-	hide_help_menu(true)
+	set_help_menu_visible(false)
 	
 	# Swap to battle screen and pause the main world
 	get_tree().paused = true
@@ -257,8 +258,10 @@ func _on_debug_button_pressed() -> void:
 
 
 func _on_menu_button_pressed() -> void:
-	hide_player_menu(player_menu_visible)
+	set_player_menu_visible(not player_menu_visible)
+	set_help_menu_visible(false)
 
 
 func _on_help_button_pressed() -> void:
-	hide_help_menu(help_menu_visible)
+	set_help_menu_visible(not help_menu_visible)
+	set_player_menu_visible(false)
